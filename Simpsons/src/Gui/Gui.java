@@ -8,9 +8,11 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import javax.swing.JTextArea;
-
+import java.awt.Color;
+import java.awt.*;
+import java.awt.event.*;
 public class Gui extends JFrame {
-
+	private JTextArea textArea;
 	private JPanel contentPane;
 
 	/**
@@ -42,15 +44,29 @@ public class Gui extends JFrame {
 		
 		JPanel panel = new JPanel();
 		contentPane.add(panel, BorderLayout.CENTER);
+		panel.setLayout(new BorderLayout(0, 0));
+		
+		textArea = new JTextArea();
+		panel.add(textArea, BorderLayout.SOUTH);
+		textArea.setText("Aprete el botón para obtener frase.");
 		
 		JPanel panel_1 = new JPanel();
+		panel_1.setBackground(new Color(30, 144, 255));
 		contentPane.add(panel_1, BorderLayout.SOUTH);
 		
-		JButton btnNewButton = new JButton("New button");
+		JButton btnNewButton = new JButton("Iniciar");
 		panel_1.add(btnNewButton);
-		
-		JTextArea textArea = new JTextArea();
-		panel_1.add(textArea);
+		OyenteBoton oyente= new OyenteBoton();
+		btnNewButton.addActionListener(oyente);
 	}
-
+	
+	private class OyenteBoton implements ActionListener{
+        public void actionPerformed(ActionEvent e){
+        	//textArea.setText("A la grande le puse cuca");
+        	/*
+        	 * Implementar
+        	 */
+        }
+	}
+	
 }
