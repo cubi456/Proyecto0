@@ -11,6 +11,8 @@ import javax.swing.JTextArea;
 import java.awt.Color;
 import java.awt.*;
 import java.awt.event.*;
+
+
 public class Gui extends JFrame {
 	private JTextArea textArea;
 	private JPanel contentPane;
@@ -48,7 +50,7 @@ public class Gui extends JFrame {
 		
 		textArea = new JTextArea();
 		panel.add(textArea, BorderLayout.SOUTH);
-		textArea.setText("Aprete el botón para obtener frase.");
+		textArea.setText("Aprete el boton para obtener frase.");
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(new Color(30, 144, 255));
