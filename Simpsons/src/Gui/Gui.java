@@ -54,7 +54,12 @@ public class Gui extends JFrame {
 		//	Area de texto
 		textArea = new JTextArea();
 		panel.add(textArea, BorderLayout.SOUTH);
-		textArea.setText("Aprete el boton para obtener frase.");
+		textArea.setText("Apriete el boton para obtener frase.");
+		textArea.setEditable(false);
+		
+		//Cambio de font
+		Font font = new Font("Verdana", Font.ITALIC, 18);
+		textArea.setFont(font);
 		
 		// Panel de control
 		JPanel panel_1 = new JPanel();
@@ -80,7 +85,7 @@ public class Gui extends JFrame {
 	private class OyenteBoton implements ActionListener{
         public void actionPerformed(ActionEvent e){
         	image.setIcon(imageicon2);
-        	textArea.setText("Ayy esta grasa no se quita");
+        	textArea.setText("Ayy esta grasa no se quita.");
         }
 	}
 	
