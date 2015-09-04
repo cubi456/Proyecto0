@@ -6,7 +6,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JTextArea;
 import java.awt.Color;
 import java.awt.*;
@@ -14,9 +16,10 @@ import java.awt.event.*;
 
 
 public class Gui extends JFrame {
-	private JTextArea textArea;
-	private JPanel contentPane;
-
+	
+	private JPanel  panel;
+	private JLabel  text,image; 
+	private JButton button;
 	/**
 	 * Launch the application.
 	 */
@@ -37,37 +40,38 @@ public class Gui extends JFrame {
 	 * Create the frame.
 	 */
 	public Gui() {
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
-		setContentPane(contentPane);
+		setBounds(0, 0, 514, 404);
+		panel = new JPanel();
+		panel.setLayout(new BorderLayout());
+		setContentPane(panel);
 		
-		JPanel panel = new JPanel();
-		contentPane.add(panel, BorderLayout.CENTER);
-		panel.setLayout(new BorderLayout(0, 0));
 		
-		textArea = new JTextArea();
-		panel.add(textArea, BorderLayout.SOUTH);
-		textArea.setText("Aprete el boton para obtener frase.");
+		text = new JLabel("Marge no voy a mentirte ..");
+		text.setVisible(false);
+		text.setFont(text.getFont().deriveFont(18.0f));
 		
-		JPanel panel_1 = new JPanel();
-		panel_1.setBackground(new Color(30, 144, 255));
-		contentPane.add(panel_1, BorderLayout.SOUTH);
-		
-		JButton btnNewButton = new JButton("Iniciar");
-		panel_1.add(btnNewButton);
+	    button = new JButton("Generar");
+		button.setBounds(0, 0, 200, 100);
 		OyenteBoton oyente= new OyenteBoton();
-		btnNewButton.addActionListener(oyente);
+		button.addActionListener(oyente);
+		
+		ImageIcon imageicon = new ImageIcon(getClass().getResource("/Imagenes/imagen1.jpg"));
+		image = new JLabel();
+		image.setIcon(imageicon);
+		
+		
+		panel.add(text, BorderLayout.NORTH);
+		panel.add(image,BorderLayout.CENTER);
+		panel.add(button,BorderLayout.SOUTH);
+		
+		
 	}
 	
 	private class OyenteBoton implements ActionListener{
         public void actionPerformed(ActionEvent e){
-        	//textArea.setText("A la grande le puse cuca");
-        	/*
-        	 * Implementar
-        	 */
+        	text.setVisible(true);
         }
 	}
 	
