@@ -19,7 +19,7 @@ public class Gui extends JFrame {
 	private JTextArea textArea;
 	private JPanel contentPane;
 	private JLabel image;
-	private ImageIcon imageicon, imageicon2;
+	private ImageIcon icon,imageicon, imageicon2;
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -45,7 +45,11 @@ public class Gui extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
 		setContentPane(contentPane);
+		super.setResizable(false);
+		super.setTitle("Simpsons");
 		
+		icon= new ImageIcon(getClass().getResource("/Imagenes/02.png"));
+		super.setIconImage(icon.getImage());
 		//	Panel Central
 		JPanel panel = new JPanel();
 		contentPane.add(panel, BorderLayout.CENTER);
@@ -56,9 +60,11 @@ public class Gui extends JFrame {
 		panel.add(textArea, BorderLayout.SOUTH);
 		textArea.setText("Apriete el boton para obtener frase.");
 		textArea.setEditable(false);
+		textArea.setLineWrap(true);
+		textArea.setWrapStyleWord(true);
 		
 		//	Cambio de font
-		Font font = new Font("Verdana", Font.ITALIC, 18);
+		Font font = new Font("Verdana", Font.ITALIC, 16);
 		textArea.setFont(font);
 		
 		//	Panel de control
@@ -74,7 +80,7 @@ public class Gui extends JFrame {
 		
 		//	Creación de labels
 		imageicon = new ImageIcon(getClass().getResource("/Imagenes/00.png"));
-		imageicon2 = new ImageIcon(getClass().getResource("/Imagenes/02.gif"));
+		imageicon2 = new ImageIcon(getClass().getResource("/Imagenes/01.gif"));
 		image = new JLabel();
 		image.setIcon(imageicon);
 		panel.add(image, BorderLayout.CENTER);
@@ -85,7 +91,7 @@ public class Gui extends JFrame {
 	private class OyenteBoton implements ActionListener{
         public void actionPerformed(ActionEvent e){
         	image.setIcon(imageicon2);
-        	textArea.setText("Ayy esta grasa no se quita.");
+        	textArea.setText("Sin la presencia de un hombre en la casa, puedes volverte afeminado en un segundo. Ayy esta grasa no se quita.");
         }
 	}
 	
