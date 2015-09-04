@@ -33,14 +33,14 @@ public class Gui extends JFrame {
 		});
 	}
 
-	/*	Creacion del frame
+	/*	Creación del frame
 	 * 
 	 */
 	public Gui() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 500, 500);
+		setBounds(100, 100, 430, 450);
 		
-		//	Creacion de contenedor
+		//	Creación de contenedor
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -57,31 +57,31 @@ public class Gui extends JFrame {
 		textArea.setText("Apriete el boton para obtener frase.");
 		textArea.setEditable(false);
 		
-		//Cambio de font
+		//	Cambio de font
 		Font font = new Font("Verdana", Font.ITALIC, 18);
 		textArea.setFont(font);
 		
-		// Panel de control
+		//	Panel de control
 		JPanel panel_1 = new JPanel();
 		panel_1.setBackground(new Color(30, 144, 255));
 		contentPane.add(panel_1, BorderLayout.SOUTH);
 		
-		//	Creacion de boton 
+		//	Creación de botón 
 		JButton btnNewButton = new JButton("Iniciar");
 		panel_1.add(btnNewButton);
 		OyenteBoton oyente= new OyenteBoton();
 		btnNewButton.addActionListener(oyente);
 		
-		//	Creacion de labels
+		//	Creación de labels
 		imageicon = new ImageIcon(getClass().getResource("/Imagenes/00.png"));
-		imageicon2 = new ImageIcon(getClass().getResource("/Imagenes/01.png"));
+		imageicon2 = new ImageIcon(getClass().getResource("/Imagenes/02.gif"));
 		image = new JLabel();
 		image.setIcon(imageicon);
 		panel.add(image, BorderLayout.CENTER);
 		
 	}
 	
-		//Creacion e implementacion de Oyente
+		//Creación e implementación de Oyente
 	private class OyenteBoton implements ActionListener{
         public void actionPerformed(ActionEvent e){
         	image.setIcon(imageicon2);
