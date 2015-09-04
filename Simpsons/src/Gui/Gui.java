@@ -3,14 +3,23 @@ package Gui;
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
 
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineEvent;
+import javax.sound.sampled.LineListener;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JButton;
 import javax.swing.JTextArea;
-import java.awt.Color;
+
 import java.awt.*;
 import java.awt.event.*;
+import java.io.*;
+
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
@@ -20,6 +29,9 @@ public class Gui extends JFrame {
 	private JPanel contentPane;
 	private JLabel image;
 	private ImageIcon icon,imageicon, imageicon2;
+	private Clip clip;
+	private AudioInputStream inputStream;
+	private JButton btnNewButton;
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -73,7 +85,7 @@ public class Gui extends JFrame {
 		contentPane.add(panel_1, BorderLayout.SOUTH);
 		
 		//	Creación de botón 
-		JButton btnNewButton = new JButton("Iniciar");
+		btnNewButton = new JButton("Iniciar");
 		panel_1.add(btnNewButton);
 		OyenteBoton oyente= new OyenteBoton();
 		btnNewButton.addActionListener(oyente);
@@ -84,12 +96,39 @@ public class Gui extends JFrame {
 		image = new JLabel();
 		image.setIcon(imageicon);
 		panel.add(image, BorderLayout.CENTER);
+		        
+	}
+
+	
+		private void Sonidos() {
+			//Creacion de sonido
+
+			try {
+				clip = AudioSystem.getClip();
+				inputStream = AudioSystem.getAudioInputStream(getClass().getResourceAsStream("/Sonidos/00.wav"));
+				clip.open(inputStream);
+			} catch (UnsupportedAudioFileException | IOException |LineUnavailableException e ) {
+				e.printStackTrace();
+			}
+				clip.start();
+	        clip.addLineListener(new LineListener() {
+	            public void update(LineEvent evt) {
+	              if (evt.getType() == LineEvent.Type.STOP) 
+	              {
+	            	  image.setIcon( new ImageIcon(getClass().getResource("/Imagenes/03.png")));
+	            	  btnNewButton.setEnabled(true);
+	              }
+	            }
+	          });
 		
 	}
-	
+
 		//Creación e implementación de Oyente
 	private class OyenteBoton implements ActionListener{
         public void actionPerformed(ActionEvent e){
+        	btnNewButton.setText("Reset");
+        	btnNewButton.setEnabled(false);
+        	Sonidos();
         	image.setIcon(imageicon2);
         	textArea.setText("Sin la presencia de un hombre en la casa, puedes volverte afeminado en un segundo. Ayy esta grasa no se quita.");
         }
