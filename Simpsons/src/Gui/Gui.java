@@ -105,7 +105,8 @@ public class Gui extends JFrame {
 
 			try {
 				clip = AudioSystem.getClip();
-				inputStream = AudioSystem.getAudioInputStream(getClass().getResourceAsStream("/Sonidos/00.wav"));
+				BufferedInputStream bis= new BufferedInputStream(getClass().getResourceAsStream("/Sonidos/00.wav"));
+				inputStream= AudioSystem.getAudioInputStream(bis);
 				clip.open(inputStream);
 			} catch (UnsupportedAudioFileException | IOException |LineUnavailableException e ) {
 				e.printStackTrace();
