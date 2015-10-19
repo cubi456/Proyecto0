@@ -14,7 +14,7 @@ public class Sirius extends Enemigo {
      * @param p
      */
     public Sirius(int s, int x, int y, int p) {
-        // TODO implement here
+        super(s, x, y, p);
     }
 
     /**

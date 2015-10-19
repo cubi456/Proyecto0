@@ -6,7 +6,7 @@ import java.util.*;
  * 
  */
 public class Pared {
-    protected boolean Destructible;
+    protected boolean destructible;
     protected PowerUp miPower;
   
     /**
@@ -14,22 +14,22 @@ public class Pared {
      * @param esDesc
      */
     public Pared(PowerUp pu , boolean esDesc) {
-        // TODO implement here
+        destructible= esDesc;
+        miPower=pu;
     }
 
     /**
      * @return
      */
-    public Boolean isDestructible() {
-        // TODO implement here
-        return null;
+    public boolean isDestructible() {
+        return destructible;
     }
 
     /**
      * @return
      */
     public PowerUp setPowerUp() {
-        // TODO implement here
+    	/**ISB ver **/
         return null;
     }
 

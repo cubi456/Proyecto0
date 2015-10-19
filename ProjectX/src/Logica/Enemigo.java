@@ -14,7 +14,8 @@ public abstract class Enemigo extends Personaje {
      * @param p
      */
     protected Enemigo(int s, int x, int y, int p) {
-        // TODO implement here
+        super(s, x, y);
+        puntaje=p;
     }
 
     /**

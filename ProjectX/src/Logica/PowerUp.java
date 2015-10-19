@@ -6,9 +6,6 @@ package Logica;
  */
 public abstract class PowerUp {
 
-    /**
-     * Default constructor
-     */
     protected PowerUp() {
     }
 

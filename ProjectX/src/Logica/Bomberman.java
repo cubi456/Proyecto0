@@ -1,14 +1,17 @@
 package Logica;
 
+import java.awt.event.KeyEvent;
+
 
 /**
  * 
  */
 public class Bomberman extends Personaje {
 
-    protected boolean Dios;
+    protected boolean dios;
     protected int puntaje;/**ISB NO CONTROLA EL JOGO? **/
     protected Bomba[] misBombas;
+    protected int cantBombas;
 
     /**
      * @param s 
@@ -16,11 +19,17 @@ public class Bomberman extends Personaje {
      * @param y
      */
     public Bomberman(int s, int x, int y) {
-        // TODO implement here
+    	super(s, x, y);
+    	dios= false;
+    	puntaje=0;
+    	misBombas= new Bomba[15];// SE PUEDEN HASTA 20 bombas
+    	for(int i=0; i<15; i++)
+    		misBombas[i]=new Bomba();
+    	
     }
 
     /**
-     * 
+     * ISB QUE ONDA CON ESTO?
      */
     public void setBomba() {
         // TODO implement here
@@ -29,65 +38,128 @@ public class Bomberman extends Personaje {
     /**
      * 
      */
-    public void setDios() {
-        // TODO implement here
+    /** ISB CAMBIO DE NOMBRE **/
+    public void convertirEnDios() {
+       dios=true;
     }
 
     /**
      * @return
      */
     public int getPuntaje() {
-        // TODO implement here
-        return 0;
+        return puntaje;
     }
 
     /**
      * @param int p
      */
     public void addPuntaje(int p) {
-        // TODO implement here
+        puntaje+=p;
     }
 
     /**
      * 
      */
     public void colocarBomba() {
-        // TODO implement here
+        if(cantBombas!=0){
+        	Celda c= miJuego.getNivel(0).getCelda(this.posX, this.posY);
+        	Bomba bom=misBombas[cantBombas-1];
+        	c.colocarBomba(bom);
+        	cantBombas--;
+        }
+        
     }
 
     /**
      * 
      */
     public void avanzarIzq() {
-        // TODO implement here
+    	Celda c=miJuego.getNivel(0).getCelda(this.posX, this.posY);
+    	if(c.getPared()!= null){ // Si celda no es pared.
+    		posX-=1;
+    		PowerUp pup=c.getPowerUp();
+    		if(pup!=null)
+    			pup.setAction(this);
+    	}
+    			
     }
 
     /**
      * 
      */
     public void avanzarDer() {
-        // TODO implement here
+    	Celda c=miJuego.getNivel(0).getCelda(this.posX, this.posY);
+    	if(c.getPared()!= null){ // Si celda no es pared.
+    		posX+=1;
+    		PowerUp pup=c.getPowerUp();
+    		if(pup!=null)
+    			pup.setAction(this);
+    	}
     }
 
     /**
      * 
      */
     public void avanzarAriba() {
-        // TODO implement here
+    	Celda c=miJuego.getNivel(0).getCelda(this.posX, this.posY);
+    	if(c.getPared()!= null){ // Si celda no es pared.
+    		posY+=1;
+    		PowerUp pup=c.getPowerUp();
+    		if(pup!=null)
+    			pup.setAction(this);
+    	}
     }
 
     /**
      * 
      */
     public void avanzarAbajo() {
-        // TODO implement here
+    	Celda c=miJuego.getNivel(0).getCelda(this.posX, this.posY);
+    	if(c.getPared()!= null){ // Si celda no es pared.
+    		posY-=1;
+    		PowerUp pup=c.getPowerUp();
+    		if(pup!=null)
+    			pup.setAction(this);
+    	}
     }
 
-    /**
-     * 
-     */
-    public void Morir() {
-        // TODO implement here
+    
+/*
+    
+*/
+    /**ISB ALTERNATIVA **/
+public void avanzar(int dir){
+	Celda c=miJuego.getNivel(0).getCelda(this.posX, this.posY);
+	if(c.getPared()!= null){ // Si celda no es pared.
+		switch (dir){
+			case 0: // Movimiento a izquierda
+				posX-=1;
+				break;
+			case 1: // Movimiento a Arriba
+				posY+=1;
+				break;
+			case 2: // Movimiento a Derecha
+				posX+=1;
+				break;
+			case 3: //Movimiento a Abajo
+				posY-=1;
+				break;
+		}
+			
+		PowerUp pup=c.getPowerUp();
+		if(pup!=null)
+			pup.setAction(this);
+		if(c.hayEnemigo())
+			morir();
+	}
+		
+}
+    public void morir() {
+    	miJuego.matarPersonaje(this);
+    }
+    
+    public Bomba[] getBombas(){
+    	return misBombas;
     }
 
 }

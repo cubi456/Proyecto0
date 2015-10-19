@@ -11,31 +11,34 @@ public class Celda {
     protected Bomberman bomberman;
     protected Enemigo[] enemigos;
     protected int x, y;
-    protected Nivel Celdas;
-    protected Pared Estado;
+    protected Pared estado;
     protected PowerUp power;
 
     /**
      * @param int x 
      * @param int y
      */
-    public void Celda(int x, int y) {
-        // TODO implement here
+    public Celda(int x, int y) {
+        this.x=x;
+        this.y=y;
+        power=null;
+        estado=null;
+        /** ISB BOMBERMAN Y ENEMIGOS QUE ONDA **/ 
     }
 
     /**
      * @return
      */
     public boolean getDestructible() {
-        // TODO implement here
-        return false;
+        return estado!=null && estado.isDestructible();
     }
 
     /**
      * @param b
      */
     public void colocarBomba(Bomba b) {
-        // TODO implement here
+    		b.setUbicacion(this);
+    		b.explotar();
     }
 
     /**
@@ -49,39 +52,35 @@ public class Celda {
      * @param PowerUp p
      */
     public void setPonerPowerUp(PowerUp p) {
-        // TODO implement here
+        power=p;
     }
 
     /**
      * @return
      */
     public PowerUp getPowerUp() {
-        // TODO implement here
-        return null;
+        return power;
     }
 
     /**
      * @return
      */
     public Pared getPared() {
-        // TODO implement here
-        return null;
+        return estado;
     }
 
     /**
      * @return
      */
-    public Bomberman estaBomberman() {
-        // TODO implement here
-        return null;
+    public boolean estaBomberman() {
+        return bomberman.getPosX()==x && bomberman.getPosY()==y;
     }
 
     /**
      * @return
      */
-    public Enemigo [] getEnemegio() {
-        // TODO implement here
-        return null;
+    public Enemigo[] getEnemigo() {
+        return enemigos;
     }
 
     /**
@@ -91,6 +90,13 @@ public class Celda {
     public Celda[] getAdyacentes(int alc) {
         // TODO implement here
         return null;
+    }
+    /** ISB AGREGADO */
+    public boolean hayEnemigo(){
+    	for(Enemigo e: enemigos)
+    		if(e.getPosX()==x && e.getPosY()==y)
+    			return true;
+    	return false;
     }
 
 }

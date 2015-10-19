@@ -8,8 +8,8 @@ public class SpeedUp extends PowerUp {
     /**
      * 
      */
-    public void SpeedUp() {
-        // TODO implement here
+    public SpeedUp() {
+        
     }
 
     /**
@@ -17,6 +17,6 @@ public class SpeedUp extends PowerUp {
      */
     
     public void setAction(Bomberman b) {
-        // TODO implement here
+        b.doubleSpeed(); //Dobla la velocidad del personaje
     }
 }

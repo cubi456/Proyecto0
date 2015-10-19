@@ -10,7 +10,7 @@ public class Altair extends Enemigo {
      * @param p
      */
     public Altair(int s, int x, int y, int p) {
-        // TODO implement here
+        super(s, x, y, p);
     }
 
     /**

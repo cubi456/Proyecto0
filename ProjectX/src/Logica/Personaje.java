@@ -6,7 +6,7 @@ package Logica;
 public abstract class Personaje {
 
     protected int speed, posX, posY;
-    protected Juego miJuego[];
+    protected Juego miJuego;
 
     /**
      * @param s 
@@ -14,48 +14,54 @@ public abstract class Personaje {
      * @param y
      */
     protected Personaje(int s, int x, int y) {
-        // TODO implement here
+        speed=s;
+        posX=x;
+        posY=y;
+        miJuego=new Juego();
     }
 
     /**
      * @param s
      */
-    public void setSpeed(int s) {
-        // TODO implement here
+    /** ISB tendria que ser aumentar el doble**/
+    public void doubleSpeed() { // Aumenta el doble la velocidad
+        speed*=2;
     }
 
     /**
      * 
      */
-    public void getSpeed() {
-        // TODO implement here
+    public int getSpeed() {
+        return speed;
     }
 
     /**
      * @return
      */
     public int getPosX() {
-        // TODO implement here
-        return 0;
+        return posX;
     }
 
     /**
      * @return
      */
     public int getPosY() {
-        // TODO implement here
-        return 0;
+        return posY;
     }
 
     /**
      * 
      */
-    public abstract void avanzarIzq();
+    public void avanzarIzq(){
+    
+    }
 
     /**
      * 
      */
-    public abstract void avanzarDer();
+    public void avanzarDer(){
+    	
+    }
 
     /**
      * 
@@ -67,11 +73,15 @@ public abstract class Personaje {
     /**
      * 
      */
-    public abstract void avanzarAbajo();
+    public void avanzarAbajo(){
+    	
+    }
 
     /**
      * 
      */
-    public abstract void morir();
+    public void morir(){
+    	
+    }
 
 }

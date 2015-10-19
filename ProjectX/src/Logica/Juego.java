@@ -15,6 +15,9 @@ public class Juego {
      * Default constructor
      */
     public Juego() {
+    	misNiveles= new Nivel[1];
+    	misPersonajes= new Personaje[8];// 7 enemigos 1 malo
+    	misNiveles[0]= crearNivel();
     }
 
 
@@ -22,17 +25,16 @@ public class Juego {
      * @return
      */
     public Personaje[] misPersonajes() {
-        // TODO implement here
-        return null;
+        return misPersonajes;
     }
 
     /**
      * @return
      */
     public Nivel[] misNiveles() {
-        // TODO implement here
-        return null;
+        return misNiveles;
     }
+    
 
     /**
      * @param pj
@@ -44,8 +46,12 @@ public class Juego {
     /**
      * 
      */
-    public void CrearNivel() {
-        // TODO implement here
+    /** ISB El nivel crea el juego el juego crea el nivel **/
+    public Nivel crearNivel() {
+    	/** Esto es asi cubo?*/
+    	PowerUp[] pu= new PowerUp[11];
+        Nivel nivel= new Nivel(pu, this);
+        return nivel;
     }
 
     /**
@@ -53,8 +59,7 @@ public class Juego {
      * @return
      */
     public Nivel getNivel(int pos) {
-        // TODO implement here
-        return null;
+        return misNiveles[pos];
     }
 
     /**
@@ -62,36 +67,36 @@ public class Juego {
      * @return
      */
     public Personaje getPersonaje(int pos) {
-        // TODO implement here
-        return null;
+        return misPersonajes[pos];
     }
 
     /**
      * 
      */
     public void addRugulus() {
-        // TODO implement here
+    	Rugulus r= new Rugulus(1, 0, 0, 15);
+    	/** ISB Y ACA comom seguimos? **/ 
     }
 
     /**
      * 
      */
     public void addAltair() {
-        // TODO implement here
+       Altair a= new Altair(1, 0, 0, 20);
     }
 
     /**
      * 
      */
     public void addSirius() {
-        // TODO implement here
+    	Sirius s= new Sirius(1, 0, 0, 50);
     }
 
     /**
      * 
      */
     public void addBomberman() {
-        // TODO implement here
+    	Bomberman b= new Bomberman(1, 0, 0);
     }
-
+    
 }

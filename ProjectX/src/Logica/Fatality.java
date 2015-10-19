@@ -10,14 +10,16 @@ public class Fatality extends PowerUp {
 
 
     public Fatality() {
-        // TODO implement here
+       
     }
 
     /**
      * @param b
      */
     public void setAction(Bomberman b) {
-        // TODO implement here
+    	/** ISB RECORRER TODO???? */
+    	for(Bomba bom: b.getBombas())
+    		bom.duplicarAlcance();
     }
 
 }

@@ -10,7 +10,7 @@ public class Rugulus extends Enemigo {
      * @param p
      */
     public Rugulus(int s, int x, int y, int p) {
-        // TODO implement here
+        super(s, x, y, p);
     }
 
     /**

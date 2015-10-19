@@ -6,28 +6,33 @@ public class Bomba {
     protected Celda ubicacion;
 
     public Bomba() {
+    	ubicacion=null;
+    	alcance=1;
     }
 
     /**
      * @param int a
      */
-    public void sumarAlcance(int a) {
-        // TODO implement here
+    public void duplicarAlcance() {
+        alcance*=2;
     }
 
     /**
      * @return
      */
     public int getAlcance() {
-        // TODO implement here
-        return 0;
+        return alcance;
     }
 
     /**
      * @param Celda c
      */
     public void setUbicacion(Celda c) {
-        // TODO implement here
+        ubicacion=c;
+    }
+    /**ISB  Esta en LA NOTA pero no en la clase*/
+    public void explotar(){
+    	
     }
 
 }
