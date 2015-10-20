@@ -9,8 +9,8 @@ public class Rugulus extends Enemigo {
      * @param y 
      * @param p
      */
-    public Rugulus(int s, int x, int y, int p) {
-        super(s, x, y, p);
+    public Rugulus(int s, int x, int y, int p,Juego j) {
+        super(s, x, y, p,j);
     }
 
     /**

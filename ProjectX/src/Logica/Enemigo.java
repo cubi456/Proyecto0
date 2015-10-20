@@ -13,17 +13,17 @@ public abstract class Enemigo extends Personaje {
      * @param y 
      * @param p
      */
-    protected Enemigo(int s, int x, int y, int p) {
-        super(s, x, y);
+    protected Enemigo(int s, int x, int y, int p,Juego j) {
+        super(s, x, y,j);
         puntaje=p;
     }
 
     /**
      * @return
      */
-    public int getPuntaje() {
-        // TODO implement here
-        return 0;
+    public int getPuntaje() 
+    {
+        return puntaje;
     }
 
     /**

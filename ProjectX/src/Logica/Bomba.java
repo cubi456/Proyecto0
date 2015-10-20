@@ -31,8 +31,20 @@ public class Bomba {
         ubicacion=c;
     }
     /**ISB  Esta en LA NOTA pero no en la clase*/
-    public void explotar(){
-    	
+    public void explotar()
+    {
+    	if(ubicacion!=null)
+    	{
+    		for(Celda c:ubicacion.getAdyacentes(alcance))
+    		{
+    			if(c.getBomberman()!=null)
+    				c.getBomberman().morir();
+    			if(c.getEnemigo()!=null)
+    				c.getEnemigo().morir();
+    			if(c.getPared()!=null)
+    				c.destruir();
+    		}
+    	}
     }
 
 }

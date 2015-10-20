@@ -16,8 +16,8 @@ public class Fatality extends PowerUp {
     /**
      * @param b
      */
-    public void setAction(Bomberman b) {
-    	/** ISB RECORRER TODO???? */
+    public void setAction(Bomberman b) 
+    {
     	for(Bomba bom: b.getBombas())
     		bom.duplicarAlcance();
     }

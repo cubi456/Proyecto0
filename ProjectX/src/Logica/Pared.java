@@ -1,7 +1,5 @@
 package Logica;
 
-import java.util.*;
-
 /**
  * 
  */
@@ -21,16 +19,17 @@ public class Pared {
     /**
      * @return
      */
-    public boolean isDestructible() {
+    public boolean isDestructible() 
+    {
         return destructible;
     }
 
     /**
      * @return
      */
-    public PowerUp setPowerUp() {
-    	/**ISB ver **/
-        return null;
+    public PowerUp getPowerUp()
+    {
+    	return miPower;
     }
-
+   
 }

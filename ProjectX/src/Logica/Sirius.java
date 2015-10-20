@@ -13,8 +13,8 @@ public class Sirius extends Enemigo {
      * @param y 
      * @param p
      */
-    public Sirius(int s, int x, int y, int p) {
-        super(s, x, y, p);
+    public Sirius(int s, int x, int y, int p,Juego j) {
+        super(s, x, y, p,j);
     }
 
     /**

@@ -13,11 +13,11 @@ public abstract class Personaje {
      * @param x 
      * @param y
      */
-    protected Personaje(int s, int x, int y) {
+    protected Personaje(int s, int x, int y,Juego j) {
         speed=s;
         posX=x;
         posY=y;
-        miJuego=new Juego();
+        miJuego=j;
     }
 
     /**
@@ -52,36 +52,24 @@ public abstract class Personaje {
     /**
      * 
      */
-    public void avanzarIzq(){
-    
-    }
+    abstract public void avanzarIzq();
 
     /**
      * 
      */
-    public void avanzarDer(){
-    	
-    }
+    abstract public void avanzarDer();
+    /**
+     * 
+     */
+    abstract public void avanzarArriba();
 
     /**
      * 
      */
-    public void avanzarArriba() {
-        // TODO implement here
-    }
+    abstract public void avanzarAbajo();
 
     /**
      * 
      */
-    public void avanzarAbajo(){
-    	
-    }
-
-    /**
-     * 
-     */
-    public void morir(){
-    	
-    }
-
+    abstract public void morir();
 }

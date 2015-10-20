@@ -9,14 +9,17 @@ public class Bombality extends PowerUp {
     /**
      * 
      */
-    public Bombality() {
+    public Bombality()
+    {
+    	super();
     }
 
     /**
      * @param b
      */
-    public void setAction(Bomberman b) {
-        // TODO implement here
+    public void setAction(Bomberman b) 
+    {
+        b.addBomba();
     }
 
 }

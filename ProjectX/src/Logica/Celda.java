@@ -9,50 +9,53 @@ import java.util.*;
 public class Celda {
 
     protected Bomberman bomberman;
-    protected Enemigo[] enemigos;
+    protected Enemigo enemigo;
     protected int x, y;
     protected Pared estado;
     protected PowerUp power;
+    protected Nivel miNivel;
 
     /**
      * @param int x 
      * @param int y
      */
-    public Celda(int x, int y) {
+    public Celda(int x, int y,Pared p,Nivel n) 
+    {
         this.x=x;
         this.y=y;
         power=null;
         estado=null;
+        miNivel=n;
         /** ISB BOMBERMAN Y ENEMIGOS QUE ONDA **/ 
     }
 
     /**
      * @return
      */
-    public boolean getDestructible() {
+    public boolean getDestructible()
+    {
         return estado!=null && estado.isDestructible();
     }
 
     /**
      * @param b
      */
-    public void colocarBomba(Bomba b) {
+    public void colocarBomba(Bomba b) 
+    {
+    	if(estado==null)
+    	{	
     		b.setUbicacion(this);
     		b.explotar();
+    	}
     }
 
     /**
      * 
      */
-    public void destruir() {
-        // TODO implement here
-    }
-
-    /**
-     * @param PowerUp p
-     */
-    public void setPonerPowerUp(PowerUp p) {
-        power=p;
+    public void destruir() 
+    {
+       power=estado.getPowerUp();
+       estado=null;
     }
 
     /**
@@ -68,35 +71,71 @@ public class Celda {
     public Pared getPared() {
         return estado;
     }
-
+    
     /**
      * @return
      */
     public boolean estaBomberman() {
-        return bomberman.getPosX()==x && bomberman.getPosY()==y;
+        return bomberman !=null;
     }
-
+    
+    public Bomberman getBomberman()
+    {
+    	return bomberman;
+    }
+    
+    public void setBomberman(Bomberman b)
+    {
+    	bomberman=b;
+    }
     /**
      * @return
      */
-    public Enemigo[] getEnemigo() {
-        return enemigos;
+    public Enemigo getEnemigo() {
+        return enemigo;
     }
 
     /**
      * @param alc 
      * @return
      */
-    public Celda[] getAdyacentes(int alc) {
-        // TODO implement here
-        return null;
-    }
-    /** ISB AGREGADO */
-    public boolean hayEnemigo(){
-    	for(Enemigo e: enemigos)
-    		if(e.getPosX()==x && e.getPosY()==y)
-    			return true;
-    	return false;
+    public Vector<Celda> getAdyacentes(int alc) 
+    {
+       Vector<Celda> salida=new Vector<Celda>();
+       boolean izq,der,arr,abj;
+       izq=der=arr=abj=true;
+       for(int i=1;i<=alc && (izq || der || arr || abj);i++)
+       {
+    	   if(izq)
+    	   {
+    		   Celda aux=miNivel.getCelda(x-i, y);
+    		   salida.addElement(aux);
+    		   if(aux.getPared()!=null)
+    			   izq=false;
+    	   }
+    	   if(der)
+    	   {
+    		   Celda aux=miNivel.getCelda(x+i, y);
+    		   salida.addElement(aux);
+    		   if(aux.getPared()!=null)
+    			   der=false;
+    	   }
+    	   if(arr)
+    	   {
+    		   Celda aux=miNivel.getCelda(x, y+1);
+    		   salida.addElement(aux);
+    		   if(aux.getPared()!=null)
+    			   arr=false;
+    	   }
+    	   if(abj)
+    	   {
+    		   Celda aux=miNivel.getCelda(x, y-1);
+    		   salida.addElement(aux);
+    		   if(aux.getPared()!=null)
+    			   abj=false;
+    	   }
+       }
+       return salida;
     }
 
 }
