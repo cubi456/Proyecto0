@@ -48,7 +48,7 @@ public class Sirius extends Enemigo {
     /**
      * 
      */
-    public void MatarBomberman() {
+    public void MatarBomberman(Bomberman b) {
         // TODO implement here
     }
 

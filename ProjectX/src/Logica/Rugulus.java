@@ -16,43 +16,82 @@ public class Rugulus extends Enemigo {
     /**
      * 
      */
-    public void avanzarIzq() {
-        // TODO implement here
+    public void avanzarIzq() 
+    {
+    	Celda c=miJuego.getNivel(1).getCelda(this.posX-1,this.posY);
+      	if(c.getPared()!= null && c.getEnemigo()==null)
+      	{
+      		miJuego.getNivel(1).getCelda(this.posX,this.posY).setEnemigo(null);
+      		posX-=1;
+      		analizar(c);
+      	}
+    		
     }
 
     /**
      * 
      */
-    public void avanzarDer() {
-        // TODO implement here
+    public void avanzarDer() 
+    {
+    	Celda c=miJuego.getNivel(1).getCelda(this.posX+1,this.posY);
+      	if(c.getPared()!= null && c.getEnemigo()==null)
+      	{
+      		miJuego.getNivel(1).getCelda(this.posX,this.posY).setEnemigo(null);
+      		posX+=1;
+      		analizar(c);
+      	}
     }
 
     /**
      * 
      */
-    public void avanzarArriba() {
-        // TODO implement here
+    public void avanzarArriba() 
+    {
+    	Celda c=miJuego.getNivel(1).getCelda(this.posX,this.posY+1);
+      	if(c.getPared()!= null && c.getEnemigo()==null)
+      	{
+      		miJuego.getNivel(1).getCelda(this.posX,this.posY).setEnemigo(null);
+      		posY+=1;
+      		analizar(c);
+      	}
     }
 
     /**
      * 
      */
-    public void avanzarAbajo() {
-        // TODO implement here
+    public void avanzarAbajo() 
+    {
+    	Celda c=miJuego.getNivel(1).getCelda(this.posX,this.posY-1);
+      	if(c.getPared()!= null && c.getEnemigo()==null)
+      	{
+      		miJuego.getNivel(1).getCelda(this.posX,this.posY).setEnemigo(null);
+      		posY-=1;
+      		analizar(c);
+      	}
     }
 
     /**
      * 
      */
-    public void MatarBomberman() {
-        // TODO implement here
+    public void MatarBomberman(Bomberman b) 
+    {
+        b.morir();
     }
 
     /**
      * 
      */
-    public void morir() {
-        // TODO implement here
+    
+    private void analizar(Celda c)
+    {
+    		c.setEnemigo(this);
+    		if(c.getBomberman()!=null)
+    			MatarBomberman(c.getBomberman());
+    }
+    
+    public void morir()
+    {
+        miJuego.matarPersonaje(this);
     }
 
 }

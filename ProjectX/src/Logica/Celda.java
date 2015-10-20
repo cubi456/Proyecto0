@@ -75,9 +75,6 @@ public class Celda {
     /**
      * @return
      */
-    public boolean estaBomberman() {
-        return bomberman !=null;
-    }
     
     public Bomberman getBomberman()
     {
@@ -94,7 +91,11 @@ public class Celda {
     public Enemigo getEnemigo() {
         return enemigo;
     }
-
+    
+    public void setEnemigo(Enemigo e)
+    {
+    	enemigo=e;
+    }
     /**
      * @param alc 
      * @return

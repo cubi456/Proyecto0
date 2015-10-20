@@ -14,10 +14,10 @@ public class Juego {
     /**
      * Default constructor
      */
-    public Juego() {
+    public Juego() 
+    {
     	misNiveles= new Vector<Nivel>();
     	misPersonajes=new Vector<Personaje>();
-    	misNiveles.addElement(crearNivel());
     }
 
 
@@ -48,15 +48,15 @@ public class Juego {
      * 
      */
     /** ISB El nivel crea el juego el juego crea el nivel **/
-    public Nivel crearNivel() {
-    	/** Esto es asi cubo?*/
+    public void crearNivel() 
+    {
     	int[] pu= new int[4];
     	pu[0]=4;
     	pu[1]=3;
     	pu[2]=3;
     	pu[1]=1;
         Nivel nivel= new Nivel(pu, this);
-        return nivel;
+        this.misNiveles.addElement(nivel);
     }
 
     /**

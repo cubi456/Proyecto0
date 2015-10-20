@@ -49,7 +49,7 @@ public abstract class Enemigo extends Personaje {
     /**
      * 
      */
-    public abstract void MatarBomberman();
+    public abstract void MatarBomberman(Bomberman b);
 
     /**
      * 
