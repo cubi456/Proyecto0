@@ -4,14 +4,18 @@ import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyAdapter;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import Logica.Bomberman;
 import Logica.Juego;
+import Logica.Personaje;
 
 public class GUI extends JFrame {
+	// ISB VER
+	Personaje b;
 	private static final long serialVersionUID = 1L;
 
 	private JPanel contenedor;
@@ -54,9 +58,10 @@ public class GUI extends JFrame {
 		
 		juego= new Juego(this);
 		juego.crearNivel();
+		b= juego.addBomberman();
 		
 		// Oyente a las teclas
-		ventana.addKeyListener(new KeyAdapter() {
+		addKeyListener(new KeyAdapter() {
 			public void keyPressed(KeyEvent arg0) {
 				OyenteTeclado(arg0);
 			}
@@ -64,24 +69,30 @@ public class GUI extends JFrame {
 		
 		}
 	
-	private void OyenteTeclado(KeyEvent key) {
-		Bomberman b=new Bomberman(1,1,3, juego);// ESTO NO VA, tendria que pedirle al juego bomb
+	protected void OyenteTeclado(KeyEvent key) {
 		switch (key.getKeyCode()) {
 			case KeyEvent.VK_LEFT :
 				b.avanzarIzq();
+				this.add(b.getGrafico());
 				break;
 			case KeyEvent.VK_UP : 
 				b.avanzarArriba();
+				this.add(b.getGrafico());
 				break;
 			case KeyEvent.VK_RIGHT : 
 				b.avanzarDer();
+				this.add(b.getGrafico());
 				break;
 			case KeyEvent.VK_DOWN : 
 				b.avanzarAbajo();
+				this.add(b.getGrafico());
 				break;
-			case KeyEvent.VK_SPACE:
-				b.colocarBomba();
-			//case ENTER. PAUSA		
+			//case KeyEvent.VK_SPACE:
+				//b.colocarBomba();
+				//break
+			//case ENTER. PAUSA	
+			default: 
+				break;
 		}
 	}
 }

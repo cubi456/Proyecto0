@@ -19,16 +19,23 @@ public abstract class PersonajeGrafico{
 		return velocidad;
 	}
 	
-	protected void cambiarImagen(int dir){
+	public void cambiarDirec(int dir){
 		// La logica le pasa la direccion donde se va a mover
 		grafico.setIcon(this.imagen[dir]);
+		
+		/* 0 izq
+		 * 1 up
+		 * 2 der
+		 * 3 down
+		 */
 	}
 	public JLabel getGrafico(){
 		if(this.grafico == null){
-			this.grafico = new JLabel(imagen[0]);
-			this.grafico.setBounds(x* ancho, y*alto, ancho, alto);
+			this.grafico = new JLabel(imagen[1]); // Comienza de enfrente
+			this.grafico.setBounds(x*ancho , y*alto, ancho, alto);
 		}
 		
 		return this.grafico;
 	}
+
 }

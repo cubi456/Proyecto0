@@ -13,7 +13,7 @@ public class Bomberman extends Personaje
 {
 
     protected boolean dios;
-    protected int puntaje;/**ISB NO CONTROLA EL JOGO? **/
+    protected int puntaje;
     protected Vector<Bomba> misBombas;
 
     /**
@@ -86,6 +86,7 @@ public class Bomberman extends Personaje
       	{
       		miJuego.getNivel(1).getCelda(this.posX,this.posY).setBomberman(null);
       		posX-=1;
+      		grafico.cambiarDirec(0);
       		analizar(c);
       	}
     		
@@ -103,6 +104,7 @@ public class Bomberman extends Personaje
       	{
       		miJuego.getNivel(1).getCelda(this.posX,this.posY).setBomberman(null);
       		posX+=1;
+      		grafico.cambiarDirec(2);
       		analizar(c);
       	}
     }
@@ -126,6 +128,7 @@ public class Bomberman extends Personaje
       	{
       		miJuego.getNivel(1).getCelda(this.posX,this.posY).setBomberman(null);
       		posY+=1;
+      		grafico.cambiarDirec(1);
       		analizar(c);
       	}
     }
@@ -140,6 +143,7 @@ public class Bomberman extends Personaje
       	{
       		miJuego.getNivel(1).getCelda(this.posX,this.posY).setBomberman(null);
       		posY-=1;
+      		grafico.cambiarDirec(3);
       		analizar(c);
       	}
     }

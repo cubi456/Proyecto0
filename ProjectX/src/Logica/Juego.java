@@ -107,12 +107,14 @@ public class Juego {
     /**
      * 
      */
-    public void addBomberman()
+    /** ISB EDITADO PARA LAGUI , ES VOID*/
+    public Personaje addBomberman()
     {
     	Personaje b= new Bomberman(1, 1, 1,this);
-    	misNiveles.get(1).getCelda(1,1).setBomberman((Bomberman)b);
+    	misNiveles.get(0).getCelda(1,1).setBomberman((Bomberman)b);
     	misPersonajes.addElement(b);
-    	gui.add(b.getGrafico());
+    	gui.add(b.getGrafico(), 1);
+    	return b;
     }
     
 }

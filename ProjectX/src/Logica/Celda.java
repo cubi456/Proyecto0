@@ -38,7 +38,7 @@ public class Celda {
         if(x==0|| x==30 || y==0 || y==12)
         	grafico=new ParedSolidaGrafico(x, y);
         else
-        if(x%2!=0)
+        if(x%2!=0 || y%2!=0)
         	grafico=new SueloGrafico(x, y);
         else
         	grafico=new ParedDesctGrafico(x, y);

@@ -19,7 +19,7 @@ public abstract class BloqueGrafico{
 	public JLabel getGrafico(){
 		if(this.grafico == null){
 			this.grafico = new JLabel(imagen);
-			this.grafico.setBounds(x * ancho, y* alto, ancho, alto);
+			this.grafico.setBounds(x*ancho , y*alto, ancho, alto);
 		}
 		
 		return this.grafico;

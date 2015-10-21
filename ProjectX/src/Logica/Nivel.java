@@ -35,7 +35,7 @@ public class Nivel {
         	        else
         	        	celdas[f][c]=new Celda(f,c,null,this); 
         		 }
-        		 g.add(celdas[f][c].getGrafico());  
+        		 g.add(celdas[f][c].getGrafico(), 0);  
         	}
         }
     }
