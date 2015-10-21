@@ -1,5 +1,6 @@
 package Logica;
 import gui.GUI;
+import hilosMalos.RugulusThread;
 
 import java.util.*;
 
@@ -82,8 +83,14 @@ public class Juego {
      */
     public void addRugulus()
     {
-    	Personaje r= new Rugulus(1, 0, 0, 15,this);
+    	Personaje r= new Rugulus(1, 11, 1, 15,this);
     	misPersonajes.addElement(r);
+    	misNiveles.get(0).getCelda(1,11).setEnemigo((Enemigo)r);
+    	gui.add(r.getGrafico(), 1);
+    	/**  Probando thread */
+    	RugulusThread rt= new RugulusThread((Rugulus)r);
+    	rt.start();
+    	
     }
 
     /**

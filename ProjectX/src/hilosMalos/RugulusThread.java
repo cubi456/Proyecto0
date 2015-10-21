@@ -17,7 +17,7 @@ public class RugulusThread extends Thread {
 		while(!rStop){
 			try {
 				Thread.sleep(1000); //cada un segundo
-				//rLogic.mover();
+				rLogic.mover();
 			} catch (InterruptedException e) { }
 		}
 	}

@@ -41,7 +41,10 @@ public class Celda {
         if(x%2!=0 || y%2!=0)
         	grafico=new SueloGrafico(x, y);
         else
-        	grafico=new ParedDesctGrafico(x, y);
+        	if(x%4==0 && y%4!=0|| x%4!=0 && y%4==0)
+        		grafico=new ParedSolidaGrafico(x, y);
+        	else
+        		grafico=new ParedDesctGrafico(x, y);
         
     }
 

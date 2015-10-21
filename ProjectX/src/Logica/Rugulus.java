@@ -1,5 +1,7 @@
 package Logica;
 
+import graficaPersonajes.RugulusGrafico;
+
 import java.util.Random;
 
 
@@ -13,6 +15,7 @@ public class Rugulus extends Enemigo {
      */
     public Rugulus(int s, int x, int y, int p,Juego j) {
         super(s, x, y, p,j);
+        grafico= new RugulusGrafico(s, x, y);
     }
 
     /**
@@ -20,10 +23,11 @@ public class Rugulus extends Enemigo {
      */
     public void avanzarIzq() 
     {
-    	Celda c=miJuego.getNivel(1).getCelda(this.posX-1,this.posY);
+    	grafico.cambiarDirec(0);
+    	Celda c=miJuego.getNivel(0).getCelda(this.posX-1,this.posY);
       	if(c.getPared()!= null && c.getEnemigo()==null)
       	{
-      		miJuego.getNivel(1).getCelda(this.posX,this.posY).setEnemigo(null);
+      		miJuego.getNivel(0).getCelda(this.posX,this.posY).setEnemigo(null);
       		posX-=1;
       		analizar(c);
       	}
@@ -35,10 +39,11 @@ public class Rugulus extends Enemigo {
      */
     public void avanzarDer() 
     {
-    	Celda c=miJuego.getNivel(1).getCelda(this.posX+1,this.posY);
+    	grafico.cambiarDirec(2);
+    	Celda c=miJuego.getNivel(0).getCelda(this.posX+1,this.posY);
       	if(c.getPared()!= null && c.getEnemigo()==null)
       	{
-      		miJuego.getNivel(1).getCelda(this.posX,this.posY).setEnemigo(null);
+      		miJuego.getNivel(0).getCelda(this.posX,this.posY).setEnemigo(null);
       		posX+=1;
       		analizar(c);
       	}
@@ -49,10 +54,11 @@ public class Rugulus extends Enemigo {
      */
     public void avanzarArriba() 
     {
-    	Celda c=miJuego.getNivel(1).getCelda(this.posX,this.posY+1);
+    	grafico.cambiarDirec(1);
+    	Celda c=miJuego.getNivel(0).getCelda(this.posX,this.posY+1);
       	if(c.getPared()!= null && c.getEnemigo()==null)
       	{
-      		miJuego.getNivel(1).getCelda(this.posX,this.posY).setEnemigo(null);
+      		miJuego.getNivel(0).getCelda(this.posX,this.posY).setEnemigo(null);
       		posY+=1;
       		analizar(c);
       	}
@@ -63,10 +69,11 @@ public class Rugulus extends Enemigo {
      */
     public void avanzarAbajo() 
     {
-    	Celda c=miJuego.getNivel(1).getCelda(this.posX,this.posY-1);
+    	grafico.cambiarDirec(3);
+    	Celda c=miJuego.getNivel(0).getCelda(this.posX,this.posY-1);
       	if(c.getPared()!= null && c.getEnemigo()==null)
       	{
-      		miJuego.getNivel(1).getCelda(this.posX,this.posY).setEnemigo(null);
+      		miJuego.getNivel(0).getCelda(this.posX,this.posY).setEnemigo(null);
       		posY-=1;
       		analizar(c);
       	}

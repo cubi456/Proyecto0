@@ -59,6 +59,7 @@ public class GUI extends JFrame {
 		juego= new Juego(this);
 		juego.crearNivel();
 		b= juego.addBomberman();
+		juego.addRugulus();
 		
 		// Oyente a las teclas
 		addKeyListener(new KeyAdapter() {
