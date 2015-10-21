@@ -81,12 +81,12 @@ public class Bomberman extends Personaje
      */
     public void avanzarIzq() 
     {
-    	Celda c=miJuego.getNivel(1).getCelda(this.posX-1,this.posY);
+    	grafico.cambiarDirec(0);
+    	Celda c=miJuego.getNivel(0).getCelda(this.posX-1,this.posY);
       	if(c.getPared()!= null)
       	{
-      		miJuego.getNivel(1).getCelda(this.posX,this.posY).setBomberman(null);
+      		miJuego.getNivel(0).getCelda(this.posX,this.posY).setBomberman(null);
       		posX-=1;
-      		grafico.cambiarDirec(0);
       		analizar(c);
       	}
     		
@@ -97,18 +97,33 @@ public class Bomberman extends Personaje
     /**
      * 
      */
-    public void avanzarDer()
+    
+    public void avanzarArriba()
     {
-    	Celda c=miJuego.getNivel(1).getCelda(this.posX+1,this.posY);
+    	grafico.cambiarDirec(1);
+    	Celda c=miJuego.getNivel(0).getCelda(this.posX,this.posY+1);
       	if(c.getPared()!= null)
       	{
-      		miJuego.getNivel(1).getCelda(this.posX,this.posY).setBomberman(null);
-      		posX+=1;
-      		grafico.cambiarDirec(2);
+      		miJuego.getNivel(0).getCelda(this.posX,this.posY).setBomberman(null);
+      		posY+=1;
       		analizar(c);
       	}
     }
     
+    public void avanzarDer()
+    {
+    	grafico.cambiarDirec(2);
+    	Celda c=miJuego.getNivel(0).getCelda(this.posX+1,this.posY);
+      	if(c.getPared()!= null)
+      	{
+      		miJuego.getNivel(0).getCelda(this.posX,this.posY).setBomberman(null);
+      		posX+=1;
+      		analizar(c);
+      	}
+    }
+    /**
+     * 
+     */
     private void analizar(Celda c)
     {
     		c.setBomberman(this);
@@ -118,32 +133,18 @@ public class Bomberman extends Personaje
     		if(pup!=null)
     			pup.setAction(this);
     }
-    /**
-     * 
-     */
-    public void avanzarArriba()
-    {
-    	Celda c=miJuego.getNivel(1).getCelda(this.posX,this.posY+1);
-      	if(c.getPared()!= null)
-      	{
-      		miJuego.getNivel(1).getCelda(this.posX,this.posY).setBomberman(null);
-      		posY+=1;
-      		grafico.cambiarDirec(1);
-      		analizar(c);
-      	}
-    }
 
     /**
      * 
      */
     public void avanzarAbajo() 
     {
-    	Celda c=miJuego.getNivel(1).getCelda(this.posX,this.posY-1);
+    	grafico.cambiarDirec(3);
+    	Celda c=miJuego.getNivel(0).getCelda(this.posX,this.posY-1);
       	if(c.getPared()!= null)
       	{
-      		miJuego.getNivel(1).getCelda(this.posX,this.posY).setBomberman(null);
+      		miJuego.getNivel(0).getCelda(this.posX,this.posY).setBomberman(null);
       		posY-=1;
-      		grafico.cambiarDirec(3);
       		analizar(c);
       	}
     }

@@ -15,7 +15,7 @@ import Logica.Personaje;
 
 public class GUI extends JFrame {
 	// ISB VER
-	Personaje b;
+	private Personaje b;
 	private static final long serialVersionUID = 1L;
 
 	private JPanel contenedor;
@@ -66,26 +66,21 @@ public class GUI extends JFrame {
 				OyenteTeclado(arg0);
 			}
 		});
-		
 		}
 	
 	protected void OyenteTeclado(KeyEvent key) {
 		switch (key.getKeyCode()) {
 			case KeyEvent.VK_LEFT :
 				b.avanzarIzq();
-				this.add(b.getGrafico());
 				break;
 			case KeyEvent.VK_UP : 
 				b.avanzarArriba();
-				this.add(b.getGrafico());
 				break;
 			case KeyEvent.VK_RIGHT : 
 				b.avanzarDer();
-				this.add(b.getGrafico());
 				break;
 			case KeyEvent.VK_DOWN : 
 				b.avanzarAbajo();
-				this.add(b.getGrafico());
 				break;
 			//case KeyEvent.VK_SPACE:
 				//b.colocarBomba();
