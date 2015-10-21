@@ -1,5 +1,7 @@
 package Logica;
 
+import java.util.Random;
+
 
 public class Rugulus extends Enemigo {
 
@@ -93,5 +95,35 @@ public class Rugulus extends Enemigo {
     {
         miJuego.matarPersonaje(this);
     }
+    
+	public void mover() {
+		// Calculo la siguiente direccion aleatoriamente.
+		Random rnd = new Random();
+		int dir = rnd.nextInt(4);
+		
+		switch (dir) {
+			case 0 : // a izq
+				this.avanzarIzq();
+				break;
+			case 1: // a arriba
+				this.avanzarArriba();
+				break;
+			case 2:
+				this.avanzarDer();
+				break;
+			case 3 :
+				this.avanzarAbajo();
+				break;
+		}
+		
+		//super.mover(dir);
+		/*	Bueno aca vengo a explicar Jojo
+		 * la onda de esto seria hacer exactamente lo que hizo juanma
+		 * teniendo un mover en la clase Personaje para tener el movimiento super
+		 * enchulado de los graficos, ademas podriamos usar un arreglo de graficos,
+		 * como atributo de personaje, ya que eso es grafico.
+		 * 
+		 */
+	}
 
 }

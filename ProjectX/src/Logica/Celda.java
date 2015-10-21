@@ -3,6 +3,13 @@ package Logica;
 
 import java.util.*;
 
+import javax.swing.JLabel;
+
+import GraficaBloques.BloqueGrafico;
+import GraficaBloques.ParedDesctGrafico;
+import GraficaBloques.ParedSolidaGrafico;
+import GraficaBloques.SueloGrafico;
+
 /**
  * 
  */
@@ -14,6 +21,7 @@ public class Celda {
     protected Pared estado;
     protected PowerUp power;
     protected Nivel miNivel;
+    protected BloqueGrafico grafico;
 
     /**
      * @param int x 
@@ -26,7 +34,15 @@ public class Celda {
         power=null;
         estado=null;
         miNivel=n;
-        /** ISB BOMBERMAN Y ENEMIGOS QUE ONDA **/ 
+        /**ISB ESTO PARA PROBAR EL MAPA**/
+        if(x==0|| x==30 || y==0 || y==12)
+        	grafico=new ParedSolidaGrafico(x, y);
+        else
+        if(x%2!=0)
+        	grafico=new SueloGrafico(x, y);
+        else
+        	grafico=new ParedDesctGrafico(x, y);
+        
     }
 
     /**
@@ -138,5 +154,8 @@ public class Celda {
        }
        return salida;
     }
-
+    
+    public JLabel getGrafico(){
+		return this.grafico.getGrafico();
+	}
 }

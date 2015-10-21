@@ -1,6 +1,11 @@
 
 package Logica;
+import gui.GUI;
+
 import java.util.*;
+
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 
 /**
  * 
@@ -13,9 +18,7 @@ public class Nivel {
     /**
      * @param powerUp int Arr
      */
-    /**ISB Modificacion constructor, se pasa el jeugo a si mismo*/
-    public Nivel(int[] pu, Juego j) {
-        //miJuego= new Juego(); /** SI CREAMOS EL JUEGO NO ES EL MISMO **/
+    public Nivel(int[] pu, Juego j, GUI g) {
         miJuego=j;
         crearPowerUps(pu);
         celdas= new Celda[31][13];
@@ -32,6 +35,7 @@ public class Nivel {
         	        else
         	        	celdas[f][c]=new Celda(f,c,null,this); 
         		 }
+        		 g.add(celdas[f][c].getGrafico());  
         	}
         }
     }

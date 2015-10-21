@@ -1,5 +1,7 @@
 package Logica;
 
+import graficaPersonajes.BombermanGrafico;
+
 import java.util.*;
 import java.awt.event.KeyEvent;
 
@@ -25,11 +27,10 @@ public class Bomberman extends Personaje
     	puntaje=0;
     	misBombas= new Vector<Bomba>();
     	addBomba();
+    	grafico=new BombermanGrafico(s, x, y);
     }
 
-    /**
-     * ISB QUE ONDA CON ESTO?
-     */
+   
     public void addBomba() 
     {
        misBombas.add(new Bomba());

@@ -1,5 +1,9 @@
 package Logica;
 
+import graficaPersonajes.PersonajeGrafico;
+
+import javax.swing.JLabel;
+
 /**
  * 
  */
@@ -7,6 +11,7 @@ public abstract class Personaje {
 
     protected int speed, posX, posY;
     protected Juego miJuego;
+    protected PersonajeGrafico grafico;
 
     /**
      * @param s 
@@ -72,4 +77,9 @@ public abstract class Personaje {
      * 
      */
     abstract public void morir();
+    
+    public JLabel getGrafico(){
+		return this.grafico.getGrafico();
+	}
+    
 }

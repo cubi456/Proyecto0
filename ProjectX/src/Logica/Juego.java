@@ -1,4 +1,6 @@
 package Logica;
+import gui.GUI;
+
 import java.util.*;
 
 /**
@@ -10,12 +12,12 @@ public class Juego {
     protected Vector<Nivel> misNiveles;
 
     protected Vector<Personaje> misPersonajes;
+    protected GUI gui;
     
-    /**
-     * Default constructor
-     */
-    public Juego() 
+
+    public Juego(GUI g) 
     {
+    	gui=g;
     	misNiveles= new Vector<Nivel>();
     	misPersonajes=new Vector<Personaje>();
     }
@@ -47,7 +49,7 @@ public class Juego {
     /**
      * 
      */
-    /** ISB El nivel crea el juego el juego crea el nivel **/
+    
     public void crearNivel() 
     {
     	int[] pu= new int[4];
@@ -55,7 +57,7 @@ public class Juego {
     	pu[1]=3;
     	pu[2]=3;
     	pu[1]=1;
-        Nivel nivel= new Nivel(pu, this);
+        Nivel nivel= new Nivel(pu, this, gui);
         this.misNiveles.addElement(nivel);
     }
 
@@ -107,8 +109,10 @@ public class Juego {
      */
     public void addBomberman()
     {
-    	Personaje b= new Bomberman(1, 0, 0,this);
+    	Personaje b= new Bomberman(1, 1, 1,this);
+    	misNiveles.get(1).getCelda(1,1).setBomberman((Bomberman)b);
     	misPersonajes.addElement(b);
+    	gui.add(b.getGrafico());
     }
     
 }
