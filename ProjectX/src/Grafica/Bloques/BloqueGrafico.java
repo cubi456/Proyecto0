@@ -12,14 +12,14 @@ public abstract class BloqueGrafico{
 	protected int x,y;
 	
 	protected BloqueGrafico(int px, int py){
-		this.x=px;
-		this.y=py;
+		this.x=px*ancho;
+		this.y=py*alto;
 	}
 	
 	public JLabel getGrafico(){
 		if(this.grafico == null){
 			this.grafico = new JLabel(imagen);
-			this.grafico.setBounds(x*ancho , y*alto, ancho, alto);
+			this.grafico.setBounds(x, y, ancho, alto);
 		}
 		
 		return this.grafico;
