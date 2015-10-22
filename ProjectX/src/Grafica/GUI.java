@@ -99,7 +99,7 @@ public class GUI extends JFrame {
 		if(!lock)
 		{
 			opcionesTeclado(dir);
-			//this.lock=true;
+			this.lock=true;
 		}
 	}
 	
