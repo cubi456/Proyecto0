@@ -1,5 +1,7 @@
 package Logica;
 
+import Logica.Jugador.Bomberman;
+
 /**
  * 
  */

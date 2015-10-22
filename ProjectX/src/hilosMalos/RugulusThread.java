@@ -1,6 +1,6 @@
 package hilosMalos;
 
-import Logica.Rugulus;
+import Logica.Enemigos.Rugulus;
 
 public class RugulusThread extends Thread {
 	private Rugulus rLogic;

@@ -1,8 +1,8 @@
 package Logica;
 
-import graficaPersonajes.PersonajeGrafico;
-
 import javax.swing.JLabel;
+
+import Grafica.Personajes.PersonajeGrafico;
 
 /**
  * 

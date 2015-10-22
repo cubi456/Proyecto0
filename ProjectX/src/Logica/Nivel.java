@@ -1,11 +1,17 @@
 
 package Logica;
-import gui.GUI;
-
 import java.util.*;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+
+import Grafica.GUI;
+import Logica.Bloques.Celda;
+import Logica.Bloques.Pared;
+import Logica.PowerUps.Bombality;
+import Logica.PowerUps.Fatality;
+import Logica.PowerUps.Masacrality;
+import Logica.PowerUps.SpeedUp;
 
 /**
  * 

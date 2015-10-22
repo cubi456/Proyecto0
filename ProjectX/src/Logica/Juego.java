@@ -1,8 +1,13 @@
 package Logica;
-import gui.GUI;
 import hilosMalos.RugulusThread;
 
 import java.util.*;
+
+import Grafica.GUI;
+import Logica.Enemigos.Altair;
+import Logica.Enemigos.Rugulus;
+import Logica.Enemigos.Sirius;
+import Logica.Jugador.Bomberman;
 
 /**
  * 
@@ -116,7 +121,7 @@ public class Juego {
     /** ISB EDITADO PARA LAGUI , ES VOID*/
     public Personaje addBomberman()
     {
-    	Personaje b= new Bomberman(1, 1, 1,this);
+    	Personaje b= new Bomberman(8, 1, 1,this);
     	misPersonajes.addElement(b);
     	gui.add(b.getGrafico(), 1);
     	return b;
