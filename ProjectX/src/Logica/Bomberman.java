@@ -83,8 +83,9 @@ public class Bomberman extends Personaje
     {
     	grafico.cambiarDirec(0);
     	Celda c=miJuego.getNivel(0).getCelda(this.posX-1,this.posY);
-      	if(c.getPared()!= null)
+      	if(c.getPared()== null)
       	{
+      		grafico.mover(0);
       		miJuego.getNivel(0).getCelda(this.posX,this.posY).setBomberman(null);
       		posX-=1;
       		analizar(c);
@@ -101,11 +102,12 @@ public class Bomberman extends Personaje
     public void avanzarArriba()
     {
     	grafico.cambiarDirec(1);
-    	Celda c=miJuego.getNivel(0).getCelda(this.posX,this.posY+1);
-      	if(c.getPared()!= null)
+    	Celda c=miJuego.getNivel(0).getCelda(this.posX,this.posY-1);
+      	if(c.getPared()== null)
       	{
+      		grafico.mover(1);
       		miJuego.getNivel(0).getCelda(this.posX,this.posY).setBomberman(null);
-      		posY+=1;
+      		posY-=1;
       		analizar(c);
       	}
     }
@@ -114,24 +116,13 @@ public class Bomberman extends Personaje
     {
     	grafico.cambiarDirec(2);
     	Celda c=miJuego.getNivel(0).getCelda(this.posX+1,this.posY);
-      	if(c.getPared()!= null)
-      	{
+      	if(c.getPared()== null)//no hay pared
+      	{ 
+      		grafico.mover(2);
       		miJuego.getNivel(0).getCelda(this.posX,this.posY).setBomberman(null);
       		posX+=1;
       		analizar(c);
       	}
-    }
-    /**
-     * 
-     */
-    private void analizar(Celda c)
-    {
-    		c.setBomberman(this);
-    		if(c.getEnemigo()!=null)
-    			morir();
-    		PowerUp pup=c.getPowerUp();
-    		if(pup!=null)
-    			pup.setAction(this);
     }
 
     /**
@@ -140,19 +131,25 @@ public class Bomberman extends Personaje
     public void avanzarAbajo() 
     {
     	grafico.cambiarDirec(3);
-    	Celda c=miJuego.getNivel(0).getCelda(this.posX,this.posY-1);
-      	if(c.getPared()!= null)
+    	Celda c=miJuego.getNivel(0).getCelda(this.posX,this.posY+1);
+      	if(c.getPared()== null)
       	{
+      		grafico.mover(3);
       		miJuego.getNivel(0).getCelda(this.posX,this.posY).setBomberman(null);
-      		posY-=1;
+      		posY+=1;
       		analizar(c);
       	}
     }
 
-    
-/*
-    
-*/
+    private void analizar(Celda c)
+    {
+    		c.setBomberman(this);
+    	/*	if(c.getEnemigo()!=null)
+    			morir();
+    		PowerUp pup=c.getPowerUp();
+    		if(pup!=null)
+    			pup.setAction(this);*/
+    }
     public void morir() {
     	miJuego.matarPersonaje(this);
     	//hilo

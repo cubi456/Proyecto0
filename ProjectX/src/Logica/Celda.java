@@ -32,19 +32,27 @@ public class Celda {
         this.x=x;
         this.y=y;
         power=null;
-        estado=null;
+        enemigo=null;
         miNivel=n;
         /**ISB ESTO PARA PROBAR EL MAPA**/
-        if(x==0|| x==30 || y==0 || y==12)
+        if(x==0|| x==30 || y==0 || y==12){
         	grafico=new ParedSolidaGrafico(x, y);
+        	estado=new Pared(null, false);
+        }
         else
-        if(x%2!=0 || y%2!=0)
+        if(x%2!=0 || y%2!=0){
         	grafico=new SueloGrafico(x, y);
+        	estado=null;
+        }
         else
-        	if(x%4==0 && y%4!=0|| x%4!=0 && y%4==0)
+        	if(x%4==0 && y%4!=0|| x%4!=0 && y%4==0){
         		grafico=new ParedSolidaGrafico(x, y);
-        	else
+        		estado=new Pared(null, false);
+        	}
+        	else{
         		grafico=new ParedDesctGrafico(x, y);
+        		estado=new Pared(null, true);
+        	}
         
     }
 
@@ -101,8 +109,9 @@ public class Celda {
     }
     
     public void setBomberman(Bomberman b)
-    {
+    {	
     	bomberman=b;
+    		
     }
     /**
      * @return

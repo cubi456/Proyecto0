@@ -15,11 +15,13 @@ public class Nivel {
     protected Juego miJuego;
     protected Celda[][] celdas;
     protected Vector<PowerUp> misPower;
+    protected GUI g;
     /**
      * @param powerUp int Arr
      */
     public Nivel(int[] pu, Juego j, GUI g) {
         miJuego=j;
+        this.g=g;
         crearPowerUps(pu);
         celdas= new Celda[31][13];
         for(int f=0; f<celdas.length; f++)
@@ -102,6 +104,10 @@ public class Nivel {
     	for(int i=0;i<pu.length;i++)
     	   for(int j=pu[i];j>0;j--)
     		   addPowerUp(i);    
+    }
+    /** */
+    public GUI getGui(){
+    	return g;
     }
 
 }
