@@ -11,5 +11,6 @@ public class ParedDesctGrafico extends BloqueGrafico {
 	
 	public void seDestruyo(){
 		imagen= new ImageIcon(this.getClass().getResource("../Sprites/Piso.png")); 
+		
 	}
 }

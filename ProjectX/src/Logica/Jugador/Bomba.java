@@ -1,6 +1,7 @@
 package Logica.Jugador;
 
 import Grafica.Bomba.BombaGrafico;
+import HilosPersonajes.BombaThread;
 import Logica.Bloques.Celda;
 
 public class Bomba {
@@ -8,7 +9,8 @@ public class Bomba {
     protected int alcance;
     protected Celda ubicacion;
     protected BombaGrafico bg;
-    private Bomberman b;
+    protected BombaThread bt;
+    
     public Bomba() {
     	ubicacion=null;
     	alcance=1;
@@ -41,12 +43,19 @@ public class Bomba {
     	return bg;
     }
     
+    public void activarBomba()
+    {
+    	bt=new BombaThread(this);
+    	bt.start();
+    }
+    
     /**ISB  Esta en LA NOTA pero no en la clase*/
     public void explotar()
     {
     	if(ubicacion!=null)
     	{
     		ubicacion.getNivel().getJuego().getGui().remove(bg.getGrafico());
+    		ubicacion.getNivel().getJuego().getGui().repaint();
     		for(Celda c:ubicacion.getAdyacentes(alcance))
     		{
     			if(c.getBomberman()!=null)
@@ -59,6 +68,7 @@ public class Bomba {
     				c.destruir();
     		}
     	}
+    	bt.destruir();
     }
 
 }

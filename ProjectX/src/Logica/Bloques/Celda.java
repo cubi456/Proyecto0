@@ -79,7 +79,7 @@ public class Celda {
     	{	
     		bomb=b;
     		b.setUbicacion(this);
-    		b.explotar();
+    		b.activarBomba();
     		
     	}
     }
@@ -112,6 +112,9 @@ public class Celda {
     		bomb=null;
     		miNivel.getJuego().getGui().remove(grafico.getGrafico());
     		grafico=null;
+    		grafico=new SueloGrafico(x,y);
+    		miNivel.getJuego().getGui().add(grafico.getGrafico(),0);
+    		miNivel.getJuego().getGui().repaint();
     	    estado=null;
     	}
     }

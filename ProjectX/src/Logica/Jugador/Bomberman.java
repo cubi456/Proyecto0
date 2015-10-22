@@ -86,6 +86,7 @@ public class Bomberman extends Personaje
         	miJuego.getGui().repaint();
         	miJuego.getGui().toggleLock();
         	c.colocarBomba(bom);
+        	addBomba();
         }
       
     }
