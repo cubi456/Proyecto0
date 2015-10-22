@@ -5,8 +5,8 @@ import javax.swing.JLabel;
 
 public class BombermanGrafico extends PersonajeGrafico {
 
-	public BombermanGrafico(int px, int py, int v) {
-		super(px, py, v);
+	public BombermanGrafico(int v, int px, int py) {
+		super(v, px, py);
 
 		this.imagen[0] = new ImageIcon(this.getClass().getResource("/Sprites/BmanL.png"));
 		this.imagen[1] = new ImageIcon(this.getClass().getResource("/Sprites/BmanB.png"));

@@ -16,6 +16,7 @@ public class Rugulus extends Enemigo {
     public Rugulus(int s, int x, int y, int p,Juego j) {
         super(s, x, y, p,j);
         grafico= new RugulusGrafico(s, x, y);
+    	miJuego.getNivel(0).getCelda(x, y).setEnemigo(this);
     }
 
     /**
@@ -24,12 +25,12 @@ public class Rugulus extends Enemigo {
     public void avanzarIzq() 
     {
     	grafico.cambiarDirec(0);
-    	Celda c=miJuego.getNivel(0).getCelda(this.posX,this.posY-1);
+    	Celda c=miJuego.getNivel(0).getCelda(this.posX-1 ,this.posY);
       	if(c.getPared()== null)// && c.getEnemigo()==null)
       	{
       		grafico.mover(0);
       		miJuego.getNivel(0).getCelda(this.posX,this.posY).setEnemigo(null);
-      		posY-=1;
+      		posX-=1;
       		analizar(c);
       	}
     		
@@ -41,12 +42,12 @@ public class Rugulus extends Enemigo {
     public void avanzarArriba() 
     {
     	grafico.cambiarDirec(1);
-    	Celda c=miJuego.getNivel(0).getCelda(this.posX-1,this.posY);
+    	Celda c=miJuego.getNivel(0).getCelda(this.posX,this.posY-1);
     	if(c.getPared()== null)// && c.getEnemigo()==null)
       	{
       		grafico.mover(1);
       		miJuego.getNivel(0).getCelda(this.posX,this.posY).setEnemigo(null);
-      		posX-=1;
+      		posY-=1;
       		analizar(c);
       	}
     }
@@ -57,12 +58,12 @@ public class Rugulus extends Enemigo {
     public void avanzarDer() 
     {
     	grafico.cambiarDirec(2);
-    	Celda c=miJuego.getNivel(0).getCelda(this.posX,this.posY+1);
+    	Celda c=miJuego.getNivel(0).getCelda(this.posX+1,this.posY);
       	if(c.getPared()== null)// && c.getEnemigo()==null)
       	{
       		grafico.mover(2);
       		miJuego.getNivel(0).getCelda(this.posX,this.posY).setEnemigo(null);
-      		posY+=1;
+      		posX+=1;
       		analizar(c);
       	}
     }
@@ -73,12 +74,12 @@ public class Rugulus extends Enemigo {
     public void avanzarAbajo() 
     {
     	grafico.cambiarDirec(3);
-    	Celda c=miJuego.getNivel(0).getCelda(this.posX+1,this.posY);
+    	Celda c=miJuego.getNivel(0).getCelda(this.posX,this.posY+1);
       	if(c.getPared()== null)// && c.getEnemigo()==null)
       	{
       		grafico.mover(3);
       		miJuego.getNivel(0).getCelda(this.posX,this.posY).setEnemigo(null);
-      		posX+=1;
+      		posY+=1;
       		analizar(c);
       	}
     }

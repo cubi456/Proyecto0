@@ -83,9 +83,8 @@ public class Juego {
      */
     public void addRugulus()
     {
-    	Personaje r= new Rugulus(1, 11, 1, 15,this);
+    	Personaje r= new Rugulus(1, 1, 11, 15,this);
     	misPersonajes.addElement(r);
-    	misNiveles.get(0).getCelda(1,11).setEnemigo((Enemigo)r);
     	gui.add(r.getGrafico(), 1);
     	/**  Probando thread */
     	RugulusThread rt= new RugulusThread((Rugulus)r);
@@ -118,7 +117,6 @@ public class Juego {
     public Personaje addBomberman()
     {
     	Personaje b= new Bomberman(1, 1, 1,this);
-    	misNiveles.get(0).getCelda(1,1).setBomberman((Bomberman)b);
     	misPersonajes.addElement(b);
     	gui.add(b.getGrafico(), 1);
     	return b;

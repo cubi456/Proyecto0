@@ -28,6 +28,7 @@ public class Bomberman extends Personaje
     	misBombas= new Vector<Bomba>();
     	addBomba();
     	grafico=new BombermanGrafico(s, x, y);
+    	miJuego.getNivel(0).getCelda(x, y).setBomberman(this);
     }
 
    

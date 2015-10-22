@@ -13,9 +13,9 @@ public abstract class PersonajeGrafico{
 	protected int velocidad;
 	protected Point pos;
 	
-	protected PersonajeGrafico(int x, int y, int v){
-		pos = new Point(ancho * x, alto * y);
+	protected PersonajeGrafico(int v, int x, int y){
 		this.velocidad=v;
+		pos = new Point(ancho * x, alto * y);
 		imagen= new Icon[4];
 	}
 	public int getVelocidad(){

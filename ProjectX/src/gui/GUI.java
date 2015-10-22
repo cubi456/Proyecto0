@@ -46,7 +46,7 @@ public class GUI extends JFrame {
 */
 	public GUI(){
 		ventana= new JFrame();
-		ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(10, 100, 100, 600);
 		setSize(new Dimension(998, 445));
 		ventana.setTitle("Proyecto X");

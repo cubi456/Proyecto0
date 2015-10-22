@@ -4,8 +4,8 @@ import javax.swing.ImageIcon;
 
 public class RugulusGrafico extends PersonajeGrafico {
 
-	public RugulusGrafico(int px, int py, int v) {
-		super(px, py, v);
+	public RugulusGrafico(int v, int px, int py) {
+		super(v, px, py);
 		
 		this.imagen[0] = new ImageIcon(this.getClass().getResource("/Sprites/Rugulus_L_f00.png"));
 		this.imagen[1] = new ImageIcon(this.getClass().getResource("/Sprites/Rugulus_B_f00.png"));
