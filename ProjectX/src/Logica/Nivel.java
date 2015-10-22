@@ -116,6 +116,11 @@ public class Nivel {
     	}
     }
     
+    public Juego getJuego()
+    {
+    	return miJuego;
+    }
+    
     private void crearPowerUps(int []pu)
     {
     	misPower=new Vector<PowerUp>();

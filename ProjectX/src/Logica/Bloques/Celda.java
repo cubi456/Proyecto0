@@ -22,6 +22,7 @@ public class Celda {
 
     protected Bomberman bomberman;
     protected Enemigo enemigo;
+    protected Bomba bomb=null;
     protected int x, y;
     protected Pared estado;
     protected PowerUp power;
@@ -76,18 +77,43 @@ public class Celda {
     {
     	if(estado==null)
     	{	
+    		bomb=b;
     		b.setUbicacion(this);
     		b.explotar();
+    		
     	}
     }
-
-    /**
+    
+    public Bomba getBomba()
+    {
+    	return bomb;
+    }
+    
+    public void destruirBomba()
+    {
+    	bomb=null;
+    }
+    /*
+     *
      * 
      */
+    
+    public Nivel getNivel()
+    {
+    	return miNivel;
+    }
+    
     public void destruir() 
     {
-       power=estado.getPowerUp();
-       estado=null;
+    	if(estado.isDestructible())
+    	{
+    		if(estado.getPowerUp()!=null)
+    			power=estado.getPowerUp();
+    		bomb=null;
+    		miNivel.getJuego().getGui().remove(grafico.getGrafico());
+    		grafico=null;
+    	    estado=null;
+    	}
     }
 
     /**
@@ -161,14 +187,14 @@ public class Celda {
     	   }
     	   if(arr)
     	   {
-    		   Celda aux=miNivel.getCelda(x, y+1);
+    		   Celda aux=miNivel.getCelda(x, y-1);
     		   salida.addElement(aux);
     		   if(aux.getPared()!=null)
     			   arr=false;
     	   }
     	   if(abj)
     	   {
-    		   Celda aux=miNivel.getCelda(x, y-1);
+    		   Celda aux=miNivel.getCelda(x, y+1);
     		   salida.addElement(aux);
     		   if(aux.getPared()!=null)
     			   abj=false;

@@ -3,6 +3,7 @@ package Logica.Jugador;
 import java.util.*;
 
 import Grafica.Personajes.BombermanGrafico;
+import Grafica.Personajes.PersonajeGrafico;
 import HilosPersonajes.BombermanThread;
 import Logica.Juego;
 import Logica.Personaje;
@@ -32,10 +33,11 @@ public class Bomberman extends Personaje
     	super(s, x, y,j);
     	dios= false;
     	puntaje=0;
-    	bt=new BombermanThread(j.getGui());
+    	bt=new BombermanThread(miJuego.getGui());
     	misBombas= new Vector<Bomba>();
     	addBomba();
     	grafico=new BombermanGrafico(s, x, y);
+    	miJuego.getGui().add(grafico.getGrafico(),1);
     	miJuego.getNivel(0).getCelda(x, y).setBomberman(this);
     	bt.start();
     }
@@ -78,10 +80,12 @@ public class Bomberman extends Personaje
         if(misBombas.size()>0)
         {
         	Celda c= miJuego.getNivel(0).getCelda(this.posX, this.posY);
-        	Bomba bom=misBombas.remove(misBombas.size());
+        	Bomba bom=misBombas.remove(misBombas.size()-1);
+        	bom.getGrafico().setPos(posX, posY);
+        	miJuego.getGui().add(bom.getGrafico().getGrafico(),1);
+        	miJuego.getGui().repaint();
+        	miJuego.getGui().toggleLock();
         	c.colocarBomba(bom);
-        	//hilo
-        	addBomba();
         }
       
     }
@@ -93,7 +97,7 @@ public class Bomberman extends Personaje
     {
     	grafico.cambiarDirec(0);
     	Celda c=miJuego.getNivel(0).getCelda(this.posX-1,this.posY);
-      	if(c.getPared()== null)
+      	if(c.getPared()== null && c.getBomba()==null)
       	{
       		grafico.mover(0);
       		miJuego.getNivel(0).getCelda(this.posX,this.posY).setBomberman(null);
@@ -113,7 +117,7 @@ public class Bomberman extends Personaje
     {
     	grafico.cambiarDirec(1);
     	Celda c=miJuego.getNivel(0).getCelda(this.posX,this.posY-1);
-      	if(c.getPared()== null)
+      	if(c.getPared()== null && c.getBomba()==null)
       	{
       		grafico.mover(1);
       		miJuego.getNivel(0).getCelda(this.posX,this.posY).setBomberman(null);
@@ -126,7 +130,7 @@ public class Bomberman extends Personaje
     {
     	grafico.cambiarDirec(2);
     	Celda c=miJuego.getNivel(0).getCelda(this.posX+1,this.posY);
-      	if(c.getPared()== null)//no hay pared
+      	if(c.getPared()== null && c.getBomba()==null)//no hay pared
       	{ 
       		grafico.mover(2);
       		miJuego.getNivel(0).getCelda(this.posX,this.posY).setBomberman(null);
@@ -142,7 +146,7 @@ public class Bomberman extends Personaje
     {
     	grafico.cambiarDirec(3);
     	Celda c=miJuego.getNivel(0).getCelda(this.posX,this.posY+1);
-      	if(c.getPared()== null)
+      	if(c.getPared()== null && c.getBomba()==null)
       	{
       		grafico.mover(3);
       		miJuego.getNivel(0).getCelda(this.posX,this.posY).setBomberman(null);

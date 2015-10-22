@@ -74,7 +74,7 @@ public class GUI extends JFrame {
 		});
 		}
 	
-	private void opcionesTeclado(int dir)
+	private void opcionesJugador(int dir)
 	{
 		switch (dir) {
 		case KeyEvent.VK_LEFT :
@@ -89,9 +89,9 @@ public class GUI extends JFrame {
 		case KeyEvent.VK_DOWN : 
 			b.avanzarAbajo();
 			break;
-		//case KeyEvent.VK_SPACE:
-			//b.colocarBomba();
-			//break
+		case KeyEvent.VK_SPACE:
+			 ((Bomberman)b).colocarBomba();
+			 break;
 		//case ENTER. PAUSA	
 		default: 
 			break;
@@ -102,7 +102,7 @@ public class GUI extends JFrame {
 	{
 		if(!lock)
 		{
-			opcionesTeclado(dir);
+			opcionesJugador(dir);
 			this.lock=true;
 			direccion=-1;
 		}
@@ -121,6 +121,11 @@ public class GUI extends JFrame {
 	public int getDireccion()
 	{
 		return direccion;
+	}
+	
+	public JPanel getContenedor()
+	{
+		return contenedor;
 	}
 	
 	protected void OyenteTeclado(KeyEvent key) 

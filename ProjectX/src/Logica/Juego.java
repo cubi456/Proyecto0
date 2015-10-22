@@ -122,7 +122,6 @@ public class Juego {
     {
     	Personaje b= new Bomberman(8, 1, 1,this);
     	misPersonajes.addElement(b);
-    	gui.add(b.getGrafico(), 1);
 
     	return b;
     } 

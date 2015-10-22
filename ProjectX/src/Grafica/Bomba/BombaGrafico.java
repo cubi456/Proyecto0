@@ -12,14 +12,18 @@ public class BombaGrafico{
 	protected final int alto = 32;
 	protected int x,y;
 	
-	public BombaGrafico(int px, int py){
-		this.x=px* ancho;
-		this.y=py* alto;
+	public BombaGrafico(){
 		imagen= new Icon[3];
 		this.imagen[0] = new ImageIcon(this.getClass().getResource("../Sprites/Bomb01.png"));
-		this.imagen[1] = new ImageIcon(this.getClass().getResource("../Sprites/Bman02.png"));
-		this.imagen[2] = new ImageIcon(this.getClass().getResource("../Sprites/Bman03.png"));
+		this.imagen[1] = new ImageIcon(this.getClass().getResource("../Sprites/Bomb02.png"));
+		this.imagen[2] = new ImageIcon(this.getClass().getResource("../Sprites/Bomb03.png"));
 		
+	}
+	
+	public void setPos(int px,int py)
+	{
+		this.x=px* ancho;
+		this.y=py* alto;
 	}
 	
 	public JLabel getGrafico(){
