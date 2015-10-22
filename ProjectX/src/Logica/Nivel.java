@@ -46,23 +46,23 @@ public class Nivel {
         	        else
         	        	celdas[f][c]=new Celda(f,c,null,this); 
         		 }
-        		 g.add(celdas[f][c].getGrafico(), 0);  
+        		 g.getContenedor().add(celdas[f][c].getGrafico(), 0); 
         	}
         }
+        //Prueba speedUp
        celdas[2][1].setPowerUp(misPower.elementAt(0)); 
        misPower.elementAt(0).getGrafico().setPos(2, 1);
-       miJuego.getGui().add(misPower.elementAt(0).getGrafico().getGrafico(),1);
-       
+       miJuego.getGui().getContenedor().add(misPower.elementAt(0).getGrafico().getGrafico(),2);
+       //Prueba Bombality
+       celdas[5][1].setPowerUp(misPower.elementAt(4)); 
+       misPower.elementAt(4).getGrafico().setPos(5, 1);
+       miJuego.getGui().getContenedor().add(misPower.elementAt(4).getGrafico().getGrafico(),2);
+
     }
     
 
  
-	/**
-     * @return
-     */
-    public Juego MiJuego() {
-        return miJuego;
-    }
+
 
     /**
      * @return

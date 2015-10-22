@@ -37,7 +37,7 @@ public class Bomberman extends Personaje
     	misBombas= new Vector<Bomba>();
     	addBomba();
     	grafico=new BombermanGrafico(s, x, y);
-    	miJuego.getGui().add(grafico.getGrafico(),1);
+    	miJuego.getGui().getContenedor().add(grafico.getGrafico(),2);
     	miJuego.getNivel(0).getCelda(x, y).setBomberman(this);
     	bt.start();
     }
@@ -45,7 +45,7 @@ public class Bomberman extends Personaje
    
     public void addBomba() 
     {
-       misBombas.add(new Bomba());
+       misBombas.add(new Bomba(this));
     }
 
     /**
@@ -82,11 +82,10 @@ public class Bomberman extends Personaje
         	Celda c= miJuego.getNivel(0).getCelda(this.posX, this.posY);
         	Bomba bom=misBombas.remove(misBombas.size()-1);
         	bom.getGrafico().setPos(posX, posY);
-        	miJuego.getGui().add(bom.getGrafico().getGrafico(),1);
+        	miJuego.getGui().getContenedor().add(bom.getGrafico().getGrafico(),4);
         	miJuego.getGui().repaint();
         	miJuego.getGui().toggleLock();
         	c.colocarBomba(bom);
-        	addBomba();
         }
       
     }
@@ -179,6 +178,7 @@ public class Bomberman extends Personaje
     	bt.dublicarVel();
     }
     
+
     public Vector<Bomba> getBombas(){
     	return misBombas;
     }

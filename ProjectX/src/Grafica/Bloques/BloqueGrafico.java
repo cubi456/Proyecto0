@@ -24,5 +24,10 @@ public abstract class BloqueGrafico{
 		
 		return this.grafico;
 	}
+	public void setGrafico(JLabel b)
+	{
+		if(grafico!=null)
+			this.grafico=b;
+	}
 	
 }

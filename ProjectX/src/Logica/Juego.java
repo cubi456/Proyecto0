@@ -91,8 +91,6 @@ public class Juego {
     	misPersonajes.addElement(r);
     	gui.add(r.getGrafico(), 1);
     	/**  Probando thread */
-    	RugulusThread rt= new RugulusThread((Rugulus)r);
-    	rt.start();
     	
     }
 

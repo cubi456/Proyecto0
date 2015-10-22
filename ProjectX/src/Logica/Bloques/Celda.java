@@ -3,6 +3,7 @@ package Logica.Bloques;
 
 import java.util.*;
 
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 import Grafica.Bloques.BloqueGrafico;
@@ -22,7 +23,7 @@ public class Celda {
 
     protected Bomberman bomberman;
     protected Enemigo enemigo;
-    protected Bomba bomb=null;
+    protected Bomba bomb;
     protected int x, y;
     protected Pared estado;
     protected PowerUp power;
@@ -39,6 +40,7 @@ public class Celda {
         this.y=y;
         power=null;
         enemigo=null;
+        bomb=null;
         miNivel=n;
         /**ISB ESTO PARA PROBAR EL MAPA**/
         if(x==0|| x==30 || y==0 || y==12){
@@ -109,11 +111,8 @@ public class Celda {
     	{
     		if(estado.getPowerUp()!=null)
     			power=estado.getPowerUp();
-    		bomb=null;
-    		miNivel.getJuego().getGui().remove(grafico.getGrafico());
-    		grafico=null;
-    		grafico=new SueloGrafico(x,y);
-    		miNivel.getJuego().getGui().add(grafico.getGrafico(),0);
+    		ImageIcon image=new ImageIcon (this.getClass().getResource("../../Grafica/Sprites/piso.png"));
+    		grafico.getGrafico().setIcon(image);
     		miNivel.getJuego().getGui().repaint();
     	    estado=null;
     	}

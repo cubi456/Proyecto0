@@ -16,7 +16,7 @@ public class RugulusThread extends Thread {
 	public void run(){
 		while(!rStop){
 			try {
-				Thread.sleep(1000); //cada un segundo
+				Thread.sleep(500); //cada un segundo
 				rLogic.moverConInteligencia();
 			} catch (InterruptedException e) { }
 		}
@@ -27,16 +27,9 @@ public class RugulusThread extends Thread {
 	 * 
 	 */
 	public void destruir() {
-		stopThread(); //	Detenemos el hilo
-		rLogic.morir();	//avisamos a la logica
+		rStop=true;
 	}
-	/**
-	 *  Detiene el hilo de ejecucion.
-	 */
-	private void stopThread(){ 
-			this.interrupt(); //interrumpimos el hilo para que no se vuelva a ejecutar
-	    	rStop = true; // Detenemos la bandera para que no siga iterando
-		
-	}
+
+
 		
 }

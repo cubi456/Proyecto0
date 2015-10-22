@@ -10,11 +10,13 @@ public class Bomba {
     protected Celda ubicacion;
     protected BombaGrafico bg;
     protected BombaThread bt;
+    protected Bomberman b;
     
-    public Bomba() {
+    public Bomba(Bomberman bom) {
     	ubicacion=null;
     	alcance=1;
     	bg=new BombaGrafico();
+    	b=bom;
     }
 
     /**
@@ -54,6 +56,8 @@ public class Bomba {
     {
     	if(ubicacion!=null)
     	{
+    		b.addBomba();
+    		ubicacion.destruirBomba();
     		ubicacion.getNivel().getJuego().getGui().remove(bg.getGrafico());
     		ubicacion.getNivel().getJuego().getGui().repaint();
     		for(Celda c:ubicacion.getAdyacentes(alcance))
