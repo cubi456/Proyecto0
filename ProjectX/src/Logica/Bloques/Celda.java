@@ -108,6 +108,11 @@ public class Celda {
      * @return
      */
     
+    public void setPowerUp(PowerUp p)
+    {
+    	power=p;
+    }
+    
     public Bomberman getBomberman()
     {
     	return bomberman;

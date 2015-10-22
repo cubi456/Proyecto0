@@ -28,10 +28,6 @@ public abstract class Personaje {
     /**
      * @param s
      */
-    /** ISB tendria que ser aumentar el doble**/
-    public void doubleSpeed() { // Aumenta el doble la velocidad
-        speed*=2;
-    }
 
     /**
      * 

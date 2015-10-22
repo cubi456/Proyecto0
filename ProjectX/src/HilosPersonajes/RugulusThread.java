@@ -1,4 +1,4 @@
-package hilosMalos;
+package HilosPersonajes;
 
 import Logica.Enemigos.Rugulus;
 

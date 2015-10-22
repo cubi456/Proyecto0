@@ -1,9 +1,9 @@
 package Logica;
-import hilosMalos.RugulusThread;
-
 import java.util.*;
 
 import Grafica.GUI;
+import HilosPersonajes.BombermanThread;
+import HilosPersonajes.RugulusThread;
 import Logica.Enemigos.Altair;
 import Logica.Enemigos.Rugulus;
 import Logica.Enemigos.Sirius;
@@ -13,8 +13,7 @@ import Logica.Jugador.Bomberman;
  * 
  */
 public class Juego {
-    protected Timer Tiempo;
-
+    //protected ContadorTiempo tiempo;
     protected Vector<Nivel> misNiveles;
 
     protected Vector<Personaje> misPersonajes;
@@ -124,7 +123,13 @@ public class Juego {
     	Personaje b= new Bomberman(8, 1, 1,this);
     	misPersonajes.addElement(b);
     	gui.add(b.getGrafico(), 1);
+
     	return b;
+    } 
+    
+    public GUI getGui()
+    {
+    	return gui;
     }
     
 }

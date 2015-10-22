@@ -6,6 +6,11 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 import Grafica.GUI;
+import Grafica.PowerUps.BombalityGrafico;
+import Grafica.PowerUps.FatalityGrafico;
+import Grafica.PowerUps.MasacralityGrafico;
+import Grafica.PowerUps.PowerUpGrafico;
+import Grafica.PowerUps.SpeedUpGrafico;
 import Logica.Bloques.Celda;
 import Logica.Bloques.Pared;
 import Logica.PowerUps.Bombality;
@@ -21,13 +26,11 @@ public class Nivel {
     protected Juego miJuego;
     protected Celda[][] celdas;
     protected Vector<PowerUp> misPower;
-    protected GUI g;
     /**
      * @param powerUp int Arr
      */
     public Nivel(int[] pu, Juego j, GUI g) {
         miJuego=j;
-        this.g=g;
         crearPowerUps(pu);
         celdas= new Celda[31][13];
         for(int f=0; f<celdas.length; f++)
@@ -46,6 +49,10 @@ public class Nivel {
         		 g.add(celdas[f][c].getGrafico(), 0);  
         	}
         }
+       celdas[2][1].setPowerUp(misPower.elementAt(0)); 
+       misPower.elementAt(0).getGrafico().setPos(2, 1);
+       miJuego.getGui().add(misPower.elementAt(0).getGrafico().getGrafico(),1);
+       
     }
     
 
@@ -79,25 +86,30 @@ public class Nivel {
     
     private void addPowerUp(int i)
     {
+    	PowerUpGrafico p;
     	switch(i)
     	{
     		case 0:{
-    				PowerUp aux=new SpeedUp();
+    				p=new SpeedUpGrafico();
+    				PowerUp aux=new SpeedUp(p);
     				misPower.addElement(aux);
     				break;
     			   }
     		case 1:{
-    				PowerUp aux=new Fatality();
+    				p=new FatalityGrafico();
+    				PowerUp aux=new Fatality(p);
     				misPower.addElement(aux);
     				break;
     			   }
     		case 2:{
-    				PowerUp aux=new Bombality();
+    				p= new BombalityGrafico();
+    				PowerUp aux=new Bombality(p);
     				misPower.addElement(aux);
     				break;
     			   }
     		case 3:{
-    				PowerUp aux=new Masacrality();
+    				p=new MasacralityGrafico();
+    				PowerUp aux=new Masacrality(p);
     				misPower.addElement(aux);
     				break;
     			   }
@@ -112,8 +124,5 @@ public class Nivel {
     		   addPowerUp(i);    
     }
     /** */
-    public GUI getGui(){
-    	return g;
-    }
 
 }

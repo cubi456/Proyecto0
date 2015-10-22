@@ -10,9 +10,9 @@ public abstract class PowerUpGrafico {
 	protected final int alto = 32;
 	protected int x,y;
 	
-	protected PowerUpGrafico(int px, int py){
-		this.x=px;
-		this.y=py;
+	protected PowerUpGrafico(){
+		this.x=0;
+		this.y=0;
 	}
 	
 	public JLabel getGrafico(){
@@ -22,6 +22,11 @@ public abstract class PowerUpGrafico {
 		}
 		
 		return this.grafico;
+	}
+	public void setPos(int px, int py)
+	{
+		x=px;
+		y=py;
 	}
 }
 

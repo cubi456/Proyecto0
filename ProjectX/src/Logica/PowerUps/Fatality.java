@@ -3,6 +3,7 @@ package Logica.PowerUps;
 
 import java.util.*;
 
+import Grafica.PowerUps.PowerUpGrafico;
 import Logica.PowerUp;
 import Logica.Jugador.Bomba;
 import Logica.Jugador.Bomberman;
@@ -13,8 +14,8 @@ import Logica.Jugador.Bomberman;
 public class Fatality extends PowerUp {
 
 
-    public Fatality() {
-       
+    public Fatality(PowerUpGrafico p) {
+       super(p);
     }
 
     /**

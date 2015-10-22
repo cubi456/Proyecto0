@@ -12,6 +12,7 @@ import javax.swing.border.EmptyBorder;
 import Logica.Juego;
 import Logica.Personaje;
 import Logica.Jugador.Bomberman;
+//import Timer.ContadorTiempo;
 
 public class GUI extends JFrame {
 	// ISB VER
@@ -21,6 +22,8 @@ public class GUI extends JFrame {
 	private JPanel contenedor;
 	private JFrame ventana;
 	private Juego juego;
+	private int direccion=-1;
+	//private ContadorTiempo tiempo;
 	
 	private boolean lock=false;
 	/**
@@ -57,6 +60,7 @@ public class GUI extends JFrame {
 		setContentPane(contenedor);
 		contenedor.setLayout(null);
 		
+		
 		juego= new Juego(this);
 		juego.crearNivel();
 		b= juego.addBomberman();
@@ -70,7 +74,7 @@ public class GUI extends JFrame {
 		});
 		}
 	
-	protected void opcionesTeclado(int dir)
+	private void opcionesTeclado(int dir)
 	{
 		switch (dir) {
 		case KeyEvent.VK_LEFT :
@@ -94,18 +98,19 @@ public class GUI extends JFrame {
 	}
 }
 	
-	protected void detectarOpciones(int dir)
+	public void detectarOpciones(int dir)
 	{
 		if(!lock)
 		{
 			opcionesTeclado(dir);
 			this.lock=true;
+			direccion=-1;
 		}
 	}
 	
-	public void desbloquear()
+	public void toggleLock()
 	{
-		this.lock=false;
+		this.lock=!this.lock;
 	}
 	
 	public boolean getLock()
@@ -113,8 +118,13 @@ public class GUI extends JFrame {
 		return lock;
 	}
 	
+	public int getDireccion()
+	{
+		return direccion;
+	}
+	
 	protected void OyenteTeclado(KeyEvent key) 
 	{
-		detectarOpciones(key.getKeyCode());
+		direccion=key.getKeyCode();
 	}
 }

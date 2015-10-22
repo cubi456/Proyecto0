@@ -1,5 +1,6 @@
 package Logica.PowerUps;
 
+import Grafica.PowerUps.PowerUpGrafico;
 import Logica.PowerUp;
 import Logica.Jugador.Bomberman;
 
@@ -11,9 +12,9 @@ public class SpeedUp extends PowerUp {
     /**
      * 
      */
-    public SpeedUp() 
+    public SpeedUp(PowerUpGrafico p) 
     {
-    	super();
+    	super(p);
     }
 
     /**

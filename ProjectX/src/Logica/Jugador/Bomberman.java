@@ -3,6 +3,7 @@ package Logica.Jugador;
 import java.util.*;
 
 import Grafica.Personajes.BombermanGrafico;
+import HilosPersonajes.BombermanThread;
 import Logica.Juego;
 import Logica.Personaje;
 import Logica.PowerUp;
@@ -20,6 +21,7 @@ public class Bomberman extends Personaje
     protected boolean dios;
     protected int puntaje;
     protected Vector<Bomba> misBombas;
+    protected BombermanThread bt;
 
     /**
      * @param s 
@@ -30,10 +32,12 @@ public class Bomberman extends Personaje
     	super(s, x, y,j);
     	dios= false;
     	puntaje=0;
+    	bt=new BombermanThread(j.getGui());
     	misBombas= new Vector<Bomba>();
     	addBomba();
     	grafico=new BombermanGrafico(s, x, y);
     	miJuego.getNivel(0).getCelda(x, y).setBomberman(this);
+    	bt.start();
     }
 
    
@@ -153,12 +157,21 @@ public class Bomberman extends Personaje
     		if(c.getEnemigo()!=null)
     			morir();
     		PowerUp pup=c.getPowerUp();
-    		if(pup!=null)
-    			pup.setAction(this);
+    		if(pup!=null){
+    			pup.setAction(this); 
+    			c.setPowerUp(null);
+    		}
     }
     public void morir() {
+    	miJuego.getNivel(0).getCelda(this.posX,this.posY).setBomberman(null);
+    	bt.destruir();
     	miJuego.matarPersonaje(this);
     	grafico.morir();
+    }
+    
+    public void doubleSpeed()
+    {
+    	bt.dublicarVel();
     }
     
     public Vector<Bomba> getBombas(){
