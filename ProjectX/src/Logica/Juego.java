@@ -10,16 +10,24 @@ import Logica.Enemigos.Sirius;
 import Logica.Jugador.Bomberman;
 
 /**
- * 
+ *@author Barreix, Iñaki.
+ *@author Comellas, Juan Manuel.
+ *@version 1.0
  */
-public class Juego {
-    //protected ContadorTiempo tiempo;
+public class Juego 
+{
+    protected Timer tiempo;
     protected Vector<Nivel> misNiveles;
 
     protected Vector<Personaje> misPersonajes;
     protected GUI gui;
     
-
+/**
+ * Recibe un atributo de tipo GUI como parámetro y
+ * crea un nuevo juego.
+ * 
+ * @param g
+ */
     public Juego(GUI g) 
     {
     	gui=g;
@@ -29,21 +37,28 @@ public class Juego {
 
 
     /**
-     * @return
+     * Retorna una colección representada con un vector 
+     * que contiene objetos de tipo Personaje.
+     * @return Vector<Personaje>
      */
-    public Vector<Personaje> misPersonajes() {
+    public Vector<Personaje> misPersonajes() 
+    {
         return misPersonajes;
     }
 
     /**
-     * @return
+     * Retorna una colección representada con un vector
+     * que contiene objetos de tipo Nivel.
+     * @return Vector<Nivel>
      */
-    public Vector<Nivel> misNiveles() {
+    public Vector<Nivel> misNiveles()
+    {
         return misNiveles;
     }
     
 
     /**
+     * Recibe un Personaje como parámetro y lo elimina del juego.
      * @param pj
      */
     public void matarPersonaje(Personaje pj) 
@@ -52,7 +67,7 @@ public class Juego {
     }
 
     /**
-     * 
+     * Crea el nivel del juego. 
      */
     
     public void crearNivel() 
@@ -62,40 +77,45 @@ public class Juego {
     	pu[1]=3;
     	pu[2]=3;
     	pu[1]=1;
-        Nivel nivel= new Nivel(pu, this, gui);
+        Nivel nivel= new Nivel(pu, this);
         this.misNiveles.addElement(nivel);
     }
 
     /**
+     * Recibe como parámetro el número de nivel, tomando 0 como nivel inicial
+     * y retorna el Nivel.
      * @param pos 
-     * @return
+     * @return Nivel
      */
-    public Nivel getNivel(int pos) {
+    public Nivel getNivel(int pos)
+    {
         return misNiveles.get(pos);
     }
 
     /**
+     * Recibe como parámetro el número de personaje, tomando 0 como personaje 
+     * inicial y luego lo retorna.
+     * 
      * @param int 
-     * @return
+     * @return Personaje.
      */
-    public Personaje getPersonaje(int pos) {
+    public Personaje getPersonaje(int pos) 
+    {
         return misPersonajes.get(pos);
     }
 
     /**
-     * 
+     * Crea un Personaje de tipo rugulus en el juego.
      */
     public void addRugulus()
     {
     	Personaje r= new Rugulus(1, 1, 11, 15,this);
     	misPersonajes.addElement(r);
-    	gui.add(r.getGrafico(), 1);
-    	/**  Probando thread */
-    	
+    	gui.add(r.getGrafico(), 1);    	
     }
 
     /**
-     * 
+     * Crea un Personaje de tipo Altair en el juego.
      */
     public void addAltair()
     {
@@ -104,7 +124,7 @@ public class Juego {
     }
 
     /**
-     * 
+     * Crea un Personaje de tipo Sirius en el juego.
      */
     public void addSirius()
     {
@@ -113,9 +133,9 @@ public class Juego {
     }
 
     /**
-     * 
+     * Crea un personaje de tipo Bomberman en el juego y lo retorna.
+     * @return Personaje
      */
-    /** ISB EDITADO PARA LAGUI , ES VOID*/
     public Personaje addBomberman()
     {
     	Personaje b= new Bomberman(8, 1, 1,this);
@@ -124,6 +144,10 @@ public class Juego {
     	return b;
     } 
     
+    /**
+     * Retorna el objeto de tipo GUI asociado al juego.
+     * @return GUI
+     */
     public GUI getGui()
     {
     	return gui;

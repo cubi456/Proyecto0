@@ -4,11 +4,15 @@ import java.util.Random;
 
 import Grafica.Personajes.RugulusGrafico;
 import HilosPersonajes.RugulusThread;
-import Logica.Enemigo;
 import Logica.Juego;
 import Logica.Bloques.Celda;
 import Logica.Jugador.Bomberman;
 
+/**
+ *@author Barreix, Iñaki.
+ *@author Comellas, Juan Manuel.
+ *@version 1.0
+ */
 
 public class Rugulus extends Enemigo {
 

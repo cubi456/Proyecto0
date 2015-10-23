@@ -2,7 +2,6 @@ package Logica.Enemigos;
 
 import java.util.*;
 
-import Logica.Enemigo;
 import Logica.Juego;
 import Logica.Jugador.Bomberman;
 

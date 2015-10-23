@@ -47,11 +47,12 @@ public class Bomberman extends Personaje
     {
        misBombas.add(new Bomba(this));
     }
-
-    /**
-     * 
-     */
-    /** ISB CAMBIO DE NOMBRE **/
+    
+    public void addBomba(Bomba b) 
+    {
+       misBombas.add(b);    
+    }
+    
     public void convertirEnDios()
     {
        dios=true;

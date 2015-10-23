@@ -10,9 +10,9 @@ import Grafica.Bloques.BloqueGrafico;
 import Grafica.Bloques.ParedDesctGrafico;
 import Grafica.Bloques.ParedSolidaGrafico;
 import Grafica.Bloques.SueloGrafico;
-import Logica.Enemigo;
 import Logica.Nivel;
 import Logica.PowerUp;
+import Logica.Enemigos.Enemigo;
 import Logica.Jugador.Bomba;
 import Logica.Jugador.Bomberman;
 

@@ -1,6 +1,5 @@
 package Logica.Enemigos;
 
-import Logica.Enemigo;
 import Logica.Juego;
 import Logica.Jugador.Bomberman;
 

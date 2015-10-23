@@ -56,7 +56,6 @@ public class Bomba {
     {
     	if(ubicacion!=null)
     	{
-    		b.addBomba();
     		ubicacion.destruirBomba();
     		ubicacion.getNivel().getJuego().getGui().remove(bg.getGrafico());
     		ubicacion.getNivel().getJuego().getGui().repaint();
@@ -73,6 +72,10 @@ public class Bomba {
     		}
     	}
     	bt.destruir();
+    	bg=null;
+    	bg=new BombaGrafico();
+    	ubicacion=null;
+    	b.addBomba(this);
     }
 
 }
