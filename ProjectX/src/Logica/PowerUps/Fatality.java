@@ -9,12 +9,21 @@ import Logica.Jugador.Bomba;
 import Logica.Jugador.Bomberman;
 
 /**
- * 
+ *@author Barreix, Iñaki.
+ *@author Comellas, Juan Manuel.
+ *@version 1.0
  */
-public class Fatality extends PowerUp {
+public class Fatality extends PowerUp 
+{
 
-
-    public Fatality(PowerUpGrafico p) {
+	/**
+	 * Recibe como parámetro el componente gráfico
+	 * del power up correspondiente y crea un nuevo
+	 * Fatality.
+	 * @param PowerUpGrafico
+	 */
+    public Fatality(PowerUpGrafico p)
+    {
        super(p);
     }
 

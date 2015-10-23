@@ -17,7 +17,9 @@ import Logica.Jugador.Bomba;
 import Logica.Jugador.Bomberman;
 
 /**
- * 
+ *@author Barreix, Iñaki.
+ *@author Comellas, Juan Manuel.
+ *@version 1.0
  */
 public class Celda {
 
@@ -31,8 +33,12 @@ public class Celda {
     protected BloqueGrafico grafico;
 
     /**
+     * Crea una nueva celda con o sin pared 
+     * en el nivel.
      * @param int x 
      * @param int y
+     * @param Pared p
+     * @param Nivel n
      */
     public Celda(int x, int y,Pared p,Nivel n) 
     {
@@ -65,15 +71,8 @@ public class Celda {
     }
 
     /**
-     * @return
-     */
-    public boolean getDestructible()
-    {
-        return estado!=null && estado.isDestructible();
-    }
-
-    /**
-     * @param b
+     * Coloca una Bomba en la celda.
+     * @param Bomba
      */
     public void colocarBomba(Bomba b) 
     {
@@ -86,25 +85,35 @@ public class Celda {
     	}
     }
     
+    /**
+     * Retorna la Bomba que se encuentra en la celda,
+     * si la bomba no existe retorna null.
+     * @return Bomba
+     */
     public Bomba getBomba()
     {
     	return bomb;
     }
-    
+    /**
+     * Destruye la bomba que se encuentra en la celda.
+     */
     public void destruirBomba()
     {
     	bomb=null;
     }
-    /*
-     *
-     * 
-     */
     
+    /**
+     * Retorna el Nivel donde se encuentra
+     * la celda.
+     * @return Nivel.
+     */
     public Nivel getNivel()
     {
     	return miNivel;
     }
-    
+    /**
+     * Destruye la pared que se encuentra en la celda.
+     */
     public void destruir() 
     {
     	if(estado.isDestructible())
@@ -119,13 +128,17 @@ public class Celda {
     }
 
     /**
-     * @return
+     * Retorna el PowerUp que se encuentra en la celda,
+     * en caso de no existir retorna null.
+     * @return PowerUp.
      */
     public PowerUp getPowerUp() {
         return power;
     }
 
     /**
+     * Retorna la pared de la celda,
+     * en caso de no existir retorna null.
      * @return
      */
     public Pared getPared() {
@@ -133,38 +146,54 @@ public class Celda {
     }
     
     /**
-     * @return
+     * Le asigna un powerUp a la celda.
+     * @param PowerUp.
      */
     
     public void setPowerUp(PowerUp p)
     {
     	power=p;
     }
-    
+    /**
+     * Retorna el Bomberman que se encuentra 
+     * en la celda, en caso de que no exista 
+     * un Bomberman retorna null.
+     * @return Bomberman
+     */
     public Bomberman getBomberman()
     {
     	return bomberman;
     }
-    
+    /**
+     * Coloca un Bomberman en la Celda.
+     * @param Bomberman.
+     */
     public void setBomberman(Bomberman b)
     {	
     	bomberman=b;
-    		
     }
     /**
-     * @return
+     * Retorna el Enemigo que se encuentra en la celda,
+     * en caso contrario retorna null.
+     * @return Enemigo.
      */
     public Enemigo getEnemigo() {
         return enemigo;
     }
-    
+    /**
+     * Coloca un Enemigo en la celda.
+     * @param Enemigo.
+     */
     public void setEnemigo(Enemigo e)
     {
     	enemigo=e;
     }
     /**
-     * @param alc 
-     * @return
+     * Retorna las celdas que se encuentran
+     * en forma lineal a una ditancia recibida
+     * como parámetro.
+     * @param int alc 
+     * @return Vector<Celda>
      */
     public Vector<Celda> getAdyacentes(int alc) 
     {
@@ -204,8 +233,13 @@ public class Celda {
        }
        return salida;
     }
-    
-    public JLabel getGrafico(){
+    /**
+     * Retorna el componente gráfico 
+     * asociado a la celda.
+     * @return JLabel.
+     */
+    public JLabel getGrafico()
+    {
 		return this.grafico.getGrafico();
 	}
 }

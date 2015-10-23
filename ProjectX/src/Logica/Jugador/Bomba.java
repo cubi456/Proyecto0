@@ -4,15 +4,26 @@ import Grafica.Bomba.BombaGrafico;
 import HilosPersonajes.BombaThread;
 import Logica.Bloques.Celda;
 
-public class Bomba {
+/**
+ *@author Barreix, Iñaki.
+ *@author Comellas, Juan Manuel.
+ *@version 1.0
+ */
+public class Bomba 
+{
 
     protected int alcance;
     protected Celda ubicacion;
     protected BombaGrafico bg;
     protected BombaThread bt;
     protected Bomberman b;
-    
-    public Bomba(Bomberman bom) {
+    /**
+     * Crea una nueva Bomba con el atributo
+     * de tipo Bomberman que recibe como parámetro.
+     * @param Bomberman.
+     */
+    public Bomba(Bomberman bom) 
+    {
     	ubicacion=null;
     	alcance=1;
     	bg=new BombaGrafico();
@@ -20,38 +31,49 @@ public class Bomba {
     }
 
     /**
-     * @param int a
+     * Dublica el alcance de la bomba en dos.
      */
     public void duplicarAlcance() {
         alcance*=2;
     }
 
     /**
-     * @return
+     * Retorna el alcance de explosión de la bomba.
+     * @return int alcance.
      */
     public int getAlcance() {
         return alcance;
     }
 
     /**
+     * Indica la ubicación de la bomba en la
+     * Celda recibida como parámetro.
      * @param Celda c
      */
     public void setUbicacion(Celda c) {
         ubicacion=c;
     }
-    
+    /**
+     * Retorna la entidad gráfica de la bomba.
+     * @return BombaGrafico.
+     */
     public BombaGrafico getGrafico()
     {
     	return bg;
     }
     
+    /**
+     * Crea el thread que le da vida a la bomba y lo inicializa.
+     */
     public void activarBomba()
     {
     	bt=new BombaThread(this);
     	bt.start();
     }
     
-    /**ISB  Esta en LA NOTA pero no en la clase*/
+    /**
+     * Genera la explosión de la bomba.
+     */
     public void explotar()
     {
     	if(ubicacion!=null)

@@ -8,21 +8,29 @@ import Logica.PowerUp;
 import Logica.Jugador.Bomberman;
 
 /**
- * 
+ *@author Barreix, Iñaki.
+ *@author Comellas, Juan Manuel.
+ *@version 1.0
  */
-public class Masacrality extends PowerUp {
+public class Masacrality extends PowerUp 
+{
 
-    /**
-     * 
-     */
-    public Masacrality(PowerUpGrafico p) {
+	/**
+	 * Recibe como parámetro el componente gráfico
+	 * del power up correspondiente y crea un nuevo
+	 * Masacrality.
+	 * @param PowerUpGrafico
+	 */
+    public Masacrality(PowerUpGrafico p) 
+    {
        super(p);
     }
 
     /**
      * @param b
      */
-    public void setAction(Bomberman b) {
+    public void setAction(Bomberman b) 
+    {
         b.convertirEnDios();
     }
 

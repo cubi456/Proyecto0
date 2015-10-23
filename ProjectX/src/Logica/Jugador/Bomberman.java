@@ -14,7 +14,9 @@ import java.awt.event.KeyEvent;
 
 
 /**
- * 
+ *@author Barreix, Iñaki.
+ *@author Comellas, Juan Manuel.
+ *@version 1.0
  */
 public class Bomberman extends Personaje 
 {
@@ -25,9 +27,11 @@ public class Bomberman extends Personaje
     protected BombermanThread bt;
 
     /**
-     * @param s 
-     * @param x 
-     * @param y
+     * Crea un nuevo Bomberman con la velocidad,
+     * y la posición recibida como parámetro.
+     * @param velocidad 
+     * @param posición en x
+     * @param posición en y
      */
     public Bomberman(int s, int x, int y,Juego j) {
     	super(s, x, y,j);
@@ -42,31 +46,41 @@ public class Bomberman extends Personaje
     	bt.start();
     }
 
-   
+   /**
+    * Agrega una bomba al bomberman.
+    */
     public void addBomba() 
     {
        misBombas.add(new Bomba(this));
     }
-    
+    /**
+     * Agrega la bomba recibida como parámetro al Bomberman.
+     * @param Bomba
+     */
     public void addBomba(Bomba b) 
     {
        misBombas.add(b);    
     }
-    
+    /**
+     * Inicializa el esta dios en verdadero.
+     */
     public void convertirEnDios()
     {
        dios=true;
-       //Hilo
+       //hilo
     }
 
     /**
-     * @return
+     * Devuelve el puntaje obtenido por el Bomberman.
+     * @return int Puntaje
      */
     public int getPuntaje() {
         return puntaje;
     }
 
     /**
+     * Le suma el puntaje recibido como parámetro
+     * al puntaje obtenido por el bomberman.
      * @param int p
      */
     public void addPuntaje(int p) {
@@ -74,7 +88,8 @@ public class Bomberman extends Personaje
     }
 
     /**
-     * 
+     * Coloca una Bomba en la celda que se encuentra
+     * el Bomberman.
      */
     public void colocarBomba() 
     {
@@ -173,13 +188,19 @@ public class Bomberman extends Personaje
     	miJuego.matarPersonaje(this);
     	grafico.morir();
     }
-    
+    /**
+     * Duplica la velocidad del Bomberman.
+     */
     public void doubleSpeed()
     {
     	bt.dublicarVel();
     }
     
-
+    /**
+     * Retorna una colección de bombas representadas
+     * con un Vector.
+     * @return Vector<Bomba>
+     */
     public Vector<Bomba> getBombas(){
     	return misBombas;
     }

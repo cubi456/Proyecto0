@@ -2,14 +2,24 @@ package Logica.Enemigos;
 
 import Logica.Juego;
 import Logica.Jugador.Bomberman;
+/**
+ *@author Barreix, Iñaki.
+ *@author Comellas, Juan Manuel.
+ *@version 1.0
+ */
+public class Altair extends Enemigo 
+{
 
-public class Altair extends Enemigo {
-
-    /**
-     * @param s 
-     * @param x 
-     * @param y 
-     * @param p
+	 /**
+     * Crea un nuevo Enemigo con la velocidad,
+     * la posición en X,la posición en Y,
+     * el puntaje que va a tener el Enemigo
+     * y el Juego que va a pertenecer.
+     * @param velocidad
+     * @param posición en X
+     * @param posición en Y 
+     * @param Puntaje
+     * @param Juego 
      */
     public Altair(int s, int x, int y, int p,Juego j) {
         super(s, x, y, p,j);

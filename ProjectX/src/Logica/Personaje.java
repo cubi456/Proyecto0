@@ -3,6 +3,7 @@ package Logica;
 import javax.swing.JLabel;
 
 import Grafica.Personajes.PersonajeGrafico;
+import Logica.Bloques.Celda;
 
 /**
  *@author Barreix, Iñaki.
@@ -16,10 +17,13 @@ public abstract class Personaje {
     protected PersonajeGrafico grafico;
 
     /**
-     * @param s 
-     * @param x 
-     * @param y
-     * @param j
+     * Crea un nuevo Personaje con la velocidad,
+     * la posición en X,la posición en Y
+     * y el Juego que va a pertenecer.
+     * @param velocidad
+     * @param Posición en X
+     * @param Posición en Y
+     * @param Juego
      */
     protected Personaje(int s, int x, int y,Juego j) {
         speed=s;
@@ -61,26 +65,27 @@ public abstract class Personaje {
      * Genera el movimiento del Personaje hacia
      * la derecha.
      */
-    abstract public void avanzarDer();
+    public abstract void avanzarDer();
     /**
      * Genera el movimiento del Personaje hacia arriba.
      */
-    abstract public void avanzarArriba();
+    public abstract void avanzarArriba();
 
     /**
      * Genera el movimiento del personaje hacia abajo.
      */
-    abstract public void avanzarAbajo();
+    public abstract void avanzarAbajo();
 
     /**
      * Genera la muerte del Personaje en el juego.
      */
-    abstract public void morir();
+    public abstract void morir();
     
     /**
      * Retorna el componente gráfico asociado al Personaje.
      * @return JLabel
      */
+    
     public JLabel getGrafico(){
 		return this.grafico.getGrafico();
 	}

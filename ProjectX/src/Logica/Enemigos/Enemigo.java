@@ -14,11 +14,15 @@ public abstract class Enemigo extends Personaje {
     protected int puntaje;
 
     /**
-     * @param s 
-     * @param x 
-     * @param y 
-     * @param p
-     * @param j
+     * Crea un nuevo Enemigo con la velocidad,
+     * la posición en X,la posición en Y,
+     * el puntaje que va a tener el Enemigo
+     * y el Juego que va a pertenecer.
+     * @param velocidad
+     * @param posición en X
+     * @param posición en Y 
+     * @param Puntaje
+     * @param Juego 
      */
     protected Enemigo(int s, int x, int y, int p,Juego j) {
         super(s, x, y,j);
@@ -55,7 +59,7 @@ public abstract class Enemigo extends Personaje {
     public abstract void avanzarAbajo();
 
     /**
-     * Elimina al Bomberman recibido como parámetro.
+     * Genera la muerte del Bomberman recibido como parámetro.
      * @param Bomberman
      */
     public abstract void MatarBomberman(Bomberman b);

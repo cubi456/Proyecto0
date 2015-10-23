@@ -14,16 +14,22 @@ import Logica.Jugador.Bomberman;
  *@version 1.0
  */
 
-public class Rugulus extends Enemigo {
+public class Rugulus extends Enemigo 
+{
 
-    /**
-     * @param s 
-     * @param x 
-     * @param y 
-     * @param p
-     */
 	protected RugulusThread rt;
 	
+    /**
+     * Crea un nuevo Enemigo de tipo Rugulus
+     * con la velocidad, la posición en X,
+     * la posición en Y, el puntaje que va a tener el Enemigo
+     * y el Juego que va a pertenecer.
+     * @param velocidad
+     * @param posición en X
+     * @param posición en Y 
+     * @param Puntaje
+     * @param Juego 
+     */
     public Rugulus(int s, int x, int y, int p,Juego j) {
         super(s, x, y, p,j);
         grafico= new RugulusGrafico(s, x, y);
@@ -106,7 +112,9 @@ public class Rugulus extends Enemigo {
     }
 
     /**
-     * 
+     * Detecta si en la celda pasada por parámetro
+     * se encuentra el Bomberman.
+     * @param Celda
      */
     
     private void analizar(Celda c)
@@ -115,7 +123,9 @@ public class Rugulus extends Enemigo {
     		if(c.getBomberman()!=null)
     			MatarBomberman(c.getBomberman());
     }
-    
+    /**
+     * 
+     */
     public void morir()
     {
     	miJuego.getNivel(0).getCelda(this.posX,this.posY).setEnemigo(null);
@@ -124,7 +134,11 @@ public class Rugulus extends Enemigo {
     	rt.destruir();
     }
     
-	public void moverConInteligencia() {
+    /**
+     * Genera un movimiento en el Enemigo.
+     */
+	public void moverConInteligencia() 
+	{
 	// Calculo la siguiente direccion aleatoriamente.
 		Random rnd = new Random();
 		int dir=rnd.nextInt(4);
@@ -143,15 +157,6 @@ public class Rugulus extends Enemigo {
 				this.avanzarAbajo();
 				break;
 		}
-		
-		//super.mover(dir);
-		/*	Bueno aca vengo a explicar Jojo
-		 * la onda de esto seria hacer exactamente lo que hizo juanma
-		 * teniendo un mover en la clase Personaje para tener el movimiento super
-		 * enchulado de los graficos, ademas podriamos usar un arreglo de graficos,
-		 * como atributo de personaje, ya que eso es grafico.
-		 * 
-		 */
 	}
 
 }
