@@ -54,9 +54,9 @@ public class Nivel {
        misPower.elementAt(0).getGrafico().setPos(2, 1);
        miJuego.getGui().getContenedor().add(misPower.elementAt(0).getGrafico().getGrafico(),2);
        //Prueba Bombality
-       celdas[5][1].setPowerUp(misPower.elementAt(4)); 
-       misPower.elementAt(4).getGrafico().setPos(5, 1);
-       miJuego.getGui().getContenedor().add(misPower.elementAt(4).getGrafico().getGrafico(),2);
+       celdas[5][1].setPowerUp(misPower.elementAt(5)); 
+       misPower.elementAt(5).getGrafico().setPos(5, 1);
+       miJuego.getGui().getContenedor().add(misPower.elementAt(5).getGrafico().getGrafico(),2);
 
     }
     
