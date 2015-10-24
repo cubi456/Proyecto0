@@ -170,7 +170,12 @@ public class Bomberman extends Personaje
       		analizar(c);
       	}
     }
-
+    /**
+     * Detecta si en la Celda recibida como Parámetro
+     * existe un enemigo o un powerUp y realiza la acción
+     * correspondiente.
+     * @param Celda
+     */
     private void analizar(Celda c)
     {
     		c.setBomberman(this);
