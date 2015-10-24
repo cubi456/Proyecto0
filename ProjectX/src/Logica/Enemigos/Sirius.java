@@ -3,6 +3,7 @@ package Logica.Enemigos;
 import java.util.*;
 
 import Logica.Juego;
+import Logica.Bloques.Celda;
 import Logica.Jugador.Bomberman;
 
 /**
@@ -62,6 +63,13 @@ public class Sirius extends Enemigo {
         // TODO implement here
     }
 
+    /**
+     * 
+     */
+    private void analizar(Celda c)
+    {
+    	
+    }
     /**
      * 
      */

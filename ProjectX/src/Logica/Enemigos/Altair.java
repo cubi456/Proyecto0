@@ -1,6 +1,7 @@
 package Logica.Enemigos;
 
 import Logica.Juego;
+import Logica.Bloques.Celda;
 import Logica.Jugador.Bomberman;
 /**
  *@author Barreix, Iñaki.
@@ -59,7 +60,13 @@ public class Altair extends Enemigo
     public void MatarBomberman(Bomberman b) {
         // TODO implement here
     }
-
+    /**
+     * 
+     */
+    private void analizar(Celda c)
+    {
+    	
+    }
     /**
      * 
      */
