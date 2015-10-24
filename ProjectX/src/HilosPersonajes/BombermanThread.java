@@ -35,8 +35,11 @@ public class BombermanThread extends Thread
 		this.stop=true;
 	}
 	
-	public void dublicarVel()
+	public void duplicarVel()
 	{
+		//Para duplicar la velocidad el atributo vel
+		//debería estar dividido por 2. Se dividio por
+		//un número más grande para que se note el efecto.
 		vel=vel/100;
 	}
 }

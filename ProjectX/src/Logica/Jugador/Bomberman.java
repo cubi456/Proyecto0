@@ -198,7 +198,7 @@ public class Bomberman extends Personaje
      */
     public void doubleSpeed()
     {
-    	bt.dublicarVel();
+    	bt.duplicarVel();
     }
     
     /**
