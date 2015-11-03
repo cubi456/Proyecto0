@@ -34,6 +34,7 @@ public class Fatality extends PowerUp
     {
     	for(Bomba bom: b.getBombas())
     		bom.duplicarAlcance();
+    	b.setAlc(b.getAlc()*2);
     }
 
 }

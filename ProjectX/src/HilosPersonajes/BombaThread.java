@@ -17,7 +17,7 @@ public class BombaThread extends Thread
 		while(!stop)
 		{
 			try {
-				this.sleep(3000);
+				b.getGrafico().detonar();
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

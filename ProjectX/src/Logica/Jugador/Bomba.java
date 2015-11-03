@@ -25,7 +25,7 @@ public class Bomba
     public Bomba(Bomberman bom) 
     {
     	ubicacion=null;
-    	alcance=1;
+    	alcance=bom.getAlc();
     	bg=new BombaGrafico();
     	b=bom;
     }
@@ -34,7 +34,7 @@ public class Bomba
      * Dublica el alcance de la bomba en dos.
      */
     public void duplicarAlcance() {
-        alcance*=2;
+        alcance*=10;
     }
 
     /**

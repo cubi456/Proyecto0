@@ -25,6 +25,7 @@ public class Bomberman extends Personaje
     protected int puntaje;
     protected Vector<Bomba> misBombas;
     protected BombermanThread bt;
+    protected int alc;
 
     /**
      * Crea un nuevo Bomberman con la velocidad,
@@ -36,6 +37,7 @@ public class Bomberman extends Personaje
     public Bomberman(int s, int x, int y,Juego j) {
     	super(s, x, y,j);
     	dios= false;
+    	alc=1;
     	puntaje=0;
     	bt=new BombermanThread(miJuego.getGui());
     	misBombas= new Vector<Bomba>();
@@ -97,10 +99,10 @@ public class Bomberman extends Personaje
         {
         	Celda c= miJuego.getNivel(0).getCelda(this.posX, this.posY);
         	Bomba bom=misBombas.remove(misBombas.size()-1);
-        	bom.getGrafico().setPos(posX, posY);
-        	miJuego.getGui().getContenedor().add(bom.getGrafico().getGrafico(),4);
+    		miJuego.getGui().getContenedor().add(bom.getGrafico().getGrafico(),4);
         	miJuego.getGui().repaint();
         	miJuego.getGui().toggleLock();
+        	bom.getGrafico().setPos(posX, posY);
         	c.colocarBomba(bom);
         }
       
@@ -208,6 +210,16 @@ public class Bomberman extends Personaje
      */
     public Vector<Bomba> getBombas(){
     	return misBombas;
+    }
+    
+    public int getAlc()
+    {
+    	return alc;
+    }
+    
+    public void setAlc(int a)
+    {
+    	alc=a;
     }
 
 }

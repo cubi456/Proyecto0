@@ -20,7 +20,7 @@ public abstract class PersonajeGrafico{
 		imagen= new Icon[5];
 		mov= new Icon[7];
 		// mover Derecha
-				this.mov[0] = new ImageIcon(this.getClass().getResource("../Sprites/CPD/01.png"));
+				this.mov[0] = new ImageIcon(this.getClass().getResource("../Sprites/Right.gif"));
 				this.mov[1] = new ImageIcon(this.getClass().getResource("../Sprites/CPD/02.png"));
 				this.mov[2] = new ImageIcon(this.getClass().getResource("../Sprites/CPD/03.png"));
 				this.mov[3] = new ImageIcon(this.getClass().getResource("../Sprites/CPD/04.png"));
@@ -49,16 +49,21 @@ public abstract class PersonajeGrafico{
 				break;
 			case 2 :  // Right
 				try {
-					for(int i=0; i<4;i++){
-						grafico.setIcon(this.mov[i]);
+					grafico.setIcon(this.mov[0]);
+					int paso = 4;
+					
+					for(int i=0; i< ancho / paso;i++){
+						pos.x += paso;
+						//grafico.setIcon(this.mov[i]);
+						grafico.setBounds(pos.x, pos.y, ancho, alto);
 						Thread.sleep(100);
 					}
-					pos.setLocation(pos.x + ancho, pos.y);
-					grafico.setBounds(pos.x, pos.y, ancho, alto);
-					for(int i=4; i<mov.length;i++){
+					//pos.setLocation(pos.x + ancho, pos.y);
+					//grafico.setBounds(pos.x, pos.y, ancho, alto);
+					/*for(int i=4; i<mov.length;i++){
 						grafico.setIcon(this.mov[i]);
 						Thread.sleep(100);
-					}
+					}*/
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				  }
