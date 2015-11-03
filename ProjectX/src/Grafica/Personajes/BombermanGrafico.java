@@ -13,6 +13,7 @@ public class BombermanGrafico extends PersonajeGrafico {
 		this.imagen[2] = new ImageIcon(this.getClass().getResource("../Sprites/BmanR.png"));
 		this.imagen[3] = new ImageIcon(this.getClass().getResource("../Sprites/BmanF.png"));
 		this.imagen[4] = new ImageIcon(this.getClass().getResource("../Sprites/BmanDead.png"));
+		
 	}
 
 }
