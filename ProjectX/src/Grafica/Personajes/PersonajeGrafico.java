@@ -48,7 +48,10 @@ public abstract class PersonajeGrafico{
 				grafico.setBounds(pos.x, pos.y, ancho, alto);
 				break;
 			case 2 :  // Right
-				try {
+				pos.setLocation(this.pos.x+ancho, this.pos.y);
+				grafico.setBounds(pos.x, pos.y, ancho, alto);
+				/*
+				 forma juanma
 					grafico.setIcon(this.mov[0]);
 					int paso = 4;
 					
@@ -58,15 +61,16 @@ public abstract class PersonajeGrafico{
 						grafico.setBounds(pos.x, pos.y, ancho, alto);
 						Thread.sleep(100);
 					}
+					//una forma
 					//pos.setLocation(pos.x + ancho, pos.y);
 					//grafico.setBounds(pos.x, pos.y, ancho, alto);
 					/*for(int i=4; i<mov.length;i++){
 						grafico.setIcon(this.mov[i]);
 						Thread.sleep(100);
-					}*/
+					}
 				} catch (InterruptedException e) {
 					e.printStackTrace();
-				  }
+				  }*/
 				break;
 			case 3 : // Down
 				pos.setLocation(pos.x, pos.y + alto);

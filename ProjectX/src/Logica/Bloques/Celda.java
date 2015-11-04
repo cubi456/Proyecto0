@@ -218,14 +218,14 @@ public class Celda {
     	   }
     	   if(arr)
     	   {
-    		   Celda aux=miNivel.getCelda(x, y-1);
+    		   Celda aux=miNivel.getCelda(x, y-i);
     		   salida.addElement(aux);
     		   if(aux.getPared()!=null)
     			   arr=false;
     	   }
     	   if(abj)
     	   {
-    		   Celda aux=miNivel.getCelda(x, y+1);
+    		   Celda aux=miNivel.getCelda(x, y+i);
     		   salida.addElement(aux);
     		   if(aux.getPared()!=null)
     			   abj=false;

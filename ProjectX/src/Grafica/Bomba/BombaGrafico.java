@@ -7,18 +7,31 @@ import javax.swing.JLabel;
 
 public class BombaGrafico{
 	protected JLabel grafico;
-	protected Icon[] imagen;
+	protected Icon[] detonar, exp ;
 	protected final int ancho = 32;
 	protected final int alto = 32;
 	protected int x,y;
 	
 	public BombaGrafico(){
-		imagen= new Icon[4];
-		this.imagen[0] = new ImageIcon(this.getClass().getResource("../Sprites/Bomb01.png"));
-		this.imagen[1] = new ImageIcon(this.getClass().getResource("../Sprites/Bomb02.png"));
-		this.imagen[2] = new ImageIcon(this.getClass().getResource("../Sprites/Bomb03.png"));
-		this.imagen[3] = new ImageIcon(this.getClass().getResource("../Sprites/fire00.png"));
-		
+		detonar= new Icon[4];
+		detonar[0] = new ImageIcon(this.getClass().getResource("../Sprites/Bomb01.png"));
+		detonar[1] = new ImageIcon(this.getClass().getResource("../Sprites/Bomb02.png"));
+		detonar[2] = new ImageIcon(this.getClass().getResource("../Sprites/Bomb03.png"));
+		/**
+		 * Para cubitooo:
+		 * Creo que deberiamos tener una entndiad fuego, 
+		 * ya que la bomba explota en una sola celda, luego
+		 * el cuando se expande no hay entidades/objetos bombas
+		 * y aguante el club.
+		 * 
+		 * PD: Maiame
+		 */
+		exp= new Icon[5];
+		exp[0] = new ImageIcon(this.getClass().getResource("../Sprites/fire00.png"));
+		exp[1] = new ImageIcon(this.getClass().getResource("../Sprites/fire01.png"));
+		exp[2] = new ImageIcon(this.getClass().getResource("../Sprites/fire02.png"));
+		exp[3] = new ImageIcon(this.getClass().getResource("../Sprites/fire03.png"));
+		exp[4] = new ImageIcon(this.getClass().getResource("../Sprites/fire04.png"));	
 		
 	}
 	
@@ -30,8 +43,7 @@ public class BombaGrafico{
 	
 	public JLabel getGrafico(){
 		if(this.grafico == null){
-			this.grafico = new JLabel(imagen[0]);
-			//hilo o gif.
+			this.grafico = new JLabel(detonar[0]);
 			this.grafico.setBounds(x , y, ancho, alto);
 		}
 		
@@ -42,11 +54,15 @@ public class BombaGrafico{
 	{
 		for(int i=0;i<3;i++)
 		{
-			grafico.setIcon(imagen[i]);
+			grafico.setIcon(detonar[i]);
 			grafico.setBounds(x,y,ancho,alto);
 			Thread.sleep(1000);
 		}
-		grafico.setIcon(imagen[3]);
+		explotar();
+	}
+	
+	public void explotar() throws InterruptedException{
+		grafico.setIcon(exp[0]);
 		grafico.setBounds(x,y,ancho,alto);
 		Thread.sleep(100);
 	}
