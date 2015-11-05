@@ -83,14 +83,17 @@ public class Bomba
     		ubicacion.getNivel().getJuego().getGui().repaint();
     		for(Celda c:ubicacion.getAdyacentes(alcance))
     		{
+    			if(c.getPared()!=null)
+    				c.destruir();
+    			else{
+    			c.incendiar();
     			if(c.getBomberman()!=null)
     				c.getBomberman().morir();
     			if(ubicacion.getBomberman()!=null)
     				ubicacion.getBomberman().morir();
     			if(c.getEnemigo()!=null)
     				c.getEnemigo().morir();
-    			if(c.getPared()!=null)
-    				c.destruir();
+    			}
     		}
     	}
     	bt.destruir();

@@ -242,4 +242,13 @@ public class Celda {
     {
 		return this.grafico.getGrafico();
 	}
+    
+    public void incendiar(){
+    	try {
+			this.grafico.prenderFuego();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    }
 }

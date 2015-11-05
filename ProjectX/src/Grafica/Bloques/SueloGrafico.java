@@ -1,5 +1,6 @@
 package Grafica.Bloques;
 
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
 public class SueloGrafico extends BloqueGrafico{
@@ -7,5 +8,4 @@ public class SueloGrafico extends BloqueGrafico{
 		super(px,py);
 		imagen=new ImageIcon(this.getClass().getResource("../Sprites/Piso.png"));
 	}
-	
 }

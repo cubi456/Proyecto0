@@ -62,9 +62,12 @@ public class BombaGrafico{
 	}
 	
 	public void explotar() throws InterruptedException{
-		grafico.setIcon(exp[0]);
-		grafico.setBounds(x,y,ancho,alto);
-		Thread.sleep(100);
+		for(int i=0;i<5;i++)
+		{
+			grafico.setIcon(exp[i]);
+			grafico.setBounds(x,y,ancho,alto);
+			Thread.sleep(100);
+		}
 	}
 	
 }
