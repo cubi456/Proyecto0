@@ -26,7 +26,6 @@ public class Bomba
     {
     	ubicacion=null;
     	alcance=bom.getAlc();
-    	bg=new BombaGrafico();
     	b=bom;
     }
 
@@ -52,6 +51,7 @@ public class Bomba
      */
     public void setUbicacion(Celda c) {
         ubicacion=c;
+        bg=new BombaGrafico(ubicacion.getNivel().getJuego().getGui());
     }
     /**
      * Retorna la entidad gráfica de la bomba.
@@ -67,7 +67,7 @@ public class Bomba
      */
     public void activarBomba()
     {
-    	bt=new BombaThread(this);
+    	bt=new BombaThread(this,ubicacion,alcance);
     	bt.start();
     }
     
@@ -83,22 +83,19 @@ public class Bomba
     		ubicacion.getNivel().getJuego().getGui().repaint();
     		for(Celda c:ubicacion.getAdyacentes(alcance))
     		{
-    			if(c.getPared()!=null)
-    				c.destruir();
-    			else{
-    			c.incendiar();
     			if(c.getBomberman()!=null)
     				c.getBomberman().morir();
     			if(ubicacion.getBomberman()!=null)
     				ubicacion.getBomberman().morir();
     			if(c.getEnemigo()!=null)
     				c.getEnemigo().morir();
-    			}
+    			if(c.getPared()!=null)
+    				c.destruir();
     		}
     	}
     	bt.destruir();
     	bg=null;
-    	bg=new BombaGrafico();
+    	bg=new BombaGrafico(ubicacion.getNivel().getJuego().getGui());
     	ubicacion=null;
     	b.addBomba(this);
     }

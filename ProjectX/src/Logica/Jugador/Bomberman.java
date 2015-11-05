@@ -99,6 +99,7 @@ public class Bomberman extends Personaje
         {
         	Celda c= miJuego.getNivel(0).getCelda(this.posX, this.posY);
         	Bomba bom=misBombas.remove(misBombas.size()-1);
+        	bom.setUbicacion(c);
     		miJuego.getGui().getContenedor().add(bom.getGrafico().getGrafico(),4);
         	miJuego.getGui().repaint();
         	miJuego.getGui().toggleLock();
