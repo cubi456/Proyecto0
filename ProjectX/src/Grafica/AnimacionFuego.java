@@ -24,7 +24,9 @@ public class AnimacionFuego extends Thread
 		
 		while(!stop)
 		{
+			c.setFuego(true);
 			fg.iniciar();
+			c.setFuego(false);
 			g.remove(fg.getGrafico());
 			g.repaint();
 			fg=null;

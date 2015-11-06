@@ -55,10 +55,11 @@ public class BombaGrafico{
 		//Coloca el fuego en las casillas adyacentes.
 		for(Celda cel:c.getAdyacentes(a))
 		{
-			if(cel.getPared()==null || cel.getPared().isDestructible())
+			if(cel.getPared()==null)
 			{
 				AnimacionFuego fg=new AnimacionFuego(cel,g);
 				fg.start();
+					
 			}
 		}
 	}

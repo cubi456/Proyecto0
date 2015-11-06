@@ -2,10 +2,7 @@
 package Logica;
 import java.util.*;
 
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 
-import Grafica.GUI;
 import Grafica.PowerUps.BombalityGrafico;
 import Grafica.PowerUps.FatalityGrafico;
 import Grafica.PowerUps.MasacralityGrafico;
@@ -38,18 +35,36 @@ public class Nivel
         miJuego=j;
         crearPowerUps(pu);
         celdas= new Celda[31][13];
+        Random random= new Random();
+        int  cantDest=145;
         for(int f=0; f<celdas.length; f++)
         {
-        	for(int c=0; c< celdas[0].length; c++)
-        	{
-        		 if(c+1==celdas[0].length || c==0)
+        	for(int c=0; c< celdas[0].length; c++){
+        		// el que se usa para probar
+       	/*	 if((c+1==celdas[0].length || c==0)||(f==0 || f+1==celdas.length))
+       		    celdas[f][c]= new Celda(f, c,new Pared(null,false),this);
+       		 else
+       			 if(f%2!=0 || c%2!=0)
+       				celdas[f][c]=new Celda(f,c,null,this);
+            		else
+            			if(f%4==0 && c%4!=0|| f%4!=0 && c%4==0)
+            				celdas[f][c]= new Celda(f, c,new Pared(null,false),this);
+            			else
+            				celdas[f][c]= new Celda(f, c,new Pared(null,true),this);
+        	*/
+        		
+        		boolean espLibre = ((f == 1) && (c == 1))||((f == 1) && (c == 2))|| ((f == 2) && (c == 1));
+        		 if((c+1==celdas[0].length || c==0)||(f==0 || f+1==celdas.length) || (f%2==0 && c%2==0))
         		    celdas[f][c]= new Celda(f, c,new Pared(null,false),this);
-        		 else
-        		 {
-        	        if(f==0 || f+1==celdas.length)
-        	        	celdas[f][c]=new Celda(f,c,new Pared(null,false),this);
-        	        else
-        	        	celdas[f][c]=new Celda(f,c,null,this); 
+        		 else{
+        			 //Hay 360 casilleros, 70 ya utilizados por los bloques, ahora se desparraman en 
+        			 //teoria 290
+        			 if((random.nextInt(2)== 0 && cantDest>0 && !espLibre)){ // numero entre 0 o 1;
+             			celdas[f][c]= new Celda(f, c,new Pared(null,true),this);
+             			cantDest--;
+             		}
+             		else
+             				celdas[f][c]=new Celda(f,c,null,this);
         		 }
         		 miJuego.getGui().getContenedor().add(celdas[f][c].getGrafico(), 0); 
         	}
@@ -59,7 +74,11 @@ public class Nivel
        misPower.elementAt(0).getGrafico().setPos(2, 1);
        miJuego.getGui().getContenedor().add(misPower.elementAt(0).getGrafico().getGrafico(),2);
        //Prueba Bombality
-       celdas[5][1].setPowerUp(misPower.elementAt(4)); 
+       celdas[5][1].setPowerUp(misPower.elementAt(5)); 
+       misPower.elementAt(5).getGrafico().setPos(5, 1);
+       miJuego.getGui().getContenedor().add(misPower.elementAt(5).getGrafico().getGrafico(),2);
+       //Prueba fatality
+       celdas[4][1].setPowerUp(misPower.elementAt(4)); 
        misPower.elementAt(4).getGrafico().setPos(4, 1);
        miJuego.getGui().getContenedor().add(misPower.elementAt(4).getGrafico().getGrafico(),2);
 

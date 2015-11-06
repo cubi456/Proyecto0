@@ -68,5 +68,7 @@ public abstract class Enemigo extends Personaje {
      * 
      */
     public abstract void morir();
+    
+    public abstract void moverConInteligencia();
 
 }

@@ -3,7 +3,7 @@ package Logica.Enemigos;
 import java.util.Random;
 
 import Grafica.Personajes.RugulusGrafico;
-import HilosPersonajes.RugulusThread;
+import HilosPersonajes.EnemigoThread;
 import Logica.Juego;
 import Logica.Bloques.Celda;
 import Logica.Jugador.Bomberman;
@@ -17,7 +17,8 @@ import Logica.Jugador.Bomberman;
 public class Rugulus extends Enemigo 
 {
 
-	protected RugulusThread rt;
+	protected EnemigoThread rt;
+	protected boolean vivo;
 	
     /**
      * Crea un nuevo Enemigo de tipo Rugulus
@@ -32,9 +33,10 @@ public class Rugulus extends Enemigo
      */
     public Rugulus(int s, int x, int y, int p,Juego j) {
         super(s, x, y, p,j);
+        vivo=true;
         grafico= new RugulusGrafico(s, x, y);
     	miJuego.getNivel(0).getCelda(x, y).setEnemigo(this);
-    	rt= new RugulusThread(this);
+    	rt= new EnemigoThread(this,speed);
     	rt.start();
     }
 
@@ -120,6 +122,8 @@ public class Rugulus extends Enemigo
     private void analizar(Celda c)
     {
     		c.setEnemigo(this);
+    		if(c.getFuego())
+    			morir();
     		if(c.getBomberman()!=null)
     			MatarBomberman(c.getBomberman());
     }
@@ -128,9 +132,11 @@ public class Rugulus extends Enemigo
      */
     public void morir()
     {
+    	vivo=false;
     	miJuego.getNivel(0).getCelda(this.posX,this.posY).setEnemigo(null);
     	miJuego.matarPersonaje(this);
-    	grafico.morir();
+    	miJuego.getGui().remove(grafico.getGrafico());
+    	miJuego.getGui().repaint();
     	rt.destruir();
     }
     
@@ -140,6 +146,8 @@ public class Rugulus extends Enemigo
 	public void moverConInteligencia() 
 	{
 	// Calculo la siguiente direccion aleatoriamente.
+		if(vivo)
+		{
 		Random rnd = new Random();
 		int dir=rnd.nextInt(4);
 		
@@ -156,6 +164,7 @@ public class Rugulus extends Enemigo
 			case 3 :
 				this.avanzarAbajo();
 				break;
+					}
 		}
 	}
 

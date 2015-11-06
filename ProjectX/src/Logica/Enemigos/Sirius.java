@@ -76,4 +76,9 @@ public class Sirius extends Enemigo {
     public void morir() {
         // TODO implement here
     }
+
+	public void moverConInteligencia() {
+		// TODO Auto-generated method stub
+		
+	}
 }

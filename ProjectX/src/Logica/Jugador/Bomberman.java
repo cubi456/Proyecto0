@@ -39,10 +39,10 @@ public class Bomberman extends Personaje
     	dios= false;
     	alc=1;
     	puntaje=0;
-    	bt=new BombermanThread(miJuego.getGui());
     	misBombas= new Vector<Bomba>();
     	addBomba();
     	grafico=new BombermanGrafico(s, x, y);
+    	bt=new BombermanThread(miJuego.getGui(),grafico,speed);
     	miJuego.getGui().getContenedor().add(grafico.getGrafico(),2);
     	miJuego.getNivel(0).getCelda(x, y).setBomberman(this);
     	bt.start();
@@ -118,7 +118,8 @@ public class Bomberman extends Personaje
     	Celda c=miJuego.getNivel(0).getCelda(this.posX-1,this.posY);
       	if(c.getPared()== null && c.getBomba()==null)
       	{
-      		grafico.mover(0);
+      		bt.setDir(0);
+      		grafico.moverB(0);
       		miJuego.getNivel(0).getCelda(this.posX,this.posY).setBomberman(null);
       		posX-=1;
       		analizar(c);
@@ -138,7 +139,8 @@ public class Bomberman extends Personaje
     	Celda c=miJuego.getNivel(0).getCelda(this.posX,this.posY-1);
       	if(c.getPared()== null && c.getBomba()==null)
       	{
-      		grafico.mover(1);
+      		bt.setDir(1);
+      		grafico.moverB(1);
       		miJuego.getNivel(0).getCelda(this.posX,this.posY).setBomberman(null);
       		posY-=1;
       		analizar(c);
@@ -151,7 +153,8 @@ public class Bomberman extends Personaje
     	Celda c=miJuego.getNivel(0).getCelda(this.posX+1,this.posY);
       	if(c.getPared()== null && c.getBomba()==null)//no hay pared
       	{ 
-      		grafico.mover(2);
+      		bt.setDir(2);
+      		grafico.moverB(2);
       		miJuego.getNivel(0).getCelda(this.posX,this.posY).setBomberman(null);
       		posX+=1;
       		analizar(c);
@@ -167,7 +170,8 @@ public class Bomberman extends Personaje
     	Celda c=miJuego.getNivel(0).getCelda(this.posX,this.posY+1);
       	if(c.getPared()== null && c.getBomba()==null)
       	{
-      		grafico.mover(3);
+      		bt.setDir(3);
+      		grafico.moverB(3);
       		miJuego.getNivel(0).getCelda(this.posX,this.posY).setBomberman(null);
       		posY+=1;
       		analizar(c);
@@ -182,11 +186,13 @@ public class Bomberman extends Personaje
     private void analizar(Celda c)
     {
     		c.setBomberman(this);
-    		if(c.getEnemigo()!=null)
+    		if(c.getEnemigo()!=null || c.getFuego())
     			morir();
     		PowerUp pup=c.getPowerUp();
     		if(pup!=null){
-    			pup.setAction(this); 
+    			pup.setAction(this);
+    			miJuego.getGui().remove(pup.getGrafico().getGrafico());
+    			miJuego.getGui().repaint();
     			c.setPowerUp(null);
     		}
     }
@@ -201,6 +207,8 @@ public class Bomberman extends Personaje
      */
     public void doubleSpeed()
     {
+    	this.speed= speed/2;
+    	grafico.setVelocidad(speed);
     	bt.duplicarVel();
     }
     

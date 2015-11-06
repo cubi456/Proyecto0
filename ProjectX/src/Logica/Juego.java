@@ -3,7 +3,7 @@ import java.util.*;
 
 import Grafica.GUI;
 import HilosPersonajes.BombermanThread;
-import HilosPersonajes.RugulusThread;
+import HilosPersonajes.EnemigoThread;
 import Logica.Enemigos.Altair;
 import Logica.Enemigos.Rugulus;
 import Logica.Enemigos.Sirius;
@@ -109,7 +109,7 @@ public class Juego
      */
     public void addRugulus()
     {
-    	Personaje r= new Rugulus(1, 1, 11, 15,this);
+    	Personaje r= new Rugulus(800, 1, 11, 15,this);
     	misPersonajes.addElement(r);
     	gui.add(r.getGrafico(), 1);    	
     }
@@ -119,8 +119,9 @@ public class Juego
      */
     public void addAltair()
     {
-       Personaje a= new Altair(1, 0, 0, 20,this);
+       Personaje a= new Altair(400, 1,11, 15,this);
        misPersonajes.addElement(a);
+       gui.add(a.getGrafico(),1);
     }
 
     /**
@@ -138,7 +139,7 @@ public class Juego
      */
     public Personaje addBomberman()
     {
-    	Personaje b= new Bomberman(8, 1, 1,this);
+    	Personaje b= new Bomberman(500, 1, 1,this);
     	misPersonajes.addElement(b);
 
     	return b;

@@ -1,16 +1,26 @@
 package HilosPersonajes;
 
+import java.util.Vector;
+
+import javax.swing.Icon;
+
 import Grafica.GUI;
+import Grafica.Personajes.PersonajeGrafico;
 
 public class BombermanThread extends Thread 
 {
 	private GUI gui;
 	private volatile boolean stop=false;
-	int vel=100;
+	private volatile int dir;
+	private PersonajeGrafico p;
+	int vel;
 	
-	public BombermanThread(GUI gui)
+	public BombermanThread(GUI gui,PersonajeGrafico pj,int vel)
 	{
 		this.gui=gui;
+		p=pj;
+		dir=3;
+		this.vel=vel;
 	}
 	
 	public void run()
@@ -40,6 +50,13 @@ public class BombermanThread extends Thread
 		//Para duplicar la velocidad el atributo vel
 		//debería estar dividido por 2. Se dividio por
 		//un número más grande para que se note el efecto.
-		vel=vel/100;
+		vel=vel/2;
 	}
+
+	
+	public void setDir(int i)
+	{
+		dir=i;
+	}
+	
 }

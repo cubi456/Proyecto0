@@ -31,6 +31,7 @@ public class Celda {
     protected PowerUp power;
     protected Nivel miNivel;
     protected BloqueGrafico grafico;
+    protected boolean fuego;
 
     /**
      * Crea una nueva celda con o sin pared 
@@ -42,31 +43,22 @@ public class Celda {
      */
     public Celda(int x, int y,Pared p,Nivel n) 
     {
+    	fuego=false;
         this.x=x;
         this.y=y;
         power=null;
         enemigo=null;
         bomb=null;
         miNivel=n;
-        /**ISB ESTO PARA PROBAR EL MAPA**/
-        if(x==0|| x==30 || y==0 || y==12){
-        	grafico=new ParedSolidaGrafico(x, y);
-        	estado=new Pared(null, false);
-        }
-        else
-        if(x%2!=0 || y%2!=0){
+        estado=p;
+        if(estado==null)
         	grafico=new SueloGrafico(x, y);
-        	estado=null;
-        }
         else
-        	if(x%4==0 && y%4!=0|| x%4!=0 && y%4==0){
-        		grafico=new ParedSolidaGrafico(x, y);
-        		estado=new Pared(null, false);
-        	}
-        	else{
+        	if(estado.isDestructible())
         		grafico=new ParedDesctGrafico(x, y);
-        		estado=new Pared(null, true);
-        	}
+        	else
+        		grafico=new ParedSolidaGrafico(x, y);
+        		
         
     }
 
@@ -251,4 +243,15 @@ public class Celda {
     {
     	return y;
     }
+    
+    public void setFuego(boolean f)
+    {
+    	fuego=f;
+    }
+    
+    public boolean getFuego()
+    {
+    	return fuego;
+    }
+    
 }
