@@ -46,7 +46,7 @@ public class Altair extends Enemigo
     	Celda c=miJuego.getNivel(0).getCelda(this.posX-1 ,this.posY);
       	if(c.getPared()== null || (c.getPared()!=null && c.getPared().isDestructible()))// && c.getEnemigo()==null)
       	{
-      		grafico.mover(0);
+      		grafico.moverB(0);
       		miJuego.getNivel(0).getCelda(this.posX,this.posY).setEnemigo(null);
       		posX-=1;
       		analizar(c);
@@ -63,7 +63,7 @@ public class Altair extends Enemigo
     	Celda c=miJuego.getNivel(0).getCelda(this.posX,this.posY-1);
       	if(c.getPared()== null || (c.getPared()!=null && c.getPared().isDestructible()))// && c.getEnemigo()==null)      	
       	{
-      		grafico.mover(1);
+      		grafico.moverB(1);
       		miJuego.getNivel(0).getCelda(this.posX,this.posY).setEnemigo(null);
       		posY-=1;
       		analizar(c);
@@ -79,7 +79,7 @@ public class Altair extends Enemigo
     	Celda c=miJuego.getNivel(0).getCelda(this.posX+1,this.posY);
       	if(c.getPared()== null || (c.getPared()!=null && c.getPared().isDestructible()))// && c.getEnemigo()==null)
     	{
-      		grafico.mover(2);
+      		grafico.moverB(2);
       		miJuego.getNivel(0).getCelda(this.posX,this.posY).setEnemigo(null);
       		posX+=1;
       		analizar(c);
@@ -95,7 +95,7 @@ public class Altair extends Enemigo
     	Celda c=miJuego.getNivel(0).getCelda(this.posX,this.posY+1);
       	if(c.getPared()== null || (c.getPared()!=null && c.getPared().isDestructible()))// && c.getEnemigo()==null)
     	{
-      		grafico.mover(3);
+      		grafico.moverB(3);
       		miJuego.getNivel(0).getCelda(this.posX,this.posY).setEnemigo(null);
       		posY+=1;
       		analizar(c);

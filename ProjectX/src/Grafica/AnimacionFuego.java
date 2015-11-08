@@ -37,5 +37,6 @@ public class AnimacionFuego extends Thread
 	public void detener()
 	{
 		stop=true;
+		this.interrupt();
 	}
 }

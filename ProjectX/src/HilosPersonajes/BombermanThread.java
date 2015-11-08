@@ -35,6 +35,12 @@ public class BombermanThread extends Thread
 			if(gui.getLock()){
 				gui.detectarOpciones(gui.getDireccion());
 				gui.toggleLock();
+				try {
+					Thread.sleep(100);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 		    }
 			else
 				gui.detectarOpciones(gui.getDireccion());
@@ -43,6 +49,7 @@ public class BombermanThread extends Thread
 	public void destruir()
 	{
 		this.stop=true;
+		this.interrupt();
 	}
 	
 	public void duplicarVel()

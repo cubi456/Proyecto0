@@ -128,5 +128,6 @@ public class AnimacionBomberman extends Thread
 	public void detener()
 	{
 		stop=true;
+		this.interrupt();
 	}
 }
