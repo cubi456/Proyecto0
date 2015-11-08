@@ -59,9 +59,14 @@ public class GUI extends JFrame {
 		contenedor.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contenedor);
 		contenedor.setLayout(null);
-		juego= new Juego(this);
-		b=juego.getBomberman();
 		
+		juego= new Juego(this);
+		juego.crearNivel();
+		b=juego.addBomberman();
+		juego.addRugulus();
+		juego.addRugulus();
+		juego.addRugulus();
+		juego.addAltair();
 		
 		// Oyente a las teclas
 		addKeyListener(new KeyAdapter() {

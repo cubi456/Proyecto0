@@ -1,5 +1,4 @@
 package Logica;
-import java.awt.Point;
 import java.util.*;
 
 import Grafica.GUI;
@@ -34,15 +33,6 @@ public class Juego
     	gui=g;
     	misNiveles= new Vector<Nivel>();
     	misPersonajes=new Vector<Personaje>();
-    	this.crearNivel();
-    	this.addBomberman();
-    	this.addRugulus();
-		this.addRugulus();
-		this.addRugulus();
-		this.addAltair();
-		this.addAltair();
-		//this.addAltair();
-		//this.addSirius();
     }
 
 
@@ -119,10 +109,7 @@ public class Juego
      */
     public void addRugulus()
     {
-    	//Para prueba
-    	//Personaje r= new Rugulus(800, 1, 11, 15,this);
-    	Point p= asignarPos();
-    	Personaje r= new Rugulus(800, (int)p.getX(), (int)p.getY(), 15,this);
+    	Personaje r= new Rugulus(800, 1, 11, 15,this);
     	misPersonajes.addElement(r);
     	gui.add(r.getGrafico(), 1);    	
     }
@@ -132,11 +119,9 @@ public class Juego
      */
     public void addAltair()
     {
-        //Personaje a= new Altair(400, 1,11, 20,this);
-    	Point p= asignarPos();
-    	Personaje a= new Altair(400, (int)p.getX(), (int)p.getY(), 20,this);
-    	misPersonajes.addElement(a);
-        gui.add(a.getGrafico(),1);
+       Personaje a= new Altair(400, 1,11, 15,this);
+       misPersonajes.addElement(a);
+       gui.add(a.getGrafico(),1);
     }
 
     /**
@@ -154,7 +139,6 @@ public class Juego
      */
     public Personaje addBomberman()
     {
-    	//Por convencion Bomberman se asigna en la celda 1,1 con una velocidad inicial designada.
     	Personaje b= new Bomberman(500, 1, 1,this);
     	misPersonajes.addElement(b);
 
@@ -168,28 +152,6 @@ public class Juego
     public GUI getGui()
     {
     	return gui;
-    }
-    /**
-     * Retorna el objeto de tipo Personaje asociado al juego.
-     * @return Personaje
-     */
-    public Personaje getBomberman(){
-    	//	Por convencion Bomberman es el primer personaje creado por eso siempre estara en la pos 0.
-    	return misPersonajes.get(0);
-    }
-    
-    public Point asignarPos(){
-    	Random pos= new Random();
-    	int x=0,y=0;
-    	boolean designe=false;
-    	while(!designe){
-    		x=pos.nextInt(29)+1;
-    		y=pos.nextInt(11)+1;
-    		if(x>5 && y>5)
-    			if(this.misNiveles.get(0).getCelda(x, y).getPared()==null)
-    				designe=true;
-    	}
-    	return new Point(x, y);
     }
     
 }
