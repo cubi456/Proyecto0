@@ -130,7 +130,6 @@ public class Celda {
     		grafico.getGrafico().setIcon(image);
     		miNivel.getJuego().getGui().repaint();
     		if(power!=null){
-    			System.out.println("Entre");
     			power.getGrafico().setPos(x, y);
     			miNivel.getJuego().getGui().getContenedor().add(power.getGrafico().getGrafico(),2);
     			miNivel.getJuego().getGui().repaint();

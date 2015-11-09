@@ -116,8 +116,6 @@ public class Juego
      */
     public void addRugulus()
     {
-    	//Para prueba
-    	//Personaje r= new Rugulus(800, 1, 11, 15,this);
     	Point p= asignarPos();
     	Personaje r= new Rugulus(600, (int)p.getX(), (int)p.getY(), 15,this);
     	misPersonajes.addElement(r);
@@ -129,7 +127,6 @@ public class Juego
      */
     public void addAltair()
     {
-        //Personaje a= new Altair(400, 1,11, 20,this);
     	Point p= asignarPos();
     	Personaje a= new Altair(600, (int)p.getX(), (int)p.getY(), 20,this);
     	misPersonajes.addElement(a);

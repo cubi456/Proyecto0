@@ -53,7 +53,7 @@ public class Nivel
             				celdas[f][c]= new Celda(f, c,new Pared(null,true),this);
         	*/
         
-        		boolean espLibre = ((f==1 && c==1)||(f==1 && c==2)||(f==2 && c==1));
+        		boolean espLibre = ((f==1 && c==1)||(f==1 && c==2)||(f==2 && c==1)||(f==28 && c==11)||(f==29 && c==10)||(f==29 && c==11));
         		 if((c+1==celdas[0].length || c==0)||(f==0 || f+1==celdas.length) || (f%2==0 && c%2==0))
         		    celdas[f][c]= new Celda(f, c,new Pared(null,false),this);
         		 else{
@@ -70,22 +70,7 @@ public class Nivel
         	}
         }
         crearPowerUps(pu);
-        System.out.println("Estoy aca"+misPower.size());
         designarPowerUps();
-        System.out.println("Pase");
-       /* //Prueba speedUp
-       celdas[2][1].setPowerUp(misPower.elementAt(0)); 
-       misPower.elementAt(0).getGrafico().setPos(2, 1);
-       miJuego.getGui().getContenedor().add(misPower.elementAt(0).getGrafico().getGrafico(),2);
-       //Prueba Bombality
-       celdas[5][1].setPowerUp(misPower.elementAt(5)); 
-       misPower.elementAt(5).getGrafico().setPos(5, 1);
-       miJuego.getGui().getContenedor().add(misPower.elementAt(5).getGrafico().getGrafico(),2);
-       //Prueba fatality
-       celdas[4][1].setPowerUp(misPower.elementAt(4)); 
-       misPower.elementAt(4).getGrafico().setPos(4, 1);
-       miJuego.getGui().getContenedor().add(misPower.elementAt(4).getGrafico().getGrafico(),2);
-	*/
     }
 
     /**
