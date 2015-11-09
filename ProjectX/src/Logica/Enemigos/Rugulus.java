@@ -124,7 +124,7 @@ public class Rugulus extends Enemigo
     		c.setEnemigo(this);
     		if(c.getFuego())
     			morir();
-    		if(c.getBomberman()!=null)
+    		if(c.getBomberman()!=null && !c.getBomberman().getDios())
     			MatarBomberman(c.getBomberman());
     }
     /**
@@ -135,8 +135,7 @@ public class Rugulus extends Enemigo
     	vivo=false;
     	miJuego.getNivel(0).getCelda(this.posX,this.posY).setEnemigo(null);
     	miJuego.matarPersonaje(this);
-    	miJuego.getGui().remove(grafico.getGrafico());
-    	miJuego.getGui().repaint();
+    	grafico.mover(4);
     	rt.destruir();
     }
     

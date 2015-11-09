@@ -83,9 +83,9 @@ public class Bomba
     		ubicacion.getNivel().getJuego().getGui().repaint();
     		for(Celda c:ubicacion.getAdyacentes(alcance))
     		{
-    			if(c.getBomberman()!=null)
+    			if(c.getBomberman()!=null && !c.getBomberman().getDios())
     				c.getBomberman().morir();
-    			if(ubicacion.getBomberman()!=null)
+    			if(ubicacion.getBomberman()!=null && !ubicacion.getBomberman().getDios())
     				ubicacion.getBomberman().morir();
     			if(c.getEnemigo()!=null)
     				c.getEnemigo().morir();

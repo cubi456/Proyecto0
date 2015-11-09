@@ -122,7 +122,7 @@ public class Sirius extends Enemigo {
     		c.setEnemigo(this);
     		if(c.getFuego())
     			morir();
-    		if(c.getBomberman()!=null)
+    		if(c.getBomberman()!=null && !c.getBomberman().getDios())
     			MatarBomberman(c.getBomberman());
     }
     /**
@@ -134,8 +134,6 @@ public class Sirius extends Enemigo {
     	miJuego.getNivel(0).getCelda(this.posX,this.posY).setEnemigo(null);
     	miJuego.matarPersonaje(this);
     	grafico.mover(4);
-    	miJuego.getGui().remove(grafico.getGrafico());
-    	miJuego.getGui().repaint();
     	st.destruir();
     }
     

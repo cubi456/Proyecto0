@@ -120,7 +120,7 @@ public class Altair extends Enemigo
     		c.setEnemigo(this);
     		if(c.getFuego())
     			morir();
-    		if(c.getBomberman()!=null)
+    		if(c.getBomberman()!=null && !c.getBomberman().getDios())
     			MatarBomberman(c.getBomberman());
     }
     /**
@@ -132,8 +132,6 @@ public class Altair extends Enemigo
     	miJuego.getNivel(0).getCelda(this.posX,this.posY).setEnemigo(null);
     	miJuego.matarPersonaje(this);
     	grafico.mover(4);
-    	miJuego.getGui().remove(grafico.getGrafico());
-    	miJuego.getGui().repaint();
     	at.destruir();
     }
     

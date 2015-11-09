@@ -4,6 +4,7 @@ import java.util.*;
 
 import Grafica.Personajes.BombermanGrafico;
 import HilosPersonajes.BombermanThread;
+import HilosPersonajes.ModoDios;
 import Logica.Juego;
 import Logica.Personaje;
 import Logica.PowerUp;
@@ -33,7 +34,7 @@ public class Bomberman extends Personaje
      */
     public Bomberman(int s, int x, int y,Juego j) {
     	super(s, x, y,j);
-    	dios= false;
+    	dios=false;
     	alc=1;
     	puntaje=0;
     	misBombas= new Vector<Bomba>();
@@ -61,14 +62,21 @@ public class Bomberman extends Personaje
        misBombas.add(b);    
     }
     /**
-     * Inicializa el esta dios en verdadero.
+     * Cambia el valor del estado dios en verdadero.
      */
-    public void convertirEnDios()
+    
+    public void Dios()
     {
-       dios=true;
+       dios=!dios;
        //hilo
     }
-
+    
+    public void convertirEnDios()
+    {
+    	ModoDios m=new ModoDios(this);
+    	m.start();
+    }
+    
     /**
      * Devuelve el puntaje obtenido por el Bomberman.
      * @return int Puntaje
@@ -95,7 +103,11 @@ public class Bomberman extends Personaje
         if(misBombas.size()>0)
         {
         	Celda c= miJuego.getNivel(0).getCelda(this.posX, this.posY);
-        	Bomba bom=misBombas.remove(misBombas.size()-1);
+        	Bomba bom;
+        	if(!dios)
+        		bom=misBombas.remove(misBombas.size()-1);
+        	else
+        		bom=misBombas.lastElement();
         	bom.setUbicacion(c);
     		miJuego.getGui().getContenedor().add(bom.getGrafico().getGrafico(),8);
         	miJuego.getGui().getContenedor().repaint();
@@ -113,7 +125,7 @@ public class Bomberman extends Personaje
     {
     	grafico.cambiarDirec(0);
     	Celda c=miJuego.getNivel(0).getCelda(this.posX-1,this.posY);
-      	if(c.getPared()== null && c.getBomba()==null)
+      	if((c.getPared()== null && c.getBomba()==null) || (dios && (c.getPared()==null || c.getPared().isDestructible())))
       	{
       		grafico.mover(0);
       		miJuego.getNivel(0).getCelda(this.posX,this.posY).setBomberman(null);
@@ -133,8 +145,8 @@ public class Bomberman extends Personaje
     {
     	grafico.cambiarDirec(1);
     	Celda c=miJuego.getNivel(0).getCelda(this.posX,this.posY-1);
-      	if(c.getPared()== null && c.getBomba()==null)
-      	{
+    	if((c.getPared()== null && c.getBomba()==null) || (dios && (c.getPared()==null || c.getPared().isDestructible())))
+    	{
       		grafico.mover(1);
       		miJuego.getNivel(0).getCelda(this.posX,this.posY).setBomberman(null);
       		posY-=1;
@@ -146,8 +158,8 @@ public class Bomberman extends Personaje
     {
     	grafico.cambiarDirec(2);
     	Celda c=miJuego.getNivel(0).getCelda(this.posX+1,this.posY);
-      	if(c.getPared()== null && c.getBomba()==null)//no hay pared
-      	{ 
+    	if((c.getPared()== null && c.getBomba()==null) || (dios && (c.getPared()==null || c.getPared().isDestructible())))
+    	{ 
       		grafico.mover(2);
       		miJuego.getNivel(0).getCelda(this.posX,this.posY).setBomberman(null);
       		posX+=1;
@@ -162,8 +174,8 @@ public class Bomberman extends Personaje
     {
     	grafico.cambiarDirec(3);
     	Celda c=miJuego.getNivel(0).getCelda(this.posX,this.posY+1);
-      	if(c.getPared()== null && c.getBomba()==null)
-      	{
+    	if((c.getPared()== null && c.getBomba()==null) || (dios && (c.getPared()==null || c.getPared().isDestructible())))
+    	{
       		grafico.mover(3);
       		miJuego.getNivel(0).getCelda(this.posX,this.posY).setBomberman(null);
       		posY+=1;
@@ -179,7 +191,7 @@ public class Bomberman extends Personaje
     private void analizar(Celda c)
     {
     		c.setBomberman(this);
-    		if(c.getEnemigo()!=null || c.getFuego())
+    		if(!dios && (c.getEnemigo()!=null || c.getFuego()))
     			morir();
     		PowerUp pup=c.getPowerUp();
     		if(pup!=null){
@@ -224,4 +236,8 @@ public class Bomberman extends Personaje
     	alc=a;
     }
 
+    public boolean getDios()
+    {
+    	return dios;
+    }
 }
