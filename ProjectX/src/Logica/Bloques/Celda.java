@@ -3,6 +3,7 @@ package Logica.Bloques;
 
 import java.util.*;
 
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
@@ -109,15 +110,34 @@ public class Celda {
     {
     	if(estado.isDestructible())
     	{
-    		if(estado.getPowerUp()!=null)
-    			power=estado.getPowerUp();
-    		ImageIcon image=new ImageIcon (this.getClass().getResource("../../Grafica/Sprites/piso.png"));
+    /*		//ISB MIRAR CUBO
+     		// ESTARIA MEJOR ESTO.
+    		if(power!=null){
+    			power.getGrafico().setPos(x, y);
+       			grafico.getGrafico().setIcon(power.getGrafico().getGrafico().getIcon());
+        		miNivel.getJuego().getGui().repaint();
+    		}
+    		else{
+    			//ponerSuelo(); hace lo de abajo
+    			miNivel.getJuego().getGui().getContenedor().remove(grafico.getGrafico());
+    			grafico=new SueloGrafico(x, y);
+    			miNivel.getJuego().getGui().getContenedor().add(grafico.getGrafico(), 0);
+    		}
+
+    		estado=null;*/
+    		
+    		Icon image=new ImageIcon (this.getClass().getResource("../../Grafica/Sprites/piso.png"));
     		grafico.getGrafico().setIcon(image);
     		miNivel.getJuego().getGui().repaint();
-    	    estado=null;
+    		if(power!=null){
+    			System.out.println("Entre");
+    			power.getGrafico().setPos(x, y);
+    			miNivel.getJuego().getGui().getContenedor().add(power.getGrafico().getGrafico(),2);
+    			miNivel.getJuego().getGui().repaint();
+    		}
+    		estado=null;
     	}
     }
-
     /**
      * Retorna el PowerUp que se encuentra en la celda,
      * en caso de no existir retorna null.

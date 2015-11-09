@@ -53,7 +53,7 @@ public class Nivel
             				celdas[f][c]= new Celda(f, c,new Pared(null,true),this);
         	*/
         
-        		boolean espLibre = ((f == 1) && (c == 1))||((f == 1) && (c == 2))|| ((f == 2) && (c == 1));
+        		boolean espLibre = ((f==1 && c==1)||(f==1 && c==2)||(f==2 && c==1));
         		 if((c+1==celdas[0].length || c==0)||(f==0 || f+1==celdas.length) || (f%2==0 && c%2==0))
         		    celdas[f][c]= new Celda(f, c,new Pared(null,false),this);
         		 else{
@@ -69,7 +69,11 @@ public class Nivel
         		 miJuego.getGui().getContenedor().add(celdas[f][c].getGrafico(), 0); 
         	}
         }
-        //Prueba speedUp
+        crearPowerUps(pu);
+        System.out.println("Estoy aca"+misPower.size());
+        designarPowerUps();
+        System.out.println("Pase");
+       /* //Prueba speedUp
        celdas[2][1].setPowerUp(misPower.elementAt(0)); 
        misPower.elementAt(0).getGrafico().setPos(2, 1);
        miJuego.getGui().getContenedor().add(misPower.elementAt(0).getGrafico().getGrafico(),2);
@@ -81,12 +85,8 @@ public class Nivel
        celdas[4][1].setPowerUp(misPower.elementAt(4)); 
        misPower.elementAt(4).getGrafico().setPos(4, 1);
        miJuego.getGui().getContenedor().add(misPower.elementAt(4).getGrafico().getGrafico(),2);
-
+	*/
     }
-    
-
- 
-
 
     /**
      * Retorna una colección de powerUps representada con un vector.
@@ -163,6 +163,24 @@ public class Nivel
     	   for(int j=pu[i];j>0;j--)
     		   addPowerUp(i);    
     }
-    /** */
+    
+    private void designarPowerUps(){
+    	Random gen= new Random();
+    	int x,y;
+    	boolean asigne=false;
+    	while(!misPower.isEmpty()){
+    		while (!asigne){
+    			x=gen.nextInt(29)+1;
+    			y=gen.nextInt(11)+1;
+    			Celda c= this.getCelda(x, y);
+    			if(c.getPared()!=null && c.getPared().isDestructible() && c.getPared().getPowerUp()==null){
+    				c.setPowerUp(misPower.remove(misPower.size()-1));
+    				System.out.println("PU en X: "+x+" Y: "+y);
+    				asigne=true;
+    			}
+    		}
+    		asigne=false;
+    	}
+    }
 
 }

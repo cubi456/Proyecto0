@@ -12,6 +12,7 @@ import javax.swing.border.EmptyBorder;
 import Logica.Juego;
 import Logica.Personaje;
 import Logica.Jugador.Bomberman;
+import Timer.Cronometro;
 //import Timer.ContadorTiempo;
 
 public class GUI extends JFrame {
@@ -23,7 +24,7 @@ public class GUI extends JFrame {
 	private JFrame ventana;
 	private Juego juego;
 	private int direccion=-1;
-	//private Cronometro tiempo;
+	private Cronometro tiempo;
 	
 	private boolean lock=false;
 	/**
@@ -52,7 +53,7 @@ public class GUI extends JFrame {
 		ventana= new JFrame();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(10, 100, 100, 600);
-		setSize(new Dimension(998, 444));
+		setSize(new Dimension(998, 500));
 		ventana.setTitle("Proyecto X");
 		setResizable(false);
 		contenedor = new JPanel();
@@ -60,6 +61,10 @@ public class GUI extends JFrame {
 		setContentPane(contenedor);
 		contenedor.setLayout(null);
 		juego= new Juego(this);
+		tiempo = new Cronometro();
+		tiempo.getGrafico().setBounds(10, 410, 128, 64);
+		contenedor.add(tiempo.getGrafico(),10);
+		tiempo.start();
 		b=juego.getBomberman();
 		
 		

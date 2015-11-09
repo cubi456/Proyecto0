@@ -83,7 +83,7 @@ public class Juego
     	pu[0]=4;
     	pu[1]=3;
     	pu[2]=3;
-    	pu[1]=1;
+    	pu[3]=1;
         Nivel nivel= new Nivel(pu, this);
         this.misNiveles.addElement(nivel);
     }
