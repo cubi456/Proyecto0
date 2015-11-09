@@ -4,7 +4,6 @@ import java.awt.Point;
 import java.util.Vector;
 
 import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 import Grafica.AnimacionBomberman;
@@ -33,28 +32,8 @@ public abstract class PersonajeGrafico{
 			grafico.setIcon(sprites.elementAt(dir).elementAt(0));
 	}
 	
-	public void mover(int direccion) {
-		switch (direccion) {
-			case 0 : // Left
-				pos.setLocation(pos.x - ancho, pos.y);
-				grafico.setBounds(pos.x, pos.y, ancho, alto);
-				break;
-			case 1 : // UP
-				pos.setLocation(this.pos.x, this.pos.y - alto);
-				grafico.setBounds(pos.x, pos.y, ancho, alto);
-				break;
-			case 2 :  // Right
-				pos.setLocation(this.pos.x+ancho, this.pos.y);
-				grafico.setBounds(pos.x, pos.y, ancho, alto); 
-				break;
-			case 3 : // Down
-				pos.setLocation(pos.x, pos.y + alto);
-				grafico.setBounds(pos.x, pos.y, ancho, alto);
-				break;
-		}
-	}
 	
-	public void moverB(int direccion)
+	public void mover(int direccion)
 	{
 		AnimacionBomberman animacion=new AnimacionBomberman(direccion,this);
 		animacion.start();

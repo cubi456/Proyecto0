@@ -20,6 +20,7 @@ public class EnemigoThread extends Thread {
 			try {
 				Thread.sleep(vel); //cada un segundo
 				rLogic.moverConInteligencia();
+				Thread.sleep(500);
 			} catch (InterruptedException e) { }
 		}
 	}
@@ -30,6 +31,7 @@ public class EnemigoThread extends Thread {
 	 */
 	public void destruir() {
 		rStop=true;
+		this.interrupt();
 	}
 
 

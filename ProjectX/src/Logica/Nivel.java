@@ -52,7 +52,7 @@ public class Nivel
             			else
             				celdas[f][c]= new Celda(f, c,new Pared(null,true),this);
         	*/
-        		
+        
         		boolean espLibre = ((f == 1) && (c == 1))||((f == 1) && (c == 2))|| ((f == 2) && (c == 1));
         		 if((c+1==celdas[0].length || c==0)||(f==0 || f+1==celdas.length) || (f%2==0 && c%2==0))
         		    celdas[f][c]= new Celda(f, c,new Pared(null,false),this);

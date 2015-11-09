@@ -3,7 +3,6 @@ package Logica.Enemigos;
 import java.util.Random;
 
 import Grafica.Personajes.AltairGrafico;
-import Grafica.Personajes.RugulusGrafico;
 import HilosPersonajes.EnemigoThread;
 import Logica.Juego;
 import Logica.Bloques.Celda;
@@ -132,7 +131,7 @@ public class Altair extends Enemigo
     	vivo=false;
     	miJuego.getNivel(0).getCelda(this.posX,this.posY).setEnemigo(null);
     	miJuego.matarPersonaje(this);
-    	grafico.moverB(4);
+    	grafico.mover(4);
     	miJuego.getGui().remove(grafico.getGrafico());
     	miJuego.getGui().repaint();
     	at.destruir();

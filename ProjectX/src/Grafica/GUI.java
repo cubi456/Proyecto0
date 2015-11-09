@@ -23,7 +23,7 @@ public class GUI extends JFrame {
 	private JFrame ventana;
 	private Juego juego;
 	private int direccion=-1;
-	//private ContadorTiempo tiempo;
+	//private Cronometro tiempo;
 	
 	private boolean lock=false;
 	/**
@@ -52,21 +52,16 @@ public class GUI extends JFrame {
 		ventana= new JFrame();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(10, 100, 100, 600);
-		setSize(new Dimension(998, 445));
+		setSize(new Dimension(998, 444));
 		ventana.setTitle("Proyecto X");
 		setResizable(false);
 		contenedor = new JPanel();
 		contenedor.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contenedor);
 		contenedor.setLayout(null);
-		
 		juego= new Juego(this);
-		juego.crearNivel();
-		b=juego.addBomberman();
-		juego.addRugulus();
-		juego.addRugulus();
-		juego.addRugulus();
-		juego.addAltair();
+		b=juego.getBomberman();
+		
 		
 		// Oyente a las teclas
 		addKeyListener(new KeyAdapter() {

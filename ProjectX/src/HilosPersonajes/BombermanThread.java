@@ -1,8 +1,5 @@
 package HilosPersonajes;
 
-import java.util.Vector;
-
-import javax.swing.Icon;
 
 import Grafica.GUI;
 import Grafica.Personajes.PersonajeGrafico;
@@ -11,15 +8,11 @@ public class BombermanThread extends Thread
 {
 	private GUI gui;
 	private volatile boolean stop=false;
-	private volatile int dir;
-	private PersonajeGrafico p;
 	int vel;
 	
 	public BombermanThread(GUI gui,PersonajeGrafico pj,int vel)
 	{
 		this.gui=gui;
-		p=pj;
-		dir=3;
 		this.vel=vel;
 	}
 	
@@ -35,6 +28,12 @@ public class BombermanThread extends Thread
 			if(gui.getLock()){
 				gui.detectarOpciones(gui.getDireccion());
 				gui.toggleLock();
+				try {
+					Thread.sleep(100);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 		    }
 			else
 				gui.detectarOpciones(gui.getDireccion());
@@ -43,6 +42,7 @@ public class BombermanThread extends Thread
 	public void destruir()
 	{
 		this.stop=true;
+		this.interrupt();
 	}
 	
 	public void duplicarVel()
@@ -51,12 +51,6 @@ public class BombermanThread extends Thread
 		//debería estar dividido por 2. Se dividio por
 		//un número más grande para que se note el efecto.
 		vel=vel/2;
-	}
-
-	
-	public void setDir(int i)
-	{
-		dir=i;
 	}
 	
 }

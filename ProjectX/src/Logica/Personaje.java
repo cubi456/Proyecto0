@@ -3,7 +3,6 @@ package Logica;
 import javax.swing.JLabel;
 
 import Grafica.Personajes.PersonajeGrafico;
-import Logica.Bloques.Celda;
 
 /**
  *@author Barreix, Iñaki.

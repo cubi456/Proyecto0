@@ -1,8 +1,6 @@
 package Logica.PowerUps;
 
 
-import java.util.*;
-
 import Grafica.PowerUps.PowerUpGrafico;
 import Logica.PowerUp;
 import Logica.Jugador.Bomberman;
