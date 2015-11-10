@@ -25,18 +25,15 @@ public class BombermanThread extends Thread
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			if(gui.getLock()){
 				gui.detectarOpciones(gui.getDireccion());
 				gui.toggleLock();
 				try {
-					Thread.sleep(50);
+					Thread.sleep(20);
 				} catch (InterruptedException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-		    }
-			else
-				gui.detectarOpciones(gui.getDireccion());
+		    
 	}
  }
 	public void destruir()

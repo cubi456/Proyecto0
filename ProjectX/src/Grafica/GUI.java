@@ -25,7 +25,7 @@ public class GUI extends JFrame {
 	private int direccion=-1;
 	private Cronometro tiempo;
 	
-	private boolean lock=false;
+	private boolean lock=true;
 	/**
 	 *  Enciende la aplicacion
 	 */

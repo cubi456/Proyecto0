@@ -30,12 +30,12 @@ public class AnimacionBomberman extends Thread
 			{
 			  case 0:
 					aux=(int)bg.getPos().getX()-ancho;
-				    mov=3;
+				    mov=4;
 				  	for(Icon i:bg.getSprites().elementAt(dir))
 			  		{
-				  		mov+=3;
+				  		bg.getPos().x -=mov;
 				  		bg.getGrafico().setIcon(i);
-				  		bg.getGrafico().setBounds((int)bg.getPos().getX()-mov,(int)bg.getPos().getY(),ancho,alto);
+				  		bg.getGrafico().setBounds((int)bg.getPos().getX(),(int)bg.getPos().getY(),ancho,alto);
 				  		try {
 							Thread.sleep(vel/8);
 						} catch (InterruptedException e) {
@@ -44,18 +44,17 @@ public class AnimacionBomberman extends Thread
 						}
 			  		}
 					bg.getPos().setLocation(aux, bg.getPos().getY());
-					bg.getGrafico().setBounds(aux,(int)bg.getPos().getY(), ancho, alto);
 				  	bg.getGrafico().setIcon(bg.getSprites().elementAt(0).elementAt(0));
 			  		this.detener();
 			  		break;
 			  case 1:
 				    aux=(int)bg.getPos().getY()-alto;
-				    mov=3;
+				    mov=4;
 				  	for(Icon i:bg.getSprites().elementAt(dir))
 			  		{
-				  		mov+=3;
+				  		bg.getPos().y -=mov;
 				  		bg.getGrafico().setIcon(i);
-				  		bg.getGrafico().setBounds((int)bg.getPos().getX(),(int)bg.getPos().getY()-mov,ancho,alto);
+				  		bg.getGrafico().setBounds((int)bg.getPos().getX(),(int)bg.getPos().getY(),ancho,alto);
 				  		try {
 							Thread.sleep(vel/8);
 						} catch (InterruptedException e) {
@@ -64,18 +63,17 @@ public class AnimacionBomberman extends Thread
 						}
 			  		}
 					bg.getPos().setLocation(bg.getPos().getX(), aux);
-					bg.getGrafico().setBounds((int)bg.getPos().getX(),aux, ancho, alto);
 				  	bg.getGrafico().setIcon(bg.getSprites().elementAt(1).elementAt(0));
 			  		this.detener();
 			  		break;
 			  case 2:
 					aux=(int)bg.getPos().getX()+ancho;
-				    mov=3;
+				    mov=4;
 				  	for(Icon i:bg.getSprites().elementAt(dir))
 			  		{
-				  		mov+=3;
+				  		bg.getPos().x +=mov;
 				  		bg.getGrafico().setIcon(i);
-				  		bg.getGrafico().setBounds((int)bg.getPos().getX()+mov,(int)bg.getPos().getY(),ancho,alto);
+				  		bg.getGrafico().setBounds((int)bg.getPos().getX(),(int)bg.getPos().getY(),ancho,alto);
 				  		try {
 							Thread.sleep(vel/8);
 						} catch (InterruptedException e) {
@@ -84,18 +82,17 @@ public class AnimacionBomberman extends Thread
 						}
 			  		}
 					bg.getPos().setLocation(aux, bg.getPos().getY());
-					bg.getGrafico().setBounds(aux,(int)bg.getPos().getY(), ancho, alto);
 				  	bg.getGrafico().setIcon(bg.getSprites().elementAt(2).elementAt(0));
 			  		this.detener();
 			  		break;
 			  case 3:
 				    aux=(int)bg.getPos().getY()+alto;
-				    mov=3;
+				    mov=4;
 				  	for(Icon i:bg.getSprites().elementAt(dir))
 			  		{
-				  		mov+=3;
+				  		bg.getPos().y +=mov;
 				  		bg.getGrafico().setIcon(i);
-				  		bg.getGrafico().setBounds((int)bg.getPos().getX(),(int)bg.getPos().getY()+mov,ancho,alto);
+				  		bg.getGrafico().setBounds((int)bg.getPos().getX(),(int)bg.getPos().getY(),ancho,alto);
 				  		try {
 							Thread.sleep(vel/8);
 						} catch (InterruptedException e) {
@@ -104,7 +101,6 @@ public class AnimacionBomberman extends Thread
 						}
 			  		}
 					bg.getPos().setLocation(bg.getPos().getX(), aux);
-					bg.getGrafico().setBounds((int)bg.getPos().getX(),aux, ancho, alto);
 				  	bg.getGrafico().setIcon(bg.getSprites().elementAt(3).elementAt(0));
 			  		this.detener();
 			  		break;
