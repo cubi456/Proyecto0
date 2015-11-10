@@ -19,7 +19,7 @@ public class ModoDios extends Thread
 		{
 			b.Dios();
 			try {
-				Thread.sleep(5000);
+				Thread.sleep(15000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

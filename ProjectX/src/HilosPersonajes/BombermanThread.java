@@ -10,7 +10,7 @@ public class BombermanThread extends Thread
 	private volatile boolean stop=false;
 	int vel;
 	
-	public BombermanThread(GUI gui,PersonajeGrafico pj,int vel)
+	public BombermanThread(GUI gui,int vel)
 	{
 		this.gui=gui;
 		this.vel=vel;
@@ -32,8 +32,8 @@ public class BombermanThread extends Thread
  }
 	public void destruir()
 	{
-		this.stop=true;
 		this.interrupt();
+		this.stop=true;
 	}
 	
 	public void duplicarVel()

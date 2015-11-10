@@ -71,5 +71,9 @@ public abstract class PersonajeGrafico{
 	{
 		return pos;
 	}
+	
+	public void cambiarA(int i){
+		
+	}
 
 }

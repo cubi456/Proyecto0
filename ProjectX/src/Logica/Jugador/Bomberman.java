@@ -40,7 +40,7 @@ public class Bomberman extends Personaje
     	misBombas= new Vector<Bomba>();
     	addBomba();
     	grafico=new BombermanGrafico(s, x, y);
-    	bt=new BombermanThread(miJuego.getGui(),grafico,speed);
+    	bt=new BombermanThread(miJuego.getGui(),speed);
     	miJuego.getGui().getContenedor().add(grafico.getGrafico(),2);
     	miJuego.getNivel(0).getCelda(x, y).setBomberman(this);
     	bt.start();
@@ -67,8 +67,11 @@ public class Bomberman extends Personaje
     
     public void Dios()
     {
+    	if(!dios)
+    		grafico.cambiarA(0);
+    	else
+    		grafico.cambiarA(1);
        dios=!dios;
-       //hilo
     }
     
     public void convertirEnDios()
