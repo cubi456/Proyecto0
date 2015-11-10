@@ -30,6 +30,7 @@ public class Fatality extends PowerUp
      */
     public void setAction(Bomberman b) 
     {
+    	b.getPuntaje().addPuntaje(35);
     	for(Bomba bom: b.getBombas())
     		bom.duplicarAlcance();
     	b.setAlc(b.getAlc()*10);

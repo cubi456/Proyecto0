@@ -20,7 +20,7 @@ public class Bomberman extends Personaje
 {
 
     protected boolean dios;
-    protected int puntaje;
+    protected Puntaje puntaje;
     protected Vector<Bomba> misBombas;
     protected BombermanThread bt;
     protected int alc;
@@ -36,7 +36,7 @@ public class Bomberman extends Personaje
     	super(s, x, y,j);
     	dios=false;
     	alc=1;
-    	puntaje=0;
+    	puntaje= new Puntaje();
     	misBombas= new Vector<Bomba>();
     	addBomba();
     	grafico=new BombermanGrafico(s, x, y);
@@ -81,17 +81,9 @@ public class Bomberman extends Personaje
      * Devuelve el puntaje obtenido por el Bomberman.
      * @return int Puntaje
      */
-    public int getPuntaje() {
+    public Puntaje getPuntaje() 
+    {
         return puntaje;
-    }
-
-    /**
-     * Le suma el puntaje recibido como parámetro
-     * al puntaje obtenido por el bomberman.
-     * @param int p
-     */
-    public void addPuntaje(int p) {
-        puntaje+=p;
     }
 
     /**

@@ -10,14 +10,13 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import Logica.Juego;
-import Logica.Personaje;
 import Logica.Jugador.Bomberman;
 import Timer.Cronometro;
 //import Timer.ContadorTiempo;
 
 public class GUI extends JFrame {
 	// ISB VER
-	private Personaje b;
+	private Bomberman b;
 	private static final long serialVersionUID = 1L;
 
 	private JPanel contenedor;
@@ -55,7 +54,7 @@ public class GUI extends JFrame {
 		setBounds(10, 100, 100, 600);
 		setSize(new Dimension(998, 500));
 		ventana.setTitle("Proyecto X");
-		setResizable(false);
+		setResizable(true);
 		contenedor = new JPanel();
 		contenedor.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contenedor);
@@ -66,6 +65,8 @@ public class GUI extends JFrame {
 		contenedor.add(tiempo.getGrafico(),10);
 		tiempo.start();
 		b=juego.getBomberman();
+		b.getPuntaje().getGrafico().setBounds(140, 410, 128,64);
+		contenedor.add(b.getPuntaje().getGrafico(),10);
 		
 		
 		// Oyente a las teclas
@@ -92,7 +93,7 @@ public class GUI extends JFrame {
 			b.avanzarAbajo();
 			break;
 		case KeyEvent.VK_SPACE:
-			 ((Bomberman)b).colocarBomba();
+			 b.colocarBomba();
 			 break;
 		//case ENTER. PAUSA	
 		default: 

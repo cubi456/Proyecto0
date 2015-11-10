@@ -29,6 +29,7 @@ public class SpeedUp extends PowerUp
     
     public void setAction(Bomberman b) 
     {
+        b.getPuntaje().addPuntaje(30);
         b.doubleSpeed(); //Dobla la velocidad del personaje
     }
 }

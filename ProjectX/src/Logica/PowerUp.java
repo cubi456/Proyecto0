@@ -21,7 +21,7 @@ public abstract class PowerUp
 	 */
     protected PowerUp(PowerUpGrafico pug) 
     {
-    	this.pug=pug;
+    	this.pug=pug;	
     }
 
     /**

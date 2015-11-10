@@ -168,9 +168,9 @@ public class Juego
      * Retorna el objeto de tipo Personaje asociado al juego.
      * @return Personaje
      */
-    public Personaje getBomberman(){
+    public Bomberman getBomberman(){
     	//	Por convencion Bomberman es el primer personaje creado por eso siempre estara en la pos 0.
-    	return misPersonajes.get(0);
+    	return (Bomberman)misPersonajes.get(0);
     }
     
     public Point asignarPos(){

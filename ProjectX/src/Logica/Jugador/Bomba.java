@@ -88,9 +88,15 @@ public class Bomba
     			if(ubicacion.getBomberman()!=null && !ubicacion.getBomberman().getDios())
     				ubicacion.getBomberman().morir();
     			if(c.getEnemigo()!=null)
+    			{
+    				b.getPuntaje().addPuntaje(c.getEnemigo().getPuntaje());
     				c.getEnemigo().morir();
-    			if(c.getPared()!=null)
+    			}
+    			if(c.getPared()!=null && c.getPared().isDestructible())
+    			{
+    				b.getPuntaje().addPuntaje(10);
     				c.destruir();
+    			}
     		}
     	}
     	bt.destruir();

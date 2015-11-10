@@ -29,6 +29,7 @@ public class Masacrality extends PowerUp
      */
     public void setAction(Bomberman b) 
     {
+    	b.getPuntaje().addPuntaje(50);
         b.convertirEnDios();
     }
 
