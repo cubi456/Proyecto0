@@ -150,7 +150,7 @@ public class Juego
     public Personaje addBomberman()
     {
     	//Por convencion Bomberman se asigna en la celda 1,1 con una velocidad inicial designada.
-    	Personaje b= new Bomberman(500, 1, 1,this);
+    	Personaje b= new Bomberman(600, 1, 1,this);
     	misPersonajes.addElement(b);
 
     	return b;

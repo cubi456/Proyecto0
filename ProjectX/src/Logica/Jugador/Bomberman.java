@@ -204,7 +204,7 @@ public class Bomberman extends Personaje
      */
     public void doubleSpeed()
     {
-    	this.speed= speed/2;
+    	this.speed= speed/16;
     	grafico.setVelocidad(speed);
     	bt.duplicarVel();
     }

@@ -27,12 +27,6 @@ public class BombermanThread extends Thread
 			}
 				gui.detectarOpciones(gui.getDireccion());
 				gui.toggleLock();
-				try {
-					Thread.sleep(20);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
 		    
 	}
  }
@@ -47,7 +41,7 @@ public class BombermanThread extends Thread
 		//Para duplicar la velocidad el atributo vel
 		//debería estar dividido por 2. Se dividio por
 		//un número más grande para que se note el efecto.
-		vel=vel/2;
+		vel=vel/16;
 	}
 	
 }

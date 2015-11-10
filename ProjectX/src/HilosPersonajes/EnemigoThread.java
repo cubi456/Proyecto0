@@ -18,9 +18,8 @@ public class EnemigoThread extends Thread {
 	public void run(){
 		while(!rStop){
 			try {
-				Thread.sleep(vel); //cada un segundo
+				Thread.sleep(vel); 
 				rLogic.moverConInteligencia();
-				Thread.sleep(100);
 			} catch (InterruptedException e) { }
 		}
 	}

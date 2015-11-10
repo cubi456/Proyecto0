@@ -24,16 +24,14 @@ public class AnimacionBomberman extends Thread
 		
 		while(!stop)
 		{
-			int aux;
 			int mov;
 			switch(dir)
 			{
 			  case 0:
-					aux=(int)bg.getPos().getX()-ancho;
 				    mov=4;
 				  	for(Icon i:bg.getSprites().elementAt(dir))
 			  		{
-				  		bg.getPos().x -=mov;
+				  		bg.getPos().setLocation(bg.getPos().getX()-mov, bg.getPos().getY());
 				  		bg.getGrafico().setIcon(i);
 				  		bg.getGrafico().setBounds((int)bg.getPos().getX(),(int)bg.getPos().getY(),ancho,alto);
 				  		try {
@@ -43,16 +41,14 @@ public class AnimacionBomberman extends Thread
 							e.printStackTrace();
 						}
 			  		}
-					bg.getPos().setLocation(aux, bg.getPos().getY());
 				  	bg.getGrafico().setIcon(bg.getSprites().elementAt(0).elementAt(0));
 			  		this.detener();
 			  		break;
 			  case 1:
-				    aux=(int)bg.getPos().getY()-alto;
 				    mov=4;
 				  	for(Icon i:bg.getSprites().elementAt(dir))
 			  		{
-				  		bg.getPos().y -=mov;
+				  		bg.getPos().setLocation(bg.getPos().getX(), bg.getPos().getY()-mov);
 				  		bg.getGrafico().setIcon(i);
 				  		bg.getGrafico().setBounds((int)bg.getPos().getX(),(int)bg.getPos().getY(),ancho,alto);
 				  		try {
@@ -62,16 +58,14 @@ public class AnimacionBomberman extends Thread
 							e.printStackTrace();
 						}
 			  		}
-					bg.getPos().setLocation(bg.getPos().getX(), aux);
 				  	bg.getGrafico().setIcon(bg.getSprites().elementAt(1).elementAt(0));
 			  		this.detener();
 			  		break;
 			  case 2:
-					aux=(int)bg.getPos().getX()+ancho;
 				    mov=4;
 				  	for(Icon i:bg.getSprites().elementAt(dir))
 			  		{
-				  		bg.getPos().x +=mov;
+				  		bg.getPos().setLocation(bg.getPos().getX()+mov, bg.getPos().getY());
 				  		bg.getGrafico().setIcon(i);
 				  		bg.getGrafico().setBounds((int)bg.getPos().getX(),(int)bg.getPos().getY(),ancho,alto);
 				  		try {
@@ -81,16 +75,14 @@ public class AnimacionBomberman extends Thread
 							e.printStackTrace();
 						}
 			  		}
-					bg.getPos().setLocation(aux, bg.getPos().getY());
 				  	bg.getGrafico().setIcon(bg.getSprites().elementAt(2).elementAt(0));
 			  		this.detener();
 			  		break;
 			  case 3:
-				    aux=(int)bg.getPos().getY()+alto;
 				    mov=4;
 				  	for(Icon i:bg.getSprites().elementAt(dir))
 			  		{
-				  		bg.getPos().y +=mov;
+				  		bg.getPos().setLocation(bg.getPos().getX(), bg.getPos().getY()+mov);
 				  		bg.getGrafico().setIcon(i);
 				  		bg.getGrafico().setBounds((int)bg.getPos().getX(),(int)bg.getPos().getY(),ancho,alto);
 				  		try {
@@ -100,7 +92,6 @@ public class AnimacionBomberman extends Thread
 							e.printStackTrace();
 						}
 			  		}
-					bg.getPos().setLocation(bg.getPos().getX(), aux);
 				  	bg.getGrafico().setIcon(bg.getSprites().elementAt(3).elementAt(0));
 			  		this.detener();
 			  		break;
