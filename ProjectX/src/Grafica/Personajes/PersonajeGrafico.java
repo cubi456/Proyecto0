@@ -71,9 +71,9 @@ public abstract class PersonajeGrafico{
 	{
 		return pos;
 	}
-	
+	//ISB puede ser abstracto
 	public void cambiarA(int i){
-		
+		//se redefinira para las clases que lo necesitan
 	}
 
 }

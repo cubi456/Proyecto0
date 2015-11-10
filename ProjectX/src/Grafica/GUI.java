@@ -45,6 +45,7 @@ public class GUI extends JFrame {
 	}
 
 /**
+ * 
  *	Creacion de la ventana 
  * 
 */

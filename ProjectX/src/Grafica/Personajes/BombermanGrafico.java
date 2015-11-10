@@ -18,7 +18,7 @@ public class BombermanGrafico extends PersonajeGrafico {
 		//0 cambiar a Dios
 		if(i==0)		
 			sprites=cargarDios();
-		else{
+		else{// carga normal
 			sprites=cargarNormal();
 		}
 	}
