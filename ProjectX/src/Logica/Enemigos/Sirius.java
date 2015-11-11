@@ -133,18 +133,17 @@ public class Sirius extends Enemigo {
     	vivo=false;
     	miJuego.getNivel(0).getCelda(this.posX,this.posY).setEnemigo(null);
     	miJuego.matarPersonaje(this);
-    	grafico.mover(4);
+    	grafico.morir();
     	st.destruir();
     }
     
     /**
      * Genera un movimiento en el Enemigo.
      */
-	public void moverConInteligencia() 
+	public void mover(int dir) 
 	{
 		if(vivo)
 		{
-			int dir;
 			boolean encontre=false;
 			Celda c=miJuego.getNivel(0).getCelda(this.posX, this.posY);
 			Celda aux=null;

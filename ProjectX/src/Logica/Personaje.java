@@ -85,6 +85,8 @@ public abstract class Personaje {
      * @return JLabel
      */
     
+    public abstract void mover(int dir);
+    
     public JLabel getGrafico(){
 		return this.grafico.getGrafico();
 	}

@@ -25,7 +25,7 @@ public class GUI extends JFrame {
 	private int direccion=-1;
 	private Cronometro tiempo;
 	
-	private boolean lock=true;
+	private boolean lock=false;
 	/**
 	 *  Enciende la aplicacion
 	 */
@@ -62,52 +62,30 @@ public class GUI extends JFrame {
 		juego= new Juego(this);
 		tiempo = new Cronometro();
 		tiempo.getGrafico().setBounds(10, 410, 128, 64);
-		contenedor.add(tiempo.getGrafico(),10);
+		contenedor.add(tiempo.getGrafico(),1);
 		tiempo.start();
 		b=juego.getBomberman();
 		b.getPuntaje().getGrafico().setBounds(140, 410, 128,64);
-		contenedor.add(b.getPuntaje().getGrafico(),10);
+		contenedor.add(b.getPuntaje().getGrafico(),1);
+		juego.getNivel(0).getControlador().getGrafico().setBounds(270, 410, 256, 64);
+		contenedor.add(juego.getNivel(0).getControlador().getGrafico(),1);
 		
 		
 		// Oyente a las teclas
 		addKeyListener(new KeyAdapter() {
 			public void keyPressed(KeyEvent arg0) {
-				OyenteTeclado(arg0);
+				mover(arg0);
 			}
 		});
 		}
 	
-	private void opcionesJugador(int dir)
-	{
-		switch (dir) {
-		case KeyEvent.VK_LEFT :
-			b.avanzarIzq();
-			break;
-		case KeyEvent.VK_UP : 
-			b.avanzarArriba();
-			break;
-		case KeyEvent.VK_RIGHT : 
-			b.avanzarDer();
-			break;
-		case KeyEvent.VK_DOWN : 
-			b.avanzarAbajo();
-			break;
-		case KeyEvent.VK_SPACE:
-			 b.colocarBomba();
-			 break;
-		//case ENTER. PAUSA	
-		default: 
-			break;
-	}
-}
 	
-	public void detectarOpciones(int dir)
+	public void mover (KeyEvent key)
 	{
 		if(!lock)
 		{
-			opcionesJugador(dir);
+			direccion=key.getKeyCode();
 			this.lock=true;
-			direccion=-1;
 		}
 	}
 	
@@ -131,8 +109,4 @@ public class GUI extends JFrame {
 		return contenedor;
 	}
 	
-	protected void OyenteTeclado(KeyEvent key) 
-	{
-		direccion=key.getKeyCode();
-	}
 }

@@ -109,29 +109,14 @@ public class Celda {
     public void destruir() 
     {
     	if(estado.isDestructible())
-    	{
-    /*		//ISB MIRAR CUBO
-     		// ESTARIA MEJOR ESTO.
-    		if(power!=null){
-    			power.getGrafico().setPos(x, y);
-       			grafico.getGrafico().setIcon(power.getGrafico().getGrafico().getIcon());
-        		miNivel.getJuego().getGui().repaint();
-    		}
-    		else{
-    			//ponerSuelo(); hace lo de abajo
-    			miNivel.getJuego().getGui().getContenedor().remove(grafico.getGrafico());
-    			grafico=new SueloGrafico(x, y);
-    			miNivel.getJuego().getGui().getContenedor().add(grafico.getGrafico(), 0);
-    		}
-
-    		estado=null;*/
-    		
+    	{    		
     		Icon image=new ImageIcon (this.getClass().getResource("../../Grafica/Sprites/piso.png"));
     		grafico.getGrafico().setIcon(image);
     		miNivel.getJuego().getGui().repaint();
+    		miNivel.getControlador().removePared();
     		if(power!=null){
     			power.getGrafico().setPos(x, y);
-    			miNivel.getJuego().getGui().getContenedor().add(power.getGrafico().getGrafico(),2);
+    			miNivel.getJuego().getGui().getContenedor().add(power.getGrafico().getGrafico(),1);
     			miNivel.getJuego().getGui().repaint();
     		}
     		estado=null;

@@ -33,7 +33,7 @@ public class Fatality extends PowerUp
     	b.getPuntaje().addPuntaje(35);
     	for(Bomba bom: b.getBombas())
     		bom.duplicarAlcance();
-    	b.setAlc(b.getAlc()*10);
+    	b.setAlc(b.getAlc()*2);
     }
 
 }

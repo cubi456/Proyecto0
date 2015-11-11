@@ -6,7 +6,6 @@ import java.util.Vector;
 import javax.swing.Icon;
 import javax.swing.JLabel;
 
-import Grafica.AnimacionBomberman;
 
 public abstract class PersonajeGrafico{
 	protected JLabel grafico;
@@ -35,8 +34,189 @@ public abstract class PersonajeGrafico{
 	
 	public void mover(int direccion)
 	{
-		AnimacionBomberman animacion=new AnimacionBomberman(direccion,this);
-		animacion.start();
+		if(velocidad<1000)
+			moverRapido(direccion);
+		else
+			moverLento(direccion);
+	}
+	
+	
+	private void moverLento(int direccion)
+	{
+		int mov;
+		switch(direccion)
+		{
+		  case 0:
+			    mov=2;
+			    for(int j=0;j<2;j++){
+			  	for(Icon i:sprites.elementAt(direccion))
+		  		{
+			  		pos.setLocation(pos.getX()-mov,pos.getY());
+			  		grafico.setIcon(i);
+			  		grafico.setBounds(pos.x ,pos.y,ancho,alto);
+			  		try {
+						Thread.sleep(velocidad/(sprites.elementAt(0).size()*2));
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+		  		}
+			    }
+			  	grafico.setIcon(sprites.elementAt(0).elementAt(0));
+		  		break;
+		  case 1:
+			    mov=2;
+			    for(int j=0;j<2;j++){
+			  	for(Icon i:sprites.elementAt(direccion))
+		  		{
+			  		pos.setLocation(pos.getX(), pos.getY()-mov);
+			  		grafico.setIcon(i);
+			  		grafico.setBounds(pos.x ,pos.y,ancho,alto);
+			  		try {
+						Thread.sleep(velocidad/(sprites.elementAt(1).size()*2));
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+		  		}
+			    }
+			  	grafico.setIcon(sprites.elementAt(1).elementAt(0));
+		  		break;
+		  case 2:
+			  	mov=2;
+			  	for(int j=0;j<2;j++){
+			  	for(Icon i:sprites.elementAt(direccion))
+		  		{
+			  		pos.setLocation(pos.getX()+mov,pos.getY());
+			  		grafico.setIcon(i);
+			  		grafico.setBounds(pos.x ,pos.y,ancho,alto);
+			  		try {
+						Thread.sleep(velocidad/(sprites.elementAt(2).size()*2));
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+		  		}
+			  	grafico.setIcon(sprites.elementAt(2).elementAt(0));
+			  	}
+		  		break;
+		  case 3:
+			  mov=2;
+			  for(int j=0;j<2;j++){
+			  	for(Icon i:sprites.elementAt(direccion))
+		  		{
+			  		pos.setLocation(pos.getX(),pos.getY()+mov);
+			  		grafico.setIcon(i);
+			  		grafico.setBounds(pos.x ,pos.y,ancho,alto);
+			  		try {
+						Thread.sleep(velocidad/(sprites.elementAt(3).size()*2));
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+		  		}
+			  }
+			  	grafico.setIcon(sprites.elementAt(3).elementAt(0));
+		  		break;
+		  case 4: //Muerte
+			  	 for(Icon i:sprites.elementAt(direccion))
+			  	 {
+			  		 grafico.setIcon(i);
+			  		 try {
+						Thread.sleep(300);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+			  	 }
+			  	 grafico.setIcon(null);
+			  	 break;
+		}
+	}
+	
+	private void moverRapido(int direccion)
+	{
+		int mov;
+		switch(direccion)
+		{
+		  case 0:
+			    mov=4;
+			  	for(Icon i:sprites.elementAt(direccion))
+		  		{
+			  		pos.setLocation(pos.getX()-mov,pos.getY());
+			  		grafico.setIcon(i);
+			  		grafico.setBounds(pos.x ,pos.y,ancho,alto);
+			  		try {
+						Thread.sleep(velocidad/sprites.elementAt(0).size());
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+		  		}
+			  	grafico.setIcon(sprites.elementAt(0).elementAt(0));
+		  		break;
+		  case 1:
+			    mov=4;
+			  	for(Icon i:sprites.elementAt(direccion))
+		  		{
+			  		pos.setLocation(pos.getX(), pos.getY()-mov);
+			  		grafico.setIcon(i);
+			  		grafico.setBounds(pos.x ,pos.y,ancho,alto);
+			  		try {
+						Thread.sleep(velocidad/sprites.elementAt(1).size());
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+		  		}
+			  	grafico.setIcon(sprites.elementAt(1).elementAt(0));
+		  		break;
+		  case 2:
+			  	mov=4;
+			  	for(Icon i:sprites.elementAt(direccion))
+		  		{
+			  		pos.setLocation(pos.getX()+mov,pos.getY());
+			  		grafico.setIcon(i);
+			  		grafico.setBounds(pos.x ,pos.y,ancho,alto);
+			  		try {
+						Thread.sleep(velocidad/sprites.elementAt(2).size());
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+		  		}
+			  	grafico.setIcon(sprites.elementAt(2).elementAt(0));
+		  		break;
+		  case 3:
+			  mov=4;
+			  	for(Icon i:sprites.elementAt(direccion))
+		  		{
+			  		pos.setLocation(pos.getX(),pos.getY()+mov);
+			  		grafico.setIcon(i);
+			  		grafico.setBounds(pos.x ,pos.y,ancho,alto);
+			  		try {
+						Thread.sleep(velocidad/sprites.elementAt(3).size());
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+		  		}
+			  	grafico.setIcon(sprites.elementAt(3).elementAt(0));
+		  		break;
+		  case 4: //Muerte
+			  	 for(Icon i:sprites.elementAt(direccion))
+			  	 {
+			  		 grafico.setIcon(i);
+			  		 try {
+						Thread.sleep(300);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+			  	 }
+			  	 grafico.setIcon(null);
+			  	 break;
+		}
 	}
 	
 	public JLabel getGrafico(){
@@ -52,8 +232,7 @@ public abstract class PersonajeGrafico{
 	{
 		if(this.grafico != null)
 		{
-			AnimacionBomberman animacion = new AnimacionBomberman(4,this);
-			animacion.start();
+			this.mover(4);
 	    }
 	}
 	
@@ -70,6 +249,10 @@ public abstract class PersonajeGrafico{
 	public Point getPos()
 	{
 		return pos;
+	}
+	//ISB puede ser abstracto
+	public void cambiarA(int i){
+		//se redefinira para las clases que lo necesitan
 	}
 
 }

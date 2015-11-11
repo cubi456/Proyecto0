@@ -131,20 +131,20 @@ public class Altair extends Enemigo
     	vivo=false;
     	miJuego.getNivel(0).getCelda(this.posX,this.posY).setEnemigo(null);
     	miJuego.matarPersonaje(this);
-    	grafico.mover(4);
+    	grafico.morir();
     	at.destruir();
     }
     
     /**
      * Genera un movimiento en el Enemigo.
      */
-	public void moverConInteligencia() 
+	public void mover(int dir) 
 	{
 	// Calculo la siguiente direccion aleatoriamente.
 		if(vivo)
 		{
 		Random rnd = new Random();
-		int dir=rnd.nextInt(4);
+	    dir=rnd.nextInt(4);
 		
 		switch (dir) {
 			case 0 : // a izq

@@ -33,7 +33,7 @@ public class Bomba
      * Dublica el alcance de la bomba en dos.
      */
     public void duplicarAlcance() {
-        alcance*=10;
+        alcance*=2;
     }
 
     /**

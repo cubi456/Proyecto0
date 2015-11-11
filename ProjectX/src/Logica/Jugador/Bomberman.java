@@ -1,5 +1,6 @@
 package Logica.Jugador;
 
+import java.awt.event.KeyEvent;
 import java.util.*;
 
 import Grafica.Personajes.BombermanGrafico;
@@ -40,7 +41,7 @@ public class Bomberman extends Personaje
     	misBombas= new Vector<Bomba>();
     	addBomba();
     	grafico=new BombermanGrafico(s, x, y);
-    	bt=new BombermanThread(miJuego.getGui(),grafico,speed);
+    	bt=new BombermanThread(miJuego.getGui(),this);
     	miJuego.getGui().getContenedor().add(grafico.getGrafico(),2);
     	miJuego.getNivel(0).getCelda(x, y).setBomberman(this);
     	bt.start();
@@ -67,8 +68,11 @@ public class Bomberman extends Personaje
     
     public void Dios()
     {
+    	if(!dios)
+    		grafico.cambiarA(0);
+    	else
+    		grafico.cambiarA(1);
        dios=!dios;
-       //hilo
     }
     
     public void convertirEnDios()
@@ -101,7 +105,7 @@ public class Bomberman extends Personaje
         	else
         		bom=misBombas.lastElement();
         	bom.setUbicacion(c);
-    		miJuego.getGui().getContenedor().add(bom.getGrafico().getGrafico(),8);
+    		miJuego.getGui().getContenedor().add(bom.getGrafico().getGrafico(),20);
         	miJuego.getGui().getContenedor().repaint();
         	miJuego.getGui().toggleLock();
         	bom.getGrafico().setPos(posX, posY);
@@ -204,9 +208,8 @@ public class Bomberman extends Personaje
      */
     public void doubleSpeed()
     {
-    	this.speed= speed/16;
+    	this.speed= speed/2;
     	grafico.setVelocidad(speed);
-    	bt.duplicarVel();
     }
     
     /**
@@ -232,4 +235,23 @@ public class Bomberman extends Personaje
     {
     	return dios;
     }
+    
+	public void mover(int dir){
+		switch (dir){
+		case KeyEvent.VK_LEFT : //Izquierda
+			this.avanzarIzq();
+			break;
+		case KeyEvent.VK_UP : //Arriba
+			this.avanzarArriba();
+			break;
+		case KeyEvent.VK_RIGHT : //Derecha
+			this.avanzarDer();
+			break;
+		case KeyEvent.VK_DOWN : //Abajo
+			this.avanzarAbajo();
+			break;
+		case KeyEvent.VK_SPACE :
+			this.colocarBomba();
+		}
+	}
 }

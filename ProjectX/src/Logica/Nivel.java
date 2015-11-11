@@ -9,6 +9,7 @@ import Grafica.PowerUps.MasacralityGrafico;
 import Grafica.PowerUps.PowerUpGrafico;
 import Grafica.PowerUps.SpeedUpGrafico;
 import Logica.Bloques.Celda;
+import Logica.Bloques.ControladorBloques;
 import Logica.Bloques.Pared;
 import Logica.PowerUps.Bombality;
 import Logica.PowerUps.Fatality;
@@ -26,6 +27,7 @@ public class Nivel
     protected Juego miJuego;
     protected Celda[][] celdas;
     protected Vector<PowerUp> misPower;
+    protected ControladorBloques paredes;
     /**
      * Recibe un arreglo de enteros con la cantidad de cada power up
      * y el juego donde se encuentra y crea un nuevo nivel.
@@ -36,6 +38,7 @@ public class Nivel
         crearPowerUps(pu);
         celdas= new Celda[31][13];
         Random random= new Random();
+        int cant=0;
         int  cantDest=145;
         for(int f=0; f<celdas.length; f++)
         {
@@ -61,6 +64,7 @@ public class Nivel
         			 //teoria 290
         			 if((random.nextInt(2)== 0 && cantDest>0 && !espLibre)){ // numero entre 0 o 1;
              			celdas[f][c]= new Celda(f, c,new Pared(null,true),this);
+             			cant++;
              			cantDest--;
              		}
              		else
@@ -71,6 +75,7 @@ public class Nivel
         }
         crearPowerUps(pu);
         designarPowerUps();
+        paredes=new ControladorBloques(cant);
     }
 
     /**
@@ -168,4 +173,9 @@ public class Nivel
     	}
     }
 
+    public ControladorBloques getControlador()
+    {
+    	return paredes;
+    }
+ 
 }

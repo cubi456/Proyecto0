@@ -2,46 +2,36 @@ package HilosPersonajes;
 
 
 import Grafica.GUI;
-import Grafica.Personajes.PersonajeGrafico;
+import Logica.Personaje;
 
 public class BombermanThread extends Thread 
 {
 	private GUI gui;
+	private Personaje p;
 	private volatile boolean stop=false;
-	int vel;
 	
-	public BombermanThread(GUI gui,PersonajeGrafico pj,int vel)
+	public BombermanThread(GUI gui,Personaje pj)
 	{
 		this.gui=gui;
-		this.vel=vel;
+		p=pj;
 	}
 	
 	public void run()
 	{
 		while(!stop)
 		{
-			try {
-				Thread.sleep(vel);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-				gui.detectarOpciones(gui.getDireccion());
-				gui.toggleLock();
-		    
+			
+			if(gui.getLock())
+			 	{
+			 		p.mover(gui.getDireccion());
+					gui.toggleLock();
+			 	}
 	}
  }
 	public void destruir()
 	{
 		this.stop=true;
 		this.interrupt();
-	}
-	
-	public void duplicarVel()
-	{
-		//Para duplicar la velocidad el atributo vel
-		//debería estar dividido por 2. Se dividio por
-		//un número más grande para que se note el efecto.
-		vel=vel/16;
 	}
 	
 }

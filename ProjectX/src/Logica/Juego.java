@@ -117,7 +117,7 @@ public class Juego
     public void addRugulus()
     {
     	Point p= asignarPos();
-    	Personaje r= new Rugulus(600, (int)p.getX(), (int)p.getY(), 15,this);
+    	Personaje r= new Rugulus(1000, (int)p.getX(), (int)p.getY(), 15,this);
     	misPersonajes.addElement(r);
     	gui.getContenedor().add(r.getGrafico(), 2);    	
     }
@@ -128,7 +128,7 @@ public class Juego
     public void addAltair()
     {
     	Point p= asignarPos();
-    	Personaje a= new Altair(600, (int)p.getX(), (int)p.getY(), 20,this);
+    	Personaje a= new Altair(1000, (int)p.getX(), (int)p.getY(), 20,this);
     	misPersonajes.addElement(a);
         gui.getContenedor().add(a.getGrafico(),2);
     }
@@ -138,7 +138,7 @@ public class Juego
      */
     public void addSirius()
     {
-    	Personaje s= new Sirius(200, 29,11, 50,this);
+    	Personaje s= new Sirius(1000/3, 29,11, 50,this);
     	misPersonajes.addElement(s);
     	gui.getContenedor().add(s.getGrafico(),2);
     }
@@ -150,7 +150,7 @@ public class Juego
     public Personaje addBomberman()
     {
     	//Por convencion Bomberman se asigna en la celda 1,1 con una velocidad inicial designada.
-    	Personaje b= new Bomberman(600, 1, 1,this);
+    	Personaje b= new Bomberman(1000, 1, 1,this);
     	misPersonajes.addElement(b);
 
     	return b;

@@ -19,7 +19,7 @@ public class EnemigoThread extends Thread {
 		while(!rStop){
 			try {
 				Thread.sleep(vel); 
-				rLogic.moverConInteligencia();
+				rLogic.mover(0);
 			} catch (InterruptedException e) { }
 		}
 	}
