@@ -5,22 +5,20 @@ import Logica.Enemigos.Enemigo;
 public class EnemigoThread extends Thread {
 	private Enemigo rLogic;
 	private volatile boolean rStop;
-	private volatile int vel;
 	
-	public EnemigoThread(Enemigo r,int v){
+	public EnemigoThread(Enemigo r){
 		rLogic=r;
 		rStop=false; 
-		vel=v;
 		//Bandera que indica cuando debe detenerse la ejecución del hilo.
 	}
 	
 	
 	public void run(){
 		while(!rStop){
-			try {
-				Thread.sleep(vel); 
+			//try {
+				//Thread.sleep(vel); 
 				rLogic.mover(0);
-			} catch (InterruptedException e) { }
+			//} catch (InterruptedException e) { }
 		}
 	}
 	

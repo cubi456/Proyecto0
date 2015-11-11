@@ -4,6 +4,7 @@ import java.util.Vector;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 
 public class AltairGrafico extends PersonajeGrafico {
 
@@ -35,6 +36,8 @@ public class AltairGrafico extends PersonajeGrafico {
 			{
 				this.sprites.lastElement().addElement(new ImageIcon(this.getClass().getResource("../Sprites/Altair/Dead/Dead0"+i+".png")));
 			}
+			this.grafico = new JLabel(sprites.elementAt(3).elementAt(0)); // Comienza de enfrente
+			this.grafico.setBounds(pos.x , pos.y, ancho, alto);
 	}
 
 }

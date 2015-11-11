@@ -35,7 +35,7 @@ public class Altair extends Enemigo
         vivo=true;
         grafico= new AltairGrafico(s, x, y);
     	miJuego.getNivel(0).getCelda(x, y).setEnemigo(this);
-    	at= new EnemigoThread(this,speed);
+    	at= new EnemigoThread(this);
     	at.start();
     }
 

@@ -34,7 +34,7 @@ public class Sirius extends Enemigo {
         vivo=true;
         grafico= new SiriusGrafico(s, x, y);
     	miJuego.getNivel(0).getCelda(x, y).setEnemigo(this);
-    	st= new EnemigoThread(this,speed);
+    	st= new EnemigoThread(this);
     	st.start();
     }
 

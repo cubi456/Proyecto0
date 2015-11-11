@@ -36,7 +36,7 @@ public class Rugulus extends Enemigo
         vivo=true;
         grafico= new RugulusGrafico(s, x, y);
     	miJuego.getNivel(0).getCelda(x, y).setEnemigo(this);
-    	rt= new EnemigoThread(this,speed);
+    	rt= new EnemigoThread(this);
     	rt.start();
     }
 
