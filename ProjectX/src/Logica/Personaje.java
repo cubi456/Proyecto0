@@ -89,6 +89,5 @@ public abstract class Personaje {
     
     public JLabel getGrafico(){
 		return this.grafico.getGrafico();
-	}
-    
+	}    
 }
