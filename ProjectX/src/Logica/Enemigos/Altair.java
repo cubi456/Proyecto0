@@ -17,7 +17,7 @@ public class Altair extends Enemigo
 {
 	
 	protected EnemigoThread at;
-	protected boolean vivo;
+	private boolean vivo;
 	
 	 /**
      * Crea un nuevo Enemigo con la velocidad,

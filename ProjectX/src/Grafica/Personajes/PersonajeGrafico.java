@@ -219,12 +219,8 @@ public abstract class PersonajeGrafico{
 		}
 	}
 	
-	public JLabel getGrafico(){
-		if(this.grafico == null){
-			this.grafico = new JLabel(sprites.elementAt(3).elementAt(0)); // Comienza de enfrente
-			this.grafico.setBounds(pos.x , pos.y, ancho, alto);
-		}
-		
+	public JLabel getGrafico()
+	{
 		return this.grafico;
 	}
 	

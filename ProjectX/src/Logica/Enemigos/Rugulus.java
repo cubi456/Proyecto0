@@ -18,7 +18,7 @@ public class Rugulus extends Enemigo
 {
 
 	protected EnemigoThread rt;
-	protected boolean vivo;
+	private boolean vivo;
 	
     /**
      * Crea un nuevo Enemigo de tipo Rugulus

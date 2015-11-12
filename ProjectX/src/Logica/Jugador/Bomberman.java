@@ -24,6 +24,7 @@ public class Bomberman extends Personaje
     protected Puntaje puntaje;
     protected Vector<Bomba> misBombas;
     protected BombermanThread bt;
+    private boolean vivo;
     protected int alc;
 
     /**
@@ -36,6 +37,7 @@ public class Bomberman extends Personaje
     public Bomberman(int s, int x, int y,Juego j) {
     	super(s, x, y,j);
     	dios=false;
+    	vivo=true;
     	alc=1;
     	puntaje= new Puntaje();
     	misBombas= new Vector<Bomba>();
@@ -45,7 +47,6 @@ public class Bomberman extends Personaje
     	miJuego.getGui().getContenedor().add(grafico.getGrafico(),2);
     	miJuego.getNivel(0).getCelda(x, y).setBomberman(this);
     	bt.start();
-    	//convertirEnDios();
     }
 
    /**
@@ -199,6 +200,7 @@ public class Bomberman extends Personaje
     		}
     }
     public void morir() {
+    	vivo=false;
     	miJuego.getNivel(0).getCelda(this.posX,this.posY).setBomberman(null);
     	bt.destruir();
     	miJuego.matarPersonaje(this);
@@ -238,6 +240,7 @@ public class Bomberman extends Personaje
     }
     
 	public void mover(int dir){
+		if(vivo)
 		switch (dir){
 		case KeyEvent.VK_LEFT : //Izquierda
 			this.avanzarIzq();

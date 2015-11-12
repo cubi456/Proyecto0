@@ -11,7 +11,8 @@ public class BombermanGrafico extends PersonajeGrafico {
 	public BombermanGrafico(int v, int px, int py) {
 		super(v, px, py);
 		sprites=cargarNormal();
-			
+		this.grafico = new JLabel(sprites.elementAt(3).elementAt(0)); // Comienza de enfrente
+		this.grafico.setBounds(pos.x , pos.y, ancho, alto);
 	}
 	
 	public void cambiarA(int i){
@@ -21,8 +22,6 @@ public class BombermanGrafico extends PersonajeGrafico {
 			sprites=cargarDios();
 		else{// carga normal
 			sprites=cargarNormal();
-			this.grafico = new JLabel(sprites.elementAt(3).elementAt(0)); // Comienza de enfrente
-			this.grafico.setBounds(pos.x , pos.y, ancho, alto);
 		}
 	}
 	
