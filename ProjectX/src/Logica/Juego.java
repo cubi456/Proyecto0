@@ -181,7 +181,7 @@ public class Juego
     	while(!designe){
     		x=pos.nextInt(29)+1;
     		y=pos.nextInt(11)+1;
-    		if(x>5 && y>5)
+    		if(x>3 && y>3)
     			if(this.misNiveles.get(0).getCelda(x, y).getPared()==null)
     				designe=true;
     	}

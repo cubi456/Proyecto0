@@ -32,6 +32,7 @@ public class Celda {
     protected Nivel miNivel;
     protected BloqueGrafico grafico;
     protected boolean fuego;
+    protected PowerUp pu;
 
     /**
      * Crea una nueva celda con o sin pared 
@@ -115,8 +116,9 @@ public class Celda {
     		PowerUp power= estado.getPowerUp();
     		if(power!=null){
     			power.getGrafico().setPos(x, y);
-    			miNivel.getJuego().getGui().getContenedor().add(power.getGrafico().getGrafico(),1);
+    			miNivel.getJuego().getGui().getContenedor().add(power.getGrafico().getGrafico(),20);
     			miNivel.getJuego().getGui().repaint();
+    			this.setPowerUp(power);
     		}
     		estado=null;
     	}
@@ -238,6 +240,17 @@ public class Celda {
     public boolean getFuego()
     {
     	return fuego;
+    }
+    
+    private void setPowerUp(PowerUp p){
+    	pu=p;
+    }
+    
+    public PowerUp getPowerUp(){
+    	PowerUp toReturn;
+    	toReturn= pu;
+    	pu=null;
+    	return toReturn;
     }
     
 }

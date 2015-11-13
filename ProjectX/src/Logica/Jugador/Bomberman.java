@@ -10,8 +10,6 @@ import Logica.Juego;
 import Logica.Personaje;
 import Logica.PowerUp;
 import Logica.Bloques.Celda;
-import Logica.Bloques.Pared;
-
 
 /**
  *@author Barreix, Iñaki.
@@ -191,16 +189,12 @@ public class Bomberman extends Personaje
     		c.setBomberman(this);
     		if(!dios && (c.getEnemigo()!=null || c.getFuego()))
     			morir();
-    		Pared p=c.getPared();
-    		if (p!=null){
-    			PowerUp pup=p.getPowerUp();
+    			PowerUp pup=c.getPowerUp(); // una vez que lo tiene ya lo borra de la celda
     			if(pup!=null){
     				pup.setAction(this);
     				miJuego.getGui().remove(pup.getGrafico().getGrafico());
     				miJuego.getGui().repaint();
-    				p.setPowerUp(null);
     			}
-    		}
     }
     public void morir() {
     	vivo=false;
