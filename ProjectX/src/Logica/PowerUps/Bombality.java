@@ -28,8 +28,8 @@ public class Bombality extends PowerUp
      */
     public void setAction(Bomberman b) 
     {
-        b.getPuntaje().addPuntaje(35);
         b.addBomba();
+        b.getPuntaje().addPuntaje(35);
     }
 
 }

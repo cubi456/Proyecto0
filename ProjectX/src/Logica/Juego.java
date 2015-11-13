@@ -17,7 +17,7 @@ public class Juego
 {
     protected Timer tiempo;
     protected Vector<Nivel> misNiveles;
-
+    protected Bomberman b;
     protected Vector<Personaje> misPersonajes;
     protected GUI gui;
     
@@ -150,7 +150,8 @@ public class Juego
     public Personaje addBomberman()
     {
     	//Por convencion Bomberman se asigna en la celda 1,1 con una velocidad inicial designada.
-    	Personaje b= new Bomberman(1000, 1, 1,this);
+    	Bomberman b= new Bomberman(1000, 1, 1,this);
+    	this.b=b;
     	misPersonajes.addElement(b);
 
     	return b;
@@ -170,7 +171,7 @@ public class Juego
      */
     public Bomberman getBomberman(){
     	//	Por convencion Bomberman es el primer personaje creado por eso siempre estara en la pos 0.
-    	return (Bomberman)misPersonajes.get(0);
+    	return b;
     }
     
     public Point asignarPos(){

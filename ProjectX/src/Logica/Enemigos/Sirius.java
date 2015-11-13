@@ -133,8 +133,8 @@ public class Sirius extends Enemigo {
     	vivo=false;
     	miJuego.getNivel(0).getCelda(this.posX,this.posY).setEnemigo(null);
     	miJuego.matarPersonaje(this);
-    	grafico.morir();
     	st.destruir();
+    	grafico.morir();
     }
     
     /**

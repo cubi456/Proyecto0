@@ -53,9 +53,9 @@ public class GUI extends JFrame {
 		ventana= new JFrame();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(10, 100, 100, 600);
-		setSize(new Dimension(998, 500));
+		setSize(new Dimension(998, 445));
 		ventana.setTitle("Proyecto X");
-		setResizable(true);
+		setResizable(false);
 		contenedor = new JPanel();
 		contenedor.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contenedor);

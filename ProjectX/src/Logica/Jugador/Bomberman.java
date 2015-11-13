@@ -105,13 +105,12 @@ public class Bomberman extends Personaje
         	if(!dios)
         		bom=misBombas.remove(misBombas.size()-1);
         	else
-        		bom=misBombas.lastElement();
+        		bom=new Bomba(this);
         	bom.setUbicacion(c);
     		miJuego.getGui().getContenedor().add(bom.getGrafico().getGrafico(),20);
-        	miJuego.getGui().getContenedor().repaint();
-        	miJuego.getGui().toggleLock();
         	bom.getGrafico().setPos(posX, posY);
         	c.colocarBomba(bom);
+        	bom=null;
         }
       
     }
@@ -125,9 +124,9 @@ public class Bomberman extends Personaje
     	Celda c=miJuego.getNivel(0).getCelda(this.posX-1,this.posY);
       	if((c.getPared()== null && c.getBomba()==null) || (dios && (c.getPared()==null || c.getPared().isDestructible())))
       	{
-      		grafico.mover(0);
       		miJuego.getNivel(0).getCelda(this.posX,this.posY).setBomberman(null);
       		posX-=1;
+      		grafico.mover(0);
       		analizar(c);
       	}
     		
@@ -145,9 +144,9 @@ public class Bomberman extends Personaje
     	Celda c=miJuego.getNivel(0).getCelda(this.posX,this.posY-1);
     	if((c.getPared()== null && c.getBomba()==null) || (dios && (c.getPared()==null || c.getPared().isDestructible())))
     	{
-      		grafico.mover(1);
       		miJuego.getNivel(0).getCelda(this.posX,this.posY).setBomberman(null);
       		posY-=1;
+      		grafico.mover(1);
       		analizar(c);
       	}
     }
@@ -158,9 +157,9 @@ public class Bomberman extends Personaje
     	Celda c=miJuego.getNivel(0).getCelda(this.posX+1,this.posY);
     	if((c.getPared()== null && c.getBomba()==null) || (dios && (c.getPared()==null || c.getPared().isDestructible())))
     	{ 
-      		grafico.mover(2);
       		miJuego.getNivel(0).getCelda(this.posX,this.posY).setBomberman(null);
       		posX+=1;
+      		grafico.mover(2);
       		analizar(c);
       	}
     }
@@ -174,9 +173,9 @@ public class Bomberman extends Personaje
     	Celda c=miJuego.getNivel(0).getCelda(this.posX,this.posY+1);
     	if((c.getPared()== null && c.getBomba()==null) || (dios && (c.getPared()==null || c.getPared().isDestructible())))
     	{
-      		grafico.mover(3);
       		miJuego.getNivel(0).getCelda(this.posX,this.posY).setBomberman(null);
       		posY+=1;
+      		grafico.mover(3);
       		analizar(c);
       	}
     }
@@ -202,9 +201,9 @@ public class Bomberman extends Personaje
     public void morir() {
     	vivo=false;
     	miJuego.getNivel(0).getCelda(this.posX,this.posY).setBomberman(null);
+    	grafico.morir();
     	bt.destruir();
     	miJuego.matarPersonaje(this);
-    	grafico.morir();
     }
     /**
      * Duplica la velocidad del Bomberman.
@@ -256,6 +255,7 @@ public class Bomberman extends Personaje
 			break;
 		case KeyEvent.VK_SPACE :
 			this.colocarBomba();
+			break;
 		}
 	}
 }
