@@ -42,5 +42,13 @@ public class Pared {
     {
     	return miPower;
     }
+
+    /**
+     * Le asigna un powerUp a la celda.
+     * @param PowerUp.
+     */
+    public void setPowerUp(PowerUp up){
+    	miPower=up;
+    }
    
 }

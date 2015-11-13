@@ -29,7 +29,6 @@ public class Celda {
     protected Bomba bomb;
     protected int x, y;
     protected Pared estado;
-    protected PowerUp power;
     protected Nivel miNivel;
     protected BloqueGrafico grafico;
     protected boolean fuego;
@@ -47,7 +46,6 @@ public class Celda {
     	fuego=false;
         this.x=x;
         this.y=y;
-        power=null;
         enemigo=null;
         bomb=null;
         miNivel=n;
@@ -114,6 +112,7 @@ public class Celda {
     		grafico.getGrafico().setIcon(image);
     		miNivel.getJuego().getGui().repaint();
     		miNivel.getControlador().removePared();
+    		PowerUp power= estado.getPowerUp();
     		if(power!=null){
     			power.getGrafico().setPos(x, y);
     			miNivel.getJuego().getGui().getContenedor().add(power.getGrafico().getGrafico(),1);
@@ -121,14 +120,6 @@ public class Celda {
     		}
     		estado=null;
     	}
-    }
-    /**
-     * Retorna el PowerUp que se encuentra en la celda,
-     * en caso de no existir retorna null.
-     * @return PowerUp.
-     */
-    public PowerUp getPowerUp() {
-        return power;
     }
 
     /**
@@ -140,15 +131,6 @@ public class Celda {
         return estado;
     }
     
-    /**
-     * Le asigna un powerUp a la celda.
-     * @param PowerUp.
-     */
-    
-    public void setPowerUp(PowerUp p)
-    {
-    	power=p;
-    }
     /**
      * Retorna el Bomberman que se encuentra 
      * en la celda, en caso de que no exista 

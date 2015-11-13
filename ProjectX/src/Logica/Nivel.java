@@ -162,9 +162,9 @@ public class Nivel
     		while (!asigne){
     			x=gen.nextInt(29)+1;
     			y=gen.nextInt(11)+1;
-    			Celda c= this.getCelda(x, y);
-    			if(c.getPared()!=null && c.getPared().isDestructible() && c.getPared().getPowerUp()==null){
-    				c.setPowerUp(misPower.remove(misPower.size()-1));
+    			Pared p= this.getCelda(x, y).getPared();
+    			if(p!=null && p.isDestructible() && p.getPowerUp()==null){
+    				p.setPowerUp(misPower.remove(misPower.size()-1));
     				System.out.println("PU en X: "+x+" Y: "+y);
     				asigne=true;
     			}

@@ -10,6 +10,7 @@ import Logica.Juego;
 import Logica.Personaje;
 import Logica.PowerUp;
 import Logica.Bloques.Celda;
+import Logica.Bloques.Pared;
 
 
 /**
@@ -190,12 +191,15 @@ public class Bomberman extends Personaje
     		c.setBomberman(this);
     		if(!dios && (c.getEnemigo()!=null || c.getFuego()))
     			morir();
-    		PowerUp pup=c.getPowerUp();
-    		if(pup!=null){
-    			pup.setAction(this);
-    			miJuego.getGui().remove(pup.getGrafico().getGrafico());
-    			miJuego.getGui().repaint();
-    			c.setPowerUp(null);
+    		Pared p=c.getPared();
+    		if (p!=null){
+    			PowerUp pup=p.getPowerUp();
+    			if(pup!=null){
+    				pup.setAction(this);
+    				miJuego.getGui().remove(pup.getGrafico().getGrafico());
+    				miJuego.getGui().repaint();
+    				p.setPowerUp(null);
+    			}
     		}
     }
     public void morir() {
