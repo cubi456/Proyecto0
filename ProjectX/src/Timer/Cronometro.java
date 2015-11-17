@@ -57,10 +57,10 @@ public class Cronometro extends Thread
 		}
 	}
 	
-	public void detener()
+	public void destruir()
 	{
-		stop=true;
 		this.interrupt();
+		this.stop=true;
 	}
 	
 	public void actualizarLabel()

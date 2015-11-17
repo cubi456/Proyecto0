@@ -61,10 +61,6 @@ public class GUI extends JFrame {
 		setContentPane(contenedor);
 		contenedor.setLayout(null);
 		juego= new Juego(this);
-		tiempo = new Cronometro();
-		tiempo.getGrafico().setBounds(10, 410, 128, 64);
-		contenedor.add(tiempo.getGrafico(),1);
-		tiempo.start();
 		b=juego.getBomberman();
 		b.getPuntaje().getGrafico().setBounds(870, 410, 128,64);
 		//b.getPuntaje().getGrafico().setBounds(140, 410, 128,64);
@@ -72,7 +68,10 @@ public class GUI extends JFrame {
 		//juego.getNivel(0).getControlador().getGrafico().setBounds(270, 410, 256, 64);
 		juego.getNivel(0).getControlador().getGrafico().setBounds(140, 410, 256, 64);
 		contenedor.add(juego.getNivel(0).getControlador().getGrafico(),1);
-		
+		tiempo = new Cronometro();
+		tiempo.getGrafico().setBounds(10, 410, 128, 64);
+		contenedor.add(tiempo.getGrafico(),1);
+		tiempo.start();
 		
 		// Oyente a las teclas
 		addKeyListener(new KeyAdapter() {

@@ -111,13 +111,11 @@ public class Celda {
     	{    		
     		Icon image=new ImageIcon (this.getClass().getResource("../../Grafica/Sprites/piso.png"));
     		grafico.getGrafico().setIcon(image);
-    		miNivel.getJuego().getGui().repaint();
     		miNivel.getControlador().removePared();
     		PowerUp power= estado.getPowerUp();
     		if(power!=null){
     			power.getGrafico().setPos(x, y);
     			miNivel.getJuego().getGui().getContenedor().add(power.getGrafico().getGrafico(),20);
-    			miNivel.getJuego().getGui().repaint();
     			this.setPowerUp(power);
     		}
     		estado=null;

@@ -25,14 +25,14 @@ public class ModoDios extends Thread
 				e.printStackTrace();
 			}
 			b.Dios();
-			this.detener();
+			this.destruir();
 		}
 	}
 	
-	public void detener()
+	public void destruir()
 	{
-		this.stop=true;
 		this.interrupt();
+		this.stop=true;
 	}
 	
 }

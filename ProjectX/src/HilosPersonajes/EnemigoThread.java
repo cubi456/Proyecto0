@@ -27,8 +27,8 @@ public class EnemigoThread extends Thread {
 	 * 
 	 */
 	public void destruir() {
-		rStop=true;
 		this.interrupt();
+		rStop=true;
 	}
 
 
