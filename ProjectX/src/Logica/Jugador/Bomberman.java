@@ -114,69 +114,13 @@ public class Bomberman extends Personaje
       
     }
 
-    /**
-     * 
-     */
-    public void avanzarIzq() 
-    {
-    	grafico.cambiarDirec(0);
-    	Celda c=miJuego.getNivel(0).getCelda(this.posX-1,this.posY);
-      	if((c.getPared()== null && c.getBomba()==null) || (dios && (c.getPared()==null || c.getPared().isDestructible())))
-      	{
-      		miJuego.getNivel(0).getCelda(this.posX,this.posY).setBomberman(null);
-      		posX-=1;
-      		grafico.mover(0);
-      		analizar(c);
-      	}
-    		
-   	}
-    			
-
-
-    /**
-     * 
-     */
-    
-    public void avanzarArriba()
-    {
-    	grafico.cambiarDirec(1);
-    	Celda c=miJuego.getNivel(0).getCelda(this.posX,this.posY-1);
+    protected void quererPasar(Celda c, int dir){
     	if((c.getPared()== null && c.getBomba()==null) || (dios && (c.getPared()==null || c.getPared().isDestructible())))
-    	{
-      		miJuego.getNivel(0).getCelda(this.posX,this.posY).setBomberman(null);
-      		posY-=1;
-      		grafico.mover(1);
-      		analizar(c);
-      	}
+    		pasar(c, dir);
     }
-    
-    public void avanzarDer()
-    {
-    	grafico.cambiarDirec(2);
-    	Celda c=miJuego.getNivel(0).getCelda(this.posX+1,this.posY);
-    	if((c.getPared()== null && c.getBomba()==null) || (dios && (c.getPared()==null || c.getPared().isDestructible())))
-    	{ 
-      		miJuego.getNivel(0).getCelda(this.posX,this.posY).setBomberman(null);
-      		posX+=1;
-      		grafico.mover(2);
-      		analizar(c);
-      	}
-    }
-
-    /**
-     * 
-     */
-    public void avanzarAbajo() 
-    {
-    	grafico.cambiarDirec(3);
-    	Celda c=miJuego.getNivel(0).getCelda(this.posX,this.posY+1);
-    	if((c.getPared()== null && c.getBomba()==null) || (dios && (c.getPared()==null || c.getPared().isDestructible())))
-    	{
-      		miJuego.getNivel(0).getCelda(this.posX,this.posY).setBomberman(null);
-      		posY+=1;
-      		grafico.mover(3);
-      		analizar(c);
-      	}
+   
+    protected void setearEnCeldaPersonaje(){
+    	miJuego.getNivel(0).getCelda(this.posX,this.posY).setBomberman(null);
     }
     /**
      * Detecta si en la Celda recibida como Parámetro
@@ -184,7 +128,7 @@ public class Bomberman extends Personaje
      * correspondiente.
      * @param Celda
      */
-    private void analizar(Celda c)
+    protected void analizar(Celda c)
     {
     		c.setBomberman(this);
     		if(!dios && (c.getEnemigo()!=null || c.getFuego()))

@@ -3,6 +3,7 @@ package Logica;
 import javax.swing.JLabel;
 
 import Grafica.Personajes.PersonajeGrafico;
+import Logica.Bloques.Celda;
 
 /**
  *@author Barreix, Iñaki.
@@ -58,26 +59,67 @@ public abstract class Personaje {
      * Genera el movimiento del personaje hacia 
      * la izquierda.
      */
-    abstract public void avanzarIzq();
+    public void avanzarIzq() 
+    {
+    	grafico.cambiarDirec(0);
+    	Celda c=miJuego.getNivel(0).getCelda(this.posX-1 ,this.posY);
+      	quererPasar(c,0);
+    }
 
+    /**
+     * Genera el movimiento del Personaje hacia arriba.
+     */
+    public void avanzarArriba() 
+    {
+    	grafico.cambiarDirec(1);
+    	Celda c=miJuego.getNivel(0).getCelda(this.posX,this.posY-1);
+    	quererPasar(c, 1);
+    }
+    
     /**
      * Genera el movimiento del Personaje hacia
      * la derecha.
      */
-    public abstract void avanzarDer();
-    /**
-     * Genera el movimiento del Personaje hacia arriba.
-     */
-    public abstract void avanzarArriba();
+    public void avanzarDer() 
+    {
+    	grafico.cambiarDirec(2);
+    	Celda c=miJuego.getNivel(0).getCelda(this.posX+1,this.posY);
+    	quererPasar(c,2);
+    }
 
     /**
      * Genera el movimiento del personaje hacia abajo.
      */
-    public abstract void avanzarAbajo();
+    public void avanzarAbajo() 
+    {
+    	grafico.cambiarDirec(3);
+    	Celda c=miJuego.getNivel(0).getCelda(this.posX,this.posY+1);
+    	quererPasar(c,3);
+    }
 
     /**
      * Genera la muerte del Personaje en el juego.
      */
+    protected void pasar(Celda c, int dir){
+    	setearEnCeldaPersonaje();
+    	switch (dir) {
+			case 0 : // izq
+				posX-=1;
+			break;
+			case 1: // arriba
+				posY-=1;
+			break;
+			case 2: // derecha
+				posX+=1;	
+			break;
+			case 3 : //abajo
+				posY+=1;
+			break;
+		}
+    	grafico.mover(dir);
+  		analizar(c);
+    }
+    
     public abstract void morir();
     
     /**
@@ -86,6 +128,12 @@ public abstract class Personaje {
      */
     
     public abstract void mover(int dir);
+    
+    protected abstract void analizar(Celda c);
+    
+    protected abstract void setearEnCeldaPersonaje();
+    
+    protected abstract void quererPasar(Celda c, int dir);
     
     public JLabel getGrafico(){
 		return this.grafico.getGrafico();

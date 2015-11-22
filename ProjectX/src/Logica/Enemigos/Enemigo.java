@@ -1,7 +1,10 @@
 package Logica.Enemigos;
 
+import java.util.Random;
+
 import Logica.Juego;
 import Logica.Personaje;
+import Logica.Bloques.Celda;
 import Logica.Jugador.Bomberman;
 
 /**
@@ -12,7 +15,7 @@ import Logica.Jugador.Bomberman;
 public abstract class Enemigo extends Personaje {
 
     protected int puntaje;
-
+    protected boolean vivo;
     /**
      * Crea un nuevo Enemigo con la velocidad,
      * la posición en X,la posición en Y,
@@ -27,6 +30,8 @@ public abstract class Enemigo extends Personaje {
     protected Enemigo(int s, int x, int y, int p,Juego j) {
         super(s, x, y,j);
         puntaje=p;
+        vivo=true;
+        miJuego.getNivel(0).getCelda(x, y).setEnemigo(this);
     }
 
     /**
@@ -39,36 +44,70 @@ public abstract class Enemigo extends Personaje {
     }
 
     /**
-     * 
-     */
-    public abstract void avanzarIzq();
-
-    /**
-     * 
-     */
-    public abstract void avanzarDer();
-
-    /**
-     *
-     */
-    public abstract void avanzarArriba();
-
-    /**
-     * 
-     */
-    public abstract void avanzarAbajo();
-
-    /**
      * Genera la muerte del Bomberman recibido como parámetro.
      * @param Bomberman
      */
-    public abstract void MatarBomberman(Bomberman b);
+    public void MatarBomberman(Bomberman b) 
+    {
+        b.morir();
+    }
 
     /**
      * 
      */
     public abstract void morir();
-    
-    public abstract void mover(int dir);
+  
+    /**
+     * Detecta si en la celda pasada por parámetro
+     * se encuentra el Bomberman.
+     * @param Celda
+     */
+    protected void analizar(Celda c)
+    {
+    		c.setEnemigo(this);
+    		if(c.getFuego())
+    			morir();
+    		if(c.getBomberman()!=null && !c.getBomberman().getDios())
+    			MatarBomberman(c.getBomberman());
+    }
+ 
+    protected void quererPasar(Celda c, int dir){
+    	//Rugulus y sirius utilizaran este. ALtair lo redifinirá
+    	if(c.getPared()== null && c.getBomba()==null)// && c.getEnemigo()==null)
+    		pasar(c, dir);
+    }
+    protected void setearEnCeldaPersonaje(){
+    	miJuego.getNivel(0).getCelda(this.posX,this.posY).setEnemigo(null);
+    }
+
+    /**
+     * Genera un movimiento en el Enemigo.
+     */
+    public void mover(int dir) {
+    	// Calculo la siguiente direccion aleatoriamente.
+    		if(vivo)
+    		{
+    		Random rnd = new Random();
+    	    dir=rnd.nextInt(4);
+    		moverHacia(dir);
+    		}
+    	}
+    	
+    	protected void moverHacia(int dir){
+    		switch (dir){
+    		case 0 : // a izq
+    			this.avanzarIzq();
+    			break;
+    		case 1: // a arriba
+    			this.avanzarArriba();
+    			break;
+    		case 2:
+    			this.avanzarDer();
+    			break;
+    		case 3 :
+    			this.avanzarAbajo();
+    			break;
+    		}
+    	}
 
 }
