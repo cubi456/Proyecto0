@@ -7,10 +7,12 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 public class BombermanGrafico extends PersonajeGrafico {
-
+	private Vector<Vector<Icon>> spritesDios, spritesAux;
 	public BombermanGrafico(int v, int px, int py) {
 		super(v, px, py);
 		sprites=cargarNormal();
+		spritesAux=sprites;
+		spritesDios=cargarDios();
 		this.grafico = new JLabel(sprites.elementAt(3).elementAt(0)); // Comienza de enfrente
 		this.grafico.setBounds(pos.x , pos.y, ancho, alto);
 	}
@@ -19,9 +21,9 @@ public class BombermanGrafico extends PersonajeGrafico {
 		//Redefine
 		//0 cambiar a Dios
 		if(i==0)		
-			sprites=cargarDios();
+			sprites=spritesDios;
 		else{// carga normal
-			sprites=cargarNormal();
+			sprites=spritesAux;
 		}
 	}
 	
