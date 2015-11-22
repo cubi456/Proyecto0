@@ -19,10 +19,9 @@ public class BombaGrafico{
 	protected GUI g;
 	
 	public BombaGrafico(GUI gui){
-		detonar= new Icon[4];
-		detonar[0] = new ImageIcon(this.getClass().getResource("../Sprites/Bomba/Bomb01.png"));
-		detonar[1] = new ImageIcon(this.getClass().getResource("../Sprites/Bomba/Bomb02.png"));
-		detonar[2] = new ImageIcon(this.getClass().getResource("../Sprites/Bomba/Bomb03.png"));
+		detonar= new Icon[3];
+		for(int i=0; i<detonar.length; i++)
+			detonar[i] = new ImageIcon(this.getClass().getResource("../Sprites/Bomba/Bomb0"+i+".png"));
 		g=gui;
 	}
 	
@@ -43,7 +42,7 @@ public class BombaGrafico{
 	
 	public void detonar(Celda c,int a) throws InterruptedException
 	{
-		for(int i=0;i<3;i++)
+		for(int i=0;i<detonar.length;i++)
 		{
 			grafico.setIcon(detonar[i]);
 			grafico.setBounds(x,y,ancho,alto);
