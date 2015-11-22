@@ -20,9 +20,9 @@ public class BombaGrafico{
 	
 	public BombaGrafico(GUI gui){
 		detonar= new Icon[4];
-		detonar[0] = new ImageIcon(this.getClass().getResource("../Sprites/Bomb01.png"));
-		detonar[1] = new ImageIcon(this.getClass().getResource("../Sprites/Bomb02.png"));
-		detonar[2] = new ImageIcon(this.getClass().getResource("../Sprites/Bomb03.png"));
+		detonar[0] = new ImageIcon(this.getClass().getResource("../Sprites/Bomba/Bomb01.png"));
+		detonar[1] = new ImageIcon(this.getClass().getResource("../Sprites/Bomba/Bomb02.png"));
+		detonar[2] = new ImageIcon(this.getClass().getResource("../Sprites/Bomba/Bomb03.png"));
 		g=gui;
 	}
 	

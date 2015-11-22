@@ -30,4 +30,7 @@ public abstract class BloqueGrafico{
 			this.grafico=b;
 	}
 	
+	//Solo lo define BloqueDestruible
+	public abstract void destruir();
+	
 }

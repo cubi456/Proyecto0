@@ -3,8 +3,6 @@ package Logica.Bloques;
 
 import java.util.*;
 
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 import Grafica.Bloques.BloqueGrafico;
@@ -109,8 +107,7 @@ public class Celda {
     {
     	if(estado.isDestructible())
     	{    		
-    		Icon image=new ImageIcon (this.getClass().getResource("../../Grafica/Sprites/piso.png"));
-    		grafico.getGrafico().setIcon(image);
+    		grafico.destruir();
     		miNivel.getControlador().removePared();
     		PowerUp power= estado.getPowerUp();
     		if(power!=null){

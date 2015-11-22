@@ -15,12 +15,8 @@ public class FuegoGrafico{
 	public FuegoGrafico(int px,int py)
 	{
 		exp= new Icon[5];
-		exp[0] = new ImageIcon(this.getClass().getResource("../Sprites/fire00.png"));
-		exp[1] = new ImageIcon(this.getClass().getResource("../Sprites/fire01.png"));
-		exp[2] = new ImageIcon(this.getClass().getResource("../Sprites/fire02.png"));
-		exp[3] = new ImageIcon(this.getClass().getResource("../Sprites/fire03.png"));
-		exp[4] = new ImageIcon(this.getClass().getResource("../Sprites/fire04.png"));
-		
+		for(int i=0; i<5; i++)
+			exp[i] = new ImageIcon(this.getClass().getResource("../Sprites/Fire/fire0"+i+".png"));		
 		this.x=px* ancho;
 		this.y=py* alto;
 		
