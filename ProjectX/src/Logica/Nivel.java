@@ -165,7 +165,7 @@ public class Nivel
     			Pared p= this.getCelda(x, y).getPared();
     			if(p!=null && p.isDestructible() && p.getPowerUp()==null){
     				p.setPowerUp(misPower.remove(misPower.size()-1));
-    				System.out.println("PU en X: "+x+" Y: "+y);
+    				//System.out.println("PU en X: "+x+" Y: "+y);
     				asigne=true;
     			}
     		}

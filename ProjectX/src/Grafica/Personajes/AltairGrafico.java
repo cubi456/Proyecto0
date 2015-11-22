@@ -39,5 +39,8 @@ public class AltairGrafico extends PersonajeGrafico {
 			this.grafico = new JLabel(sprites.elementAt(3).elementAt(0)); // Comienza de enfrente
 			this.grafico.setBounds(pos.x , pos.y, ancho, alto);
 	}
+	public void cambiarA(int i){
+		
+	}
 
 }
