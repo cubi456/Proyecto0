@@ -15,7 +15,6 @@ import Logica.Bloques.Celda;
 public class Sirius extends Enemigo {
 
 	
-	private EnemigoThread st;
 	/**
      * Crea un nuevo Enemigo de tipo Sirus
      * con la velocidad, la posición en X,
@@ -30,21 +29,10 @@ public class Sirius extends Enemigo {
     public Sirius(int s, int x, int y, int p,Juego j) {
         super(s, x, y, p,j);
         grafico= new SiriusGrafico(s, x, y);
-    	st= new EnemigoThread(this);
-    	st.start();
+    	et= new EnemigoThread(this);
+    	et.start();
     }
 
-    /**
-     * 
-     */
-    public void morir()
-    {
-    	vivo=false;
-    	miJuego.getNivel(0).getCelda(this.posX,this.posY).setEnemigo(null);
-    	miJuego.matarPersonaje(this);
-    	st.destruir();
-    	grafico.morir();
-    }
     
     /**
      * Genera un movimiento en el Enemigo.

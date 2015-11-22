@@ -2,6 +2,7 @@ package Logica.Enemigos;
 
 import java.util.Random;
 
+import HilosPersonajes.EnemigoThread;
 import Logica.Juego;
 import Logica.Personaje;
 import Logica.Bloques.Celda;
@@ -16,6 +17,7 @@ public abstract class Enemigo extends Personaje {
 
     protected int puntaje;
     protected boolean vivo;
+    protected EnemigoThread et;
     /**
      * Crea un nuevo Enemigo con la velocidad,
      * la posición en X,la posición en Y,
@@ -55,7 +57,14 @@ public abstract class Enemigo extends Personaje {
     /**
      * 
      */
-    public abstract void morir();
+    public void morir()
+    {
+    	vivo=false;
+    	miJuego.getNivel(0).getCelda(this.posX,this.posY).setEnemigo(null);
+    	miJuego.matarPersonaje(this);
+    	grafico.morir();
+    	et.destruir();
+    }
   
     /**
      * Detecta si en la celda pasada por parámetro

@@ -12,8 +12,6 @@ import Logica.Juego;
 
 public class Rugulus extends Enemigo 
 {
-
-	protected EnemigoThread rt;
 	
     /**
      * Crea un nuevo Enemigo de tipo Rugulus
@@ -29,20 +27,8 @@ public class Rugulus extends Enemigo
     public Rugulus(int s, int x, int y, int p,Juego j) {
         super(s, x, y, p,j);
         grafico= new RugulusGrafico(s, x, y);
-    	rt= new EnemigoThread(this);
-    	rt.start();
+    	et= new EnemigoThread(this);
+    	et.start();
     }
     
-    /**
-     * 
-     */
-    public void morir()
-    {
-    	vivo=false;
-    	miJuego.getNivel(0).getCelda(this.posX,this.posY).setEnemigo(null);
-    	miJuego.matarPersonaje(this);
-    	grafico.morir();
-    	rt.destruir();
-    }
-
 }
