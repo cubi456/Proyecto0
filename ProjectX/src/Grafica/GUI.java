@@ -5,7 +5,9 @@ import java.awt.EventQueue;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyAdapter;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -19,7 +21,7 @@ public class GUI extends JFrame {
 	private Bomberman b;
 	private static final long serialVersionUID = 1L;
 
-	private JPanel contenedor;
+	private JPanel contenedor, pantallaIncio;
 	private JFrame ventana;
 	private Juego juego;
 	private int direccion=-1;
@@ -56,16 +58,53 @@ public class GUI extends JFrame {
 		setSize(new Dimension(998, 500));
 		ventana.setTitle("Proyecto X");
 		setResizable(false);
+		setIconImage(new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/icon03.png")).getImage());
+		crearContenedor();
+	
+		// Teclas del menu
+		addKeyListener(new KeyAdapter() {
+			public void keyPressed(KeyEvent arg0) {
+				if (arg0.getKeyCode() == KeyEvent.VK_ENTER) {
+					if (juego == null) {
+						contenedor.remove(pantallaIncio);
+						iniciarJuego();
+					}
+				}
+			}
+		});
+		
+		// Oyente a las teclas
+		addKeyListener(new KeyAdapter() {
+		public void keyPressed(KeyEvent arg0) {
+			mover(arg0);
+		}
+		});
+	}
+
+	private void crearContenedor(){
 		contenedor = new JPanel();
 		contenedor.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contenedor);
 		contenedor.setLayout(null);
+		JLabel bg=new JLabel(new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/Background.png"))); 
+		bg.setBounds(0, 0,998, 500);
+		contenedor.add(bg);
+		crearPantallaIncio();
+		//contenedor.add(pantallaIncio);
+	}
+	
+	private void crearPantallaIncio(){
+		pantallaIncio=new JPanel();
+		JLabel bm=new JLabel(new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/BombermanRender00.png")));
+		bm.setBounds(570, 40, 420, 423);
+		pantallaIncio.add(bm);	
+	}
+	
+	private void iniciarJuego(){
 		juego= new Juego(this);
 		b=juego.getBomberman();
 		b.getPuntaje().getGrafico().setBounds(870, 410, 128,64);
-		//b.getPuntaje().getGrafico().setBounds(140, 410, 128,64);
 		contenedor.add(b.getPuntaje().getGrafico(),1);
-		//juego.getNivel(0).getControlador().getGrafico().setBounds(270, 410, 256, 64);
 		juego.getNivel(0).getControlador().getGrafico().setBounds(140, 410, 256, 64);
 		contenedor.add(juego.getNivel(0).getControlador().getGrafico(),1);
 		tiempo = new Cronometro();
@@ -73,15 +112,8 @@ public class GUI extends JFrame {
 		contenedor.add(tiempo.getGrafico(),1);
 		tiempo.start();
 		
-		// Oyente a las teclas
-		addKeyListener(new KeyAdapter() {
-			public void keyPressed(KeyEvent arg0) {
-				mover(arg0);
-			}
-		});
-		}
-	
-	
+	}
+
 	public void mover (KeyEvent key)
 	{
 		if(!lock)
