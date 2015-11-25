@@ -1,13 +1,12 @@
 package Grafica;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.Vector;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -22,7 +21,8 @@ import Logica.Jugador.Bomberman;
 import Timer.Cronometro;
 //import Timer.ContadorTiempo;
 
-public class GUI extends JFrame {
+public class GUI extends JFrame implements ActionListener,KeyListener
+{
 	// ISB VER
 	private Bomberman b;
 	private static final long serialVersionUID = 1L;
@@ -32,7 +32,6 @@ public class GUI extends JFrame {
 	private JButton comenzar,salir;
 	private int direccion=-1;
 	private Cronometro tiempo;
-	private ActionListener oyenteB;
 	
 	private boolean lock=false;
 	/**
@@ -70,39 +69,13 @@ public class GUI extends JFrame {
 		setContentPane(contenedor);
 		contenedor.setLayout(null);
 		componentes = new Vector<JComponent>();
+		this.addKeyListener(this);
+		this.setFocusable(true);
 		crearMenu();
-	
-		// Teclas del menu
-		addKeyListener(new KeyAdapter() {
-			public void keyPressed(KeyEvent arg0) {
-				if (arg0.getKeyCode() == KeyEvent.VK_ENTER) {
-					if (juego == null) {
-						for(JComponent c:componentes)
-							contenedor.remove(c);
-						contenedor.repaint();
-						iniciarJuego();
-					}
-				}
-				else
-					if(arg0.getKeyCode()==KeyEvent.VK_ESCAPE)
-						System.exit(0);
-					else
-						if(arg0.getKeyCode()==KeyEvent.VK_R)
-							reset();
-			}
-		});
 		
-		
-		
-		// Oyente a las teclas
-		addKeyListener(new KeyAdapter() {
-		public void keyPressed(KeyEvent arg0) {
-			mover(arg0);
-		}
-		});
 	}
 	
-	
+
 	private void crearMenu(){
 		JLabel bg=new JLabel(new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/Background.png"))); 
 		bg.setBounds(0, 0,998, 500);
@@ -117,11 +90,10 @@ public class GUI extends JFrame {
 		
 		//Botones
 		
-		oyenteB=new OyenteBotones();
 		
 		comenzar=new JButton(new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/comenzar00.png")));
 		comenzar.setActionCommand("comenzar");
-		comenzar.addActionListener(oyenteB);
+		comenzar.addActionListener(this);
 		comenzar.setRolloverIcon(new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/comenzar01.png")));
 		comenzar.setOpaque(false);
 		comenzar.setContentAreaFilled(false);
@@ -132,8 +104,7 @@ public class GUI extends JFrame {
 		
 		salir=new JButton(new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/salir01.png")));
 		salir.setActionCommand("salir");
-		salir.addActionListener(oyenteB);
-		salir.setEnabled(true);
+		salir.addActionListener(this);
 		salir.setRolloverIcon(new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/salir00.png")));
 		salir.setOpaque(false);
 		salir.setContentAreaFilled(false);
@@ -154,7 +125,6 @@ public class GUI extends JFrame {
 		tiempo.getGrafico().setBounds(10, 410, 128, 64);
 		contenedor.add(tiempo.getGrafico(),1);
 		tiempo.start();
-		
 	}
 
 	public void mover (KeyEvent key)
@@ -186,6 +156,18 @@ public class GUI extends JFrame {
 		return contenedor;
 	}
 	
+	private void corregirContenedor()
+	{
+		if (juego == null) {
+			for(JComponent c:componentes){
+				contenedor.remove(c);
+				c=null;
+			}
+			this.repaint();
+			iniciarJuego();
+		}
+	}
+	
 	public void reset()
 	{
 		this.remove(contenedor);
@@ -198,20 +180,38 @@ public class GUI extends JFrame {
 		iniciarJuego();
 	}
 
- public class OyenteBotones implements ActionListener
- {
-
-	public void actionPerformed(ActionEvent e) 
+	@Override
+	public void keyPressed(KeyEvent arg0) 
 	{
-		if(e.getActionCommand().equals("comenzar"))
-			if (juego == null) {
-				for(JComponent c:componentes)
-					contenedor.remove(c);
-				contenedor.repaint();
-				iniciarJuego();
-			}
-		if(e.getActionCommand().equals("salir"))
-			System.exit(0);
+		if (arg0.getKeyCode() == KeyEvent.VK_ENTER) {
+			corregirContenedor();
+		}
+		else
+			if(arg0.getKeyCode()==KeyEvent.VK_ESCAPE)
+				System.exit(0);
+			else
+				if(arg0.getKeyCode()==KeyEvent.VK_R)
+					reset();
+				else
+					mover(arg0);
 	}
- }
+
+	public void keyReleased(KeyEvent arg0) 
+	{
+
+	}
+
+	public void keyTyped(KeyEvent arg0)
+	{
+		
+	}
+
+	public void actionPerformed(ActionEvent arg0) 
+	{
+		if(arg0.getActionCommand().equals("comenzar"))
+			this.corregirContenedor();
+		if(arg0.getActionCommand().equals("salir"))
+			System.exit(0);
+		this.requestFocus();
+	}
 }
