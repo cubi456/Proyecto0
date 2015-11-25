@@ -1,12 +1,16 @@
 package Grafica;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.event.KeyEvent;
 import java.util.Vector;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -25,8 +29,10 @@ public class GUI extends JFrame {
 	private Vector<JComponent> componentes;
 	private JPanel contenedor;
 	private Juego juego;
+	private JButton comenzar,salir;
 	private int direccion=-1;
 	private Cronometro tiempo;
+	private ActionListener oyenteB;
 	
 	private boolean lock=false;
 	/**
@@ -86,6 +92,8 @@ public class GUI extends JFrame {
 			}
 		});
 		
+		
+		
 		// Oyente a las teclas
 		addKeyListener(new KeyAdapter() {
 		public void keyPressed(KeyEvent arg0) {
@@ -93,7 +101,8 @@ public class GUI extends JFrame {
 		}
 		});
 	}
-
+	
+	
 	private void crearMenu(){
 		JLabel bg=new JLabel(new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/Background.png"))); 
 		bg.setBounds(0, 0,998, 500);
@@ -101,7 +110,37 @@ public class GUI extends JFrame {
 		JLabel bm=new JLabel(new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/BombermanRender00.png")));
 		bm.setBounds(570, 20, 420, 423);
 		contenedor.add(bm,0);
+		JLabel tl=new JLabel(new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/title.png")));
+		tl.setBounds(100, 20, 458, 117);
+		contenedor.add(tl,0);
 		componentes.add(bm);
+		
+		//Botones
+		
+		oyenteB=new OyenteBotones();
+		
+		comenzar=new JButton(new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/comenzar00.png")));
+		comenzar.setActionCommand("comenzar");
+		comenzar.addActionListener(oyenteB);
+		comenzar.setRolloverIcon(new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/comenzar01.png")));
+		comenzar.setOpaque(false);
+		comenzar.setContentAreaFilled(false);
+		comenzar.setBorderPainted(false);
+		comenzar.setBounds(160,160,350,50);
+		contenedor.add(comenzar,0);
+		componentes.add(comenzar);
+		
+		salir=new JButton(new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/salir01.png")));
+		salir.setActionCommand("salir");
+		salir.addActionListener(oyenteB);
+		salir.setEnabled(true);
+		salir.setRolloverIcon(new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/salir00.png")));
+		salir.setOpaque(false);
+		salir.setContentAreaFilled(false);
+		salir.setBorderPainted(false);
+		salir.setBounds(200,220,350,50);
+		contenedor.add(salir,0);
+		componentes.add(salir);
 	}
 	
 	private void iniciarJuego(){
@@ -158,5 +197,21 @@ public class GUI extends JFrame {
 		System.gc();
 		iniciarJuego();
 	}
-	
+
+ public class OyenteBotones implements ActionListener
+ {
+
+	public void actionPerformed(ActionEvent e) 
+	{
+		if(e.getActionCommand().equals("comenzar"))
+			if (juego == null) {
+				for(JComponent c:componentes)
+					contenedor.remove(c);
+				contenedor.repaint();
+				iniciarJuego();
+			}
+		if(e.getActionCommand().equals("salir"))
+			System.exit(0);
+	}
+ }
 }
