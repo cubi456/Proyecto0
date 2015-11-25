@@ -1,6 +1,7 @@
 package Timer;
 
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontFormatException;
 import java.io.IOException;
@@ -23,6 +24,7 @@ public class Cronometro extends Thread
 		InputStream is=this.getClass().getResourceAsStream("../Grafica/Fonts/Prototype.ttf");
 		try {
 			tiempo.setFont(Font.createFont(Font.TRUETYPE_FONT, is).deriveFont(1, 18));
+			tiempo.setForeground(Color.white);
 		} catch (FontFormatException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

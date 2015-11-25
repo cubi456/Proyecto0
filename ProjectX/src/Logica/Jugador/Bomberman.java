@@ -23,7 +23,6 @@ public class Bomberman extends Personaje
     protected Puntaje puntaje;
     protected Vector<Bomba> misBombas;
     protected BombermanThread bt;
-    private boolean vivo;
     protected int alc;
 
     /**
@@ -36,11 +35,9 @@ public class Bomberman extends Personaje
     public Bomberman(int s, int x, int y,Juego j) {
     	super(s, x, y,j);
     	dios=false;
-    	vivo=true;
     	alc=1;
     	puntaje= new Puntaje();
     	misBombas= new Vector<Bomba>();
-    	addBomba();
     	addBomba();
     	grafico=new BombermanGrafico(s, x, y);
     	bt=new BombermanThread(miJuego.getGui(),this);
@@ -155,7 +152,7 @@ public class Bomberman extends Personaje
      */
     public void doubleSpeed()
     {
-    	this.speed= speed/2;
+    	this.speed= (int) (speed*0.75);
     	grafico.setVelocidad(speed);
     }
     

@@ -16,7 +16,6 @@ import Logica.Jugador.Bomberman;
 public abstract class Enemigo extends Personaje {
 
     protected int puntaje;
-    protected boolean vivo;
     protected EnemigoThread et;
     /**
      * Crea un nuevo Enemigo con la velocidad,
@@ -32,7 +31,6 @@ public abstract class Enemigo extends Personaje {
     protected Enemigo(int s, int x, int y, int p,Juego j) {
         super(s, x, y,j);
         puntaje=p;
-        vivo=true;
         miJuego.getNivel(0).getCelda(x, y).setEnemigo(this);
     }
 

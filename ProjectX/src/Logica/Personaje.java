@@ -14,6 +14,7 @@ public abstract class Personaje {
 
     protected int speed, posX, posY;
     protected Juego miJuego;
+    protected boolean vivo;
     protected PersonajeGrafico grafico;
 
     /**
@@ -30,6 +31,7 @@ public abstract class Personaje {
         posX=x;
         posY=y;
         miJuego=j;
+        vivo=true;
     }
     /**
      * Retorna la velocidad asociada a un personaje.
@@ -116,8 +118,9 @@ public abstract class Personaje {
 				posY+=1;
 			break;
 		}
-    	grafico.mover(dir);
   		analizar(c);
+  		if(vivo)
+  			grafico.mover(dir);
     }
     
     public abstract void morir();

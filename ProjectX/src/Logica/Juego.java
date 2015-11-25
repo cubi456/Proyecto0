@@ -138,7 +138,7 @@ public class Juego
      */
     public void addSirius()
     {
-    	Personaje s= new Sirius(1000/3, 29,11, 50,this);
+    	Personaje s= new Sirius(1200/2, 29,11, 50,this);
     	misPersonajes.addElement(s);
     	gui.getContenedor().add(s.getGrafico(),2);
     }
