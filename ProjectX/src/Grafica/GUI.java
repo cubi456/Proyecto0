@@ -18,6 +18,9 @@ import javax.swing.border.EmptyBorder;
 
 import Logica.Juego;
 import Logica.Jugador.Bomberman;
+import Sonidos.Sonido;
+import Sonidos.SonidoJuego;
+import Sonidos.SonidoMenu;
 import Timer.Cronometro;
 //import Timer.ContadorTiempo;
 
@@ -32,6 +35,7 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 	private JButton comenzar,salir;
 	private int direccion=-1;
 	private Cronometro tiempo;
+	private Sonido sonidoM,sonidoJ;
 	
 	private boolean lock=false;
 	/**
@@ -77,6 +81,7 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 	
 
 	private void crearMenu(){
+		sonidoM=new SonidoMenu();
 		JLabel bg=new JLabel(new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/Background.png"))); 
 		bg.setBounds(0, 0,998, 500);
 		contenedor.add(bg,0);
@@ -112,9 +117,12 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 		salir.setBounds(200,220,350,50);
 		contenedor.add(salir,0);
 		componentes.add(salir);
+		
+		sonidoM.reproducir();
 	}
 	
 	private void iniciarJuego(){
+		sonidoJ=new SonidoJuego();
 		juego= new Juego(this);
 		b=juego.getBomberman();
 		b.getPuntaje().getGrafico().setBounds(870, 410, 128,64);
@@ -124,6 +132,7 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 		tiempo = new Cronometro();
 		tiempo.getGrafico().setBounds(10, 410, 128, 64);
 		contenedor.add(tiempo.getGrafico(),1);
+		sonidoJ.reproducir();
 		tiempo.start();
 	}
 
@@ -163,6 +172,8 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 				contenedor.remove(c);
 				c=null;
 			}
+			sonidoM.detener();
+			sonidoM=null;
 			this.repaint();
 			iniciarJuego();
 		}
@@ -180,7 +191,6 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 		iniciarJuego();
 	}
 
-	@Override
 	public void keyPressed(KeyEvent arg0) 
 	{
 		if (arg0.getKeyCode() == KeyEvent.VK_ENTER) {
@@ -193,7 +203,13 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 				if(arg0.getKeyCode()==KeyEvent.VK_R)
 					reset();
 				else
-					mover(arg0);
+					if(arg0.getKeyCode()==KeyEvent.VK_S)
+						if(sonidoJ!=null)
+							sonidoJ.mute();
+						else
+							sonidoM.mute();
+					else
+						mover(arg0);
 	}
 
 	public void keyReleased(KeyEvent arg0) 

@@ -3,6 +3,7 @@ package Logica.Jugador;
 import Grafica.Bomba.BombaGrafico;
 import HilosPersonajes.BombaThread;
 import Logica.Bloques.Celda;
+import Sonidos.SonidoBomba;
 
 /**
  *@author Barreix, Iñaki.
@@ -17,6 +18,7 @@ public class Bomba
     protected BombaGrafico bg;
     protected BombaThread bt;
     protected Bomberman b;
+    protected SonidoBomba sonido;
     protected boolean agrego;
     /**
      * Crea una nueva Bomba con el atributo
@@ -29,6 +31,7 @@ public class Bomba
     	agrego=!bom.getDios();
     	alcance=bom.getAlc();
     	b=bom;
+    	sonido=new SonidoBomba();
     }
 
     /**
@@ -80,6 +83,7 @@ public class Bomba
     {
     	if(ubicacion!=null)
     	{
+    		sonido.reproducir();
     		ubicacion.destruirBomba();
     		ubicacion.getNivel().getJuego().getGui().remove(bg.getGrafico());
     		for(Celda c:ubicacion.getAdyacentes(alcance))
@@ -101,6 +105,8 @@ public class Bomba
     		}
     	}
     	bt.destruir();
+    	sonido.detener();
+    	sonido=null;
     	if(agrego)
     		b.addBomba();
     }
