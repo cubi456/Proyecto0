@@ -106,7 +106,7 @@ public class Bomba
     		}
     	}
     	if(!dios)
-    		b.addBomba();
+    		b.addBomba(this);
     	bt.destruir();
     }
 

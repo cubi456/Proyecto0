@@ -39,6 +39,7 @@ public class Bomberman extends Personaje
     	puntaje= new Puntaje();
     	misBombas= new Vector<Bomba>();
     	addBomba();
+    	addBomba();
     	grafico=new BombermanGrafico(s, x, y);
     	bt=new BombermanThread(miJuego.getGui(),this);
     	miJuego.getGui().agregarJuego(grafico.getGrafico(),2);
@@ -95,22 +96,32 @@ public class Bomberman extends Personaje
      */
     public void colocarBomba() 
     {
-        if(misBombas.size()>0)
-        {
-        	Celda c= miJuego.getNivel(0).getCelda(this.posX, this.posY);
-        	if(c.getBomba()==null){
-        		Bomba bom;
-        		if(!dios)
-        			bom=misBombas.remove(misBombas.size()-1);
-        		else
-        			bom=new Bomba(this);
-        		bom.setUbicacion(c);
-    			miJuego.getGui().agregarJuego(bom.getGrafico().getGrafico(),20);
-        		bom.getGrafico().setPos(posX, posY);
-        		c.colocarBomba(bom);
-        		bom=null;
-        	}
-        }
+    	Bomba bom;
+    	Celda c= miJuego.getNivel(0).getCelda(this.posX, this.posY);
+    	if(!dios)
+    	{
+    		if(misBombas.size()>0)
+    		{
+    			if(c.getBomba()==null){
+    				bom=misBombas.remove(misBombas.size()-1);
+    				System.out.println("Removi bomba");
+    				bom.setUbicacion(c);
+    				miJuego.getGui().agregarJuego(bom.getGrafico().getGrafico(),20);
+    				bom.getGrafico().setPos(posX, posY);
+    				c.colocarBomba(bom);
+    				bom=null;
+    			}
+    		}
+    	}
+    	else
+    	{
+    		bom=new Bomba(this);
+    		bom.setUbicacion(c);
+			miJuego.getGui().agregarJuego(bom.getGrafico().getGrafico(),20);
+    		bom.getGrafico().setPos(posX, posY);
+    		c.colocarBomba(bom);
+    		bom=null;
+    	}
       
     }
 

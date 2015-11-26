@@ -39,6 +39,7 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 	private static final long serialVersionUID = 1L;
 	private Vector<JComponent> componentes;
 	private JPanel contenedor;
+	private JLabel bg;
 	private Juego juego;
 	private JButton comenzar,salir,musica;
 	private int direccion=-1;
@@ -85,6 +86,9 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 		componentes = new Vector<JComponent>();
 		this.addKeyListener(this);
 		this.setFocusable(true);
+		bg=new JLabel(new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/Background.png"))); 
+		bg.setBounds(0, 0,998, 500);
+		contenedor.add(bg,0);
 		crearMenu();
 		
 	}
@@ -92,9 +96,6 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 
 	private void crearMenu(){
 		sonidoM=new SonidoMenu();
-		JLabel bg=new JLabel(new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/Background.png"))); 
-		bg.setBounds(0, 0,998, 500);
-		contenedor.add(bg,0);
 		JLabel bm=new JLabel(new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/BombermanRender00.png")));
 		bm.setBounds(570, 20, 420, 423);
 		contenedor.add(bm,0);
@@ -102,6 +103,7 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 		tl.setBounds(100, 20, 458, 117);
 		contenedor.add(tl,0);
 		componentes.add(bm);
+		componentes.add(tl);
 		
 		//Botones
 		
@@ -151,11 +153,14 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 		b=juego.getBomberman();
 		b.getPuntaje().getGrafico().setBounds(870, 410, 128,64);
 		contenedor.add(b.getPuntaje().getGrafico(),1);
+		componentes.add(b.getPuntaje().getGrafico());
 		juego.getNivel(0).getControlador().getGrafico().setBounds(140, 410, 256, 64);
 		contenedor.add(juego.getNivel(0).getControlador().getGrafico(),1);
+		componentes.add(juego.getNivel(0).getControlador().getGrafico());
 		tiempo = new Cronometro();
 		tiempo.getGrafico().setBounds(10, 410, 128, 64);
 		contenedor.add(tiempo.getGrafico(),1);
+		componentes.add(tiempo.getGrafico());
 		sonidoJ.reproducir();
 		tiempo.start();
 	}
@@ -207,12 +212,13 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 	
 	public void reset()
 	{
-		this.remove(contenedor);
-		contenedor = new JPanel();
-		contenedor.setBorder(new EmptyBorder(5, 5, 5, 5));
-		setContentPane(contenedor);
-		contenedor.setLayout(null);
-		juego=null;
+		for(JComponent c:componentes)
+		{
+			contenedor.remove(c);
+			c=null;
+		}
+		bg.setIcon((new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/Background.png"))));
+		musica.setBounds(820,430,32,32);
 		System.gc();
 		iniciarJuego();
 	}
@@ -232,7 +238,10 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 					if(arg0.getKeyCode()==KeyEvent.VK_S)
 						toggleSound();
 					else
-						mover(arg0);
+						if(arg0.getKeyCode()==KeyEvent.VK_D)
+							this.b.convertirEnDios();
+						else
+							mover(arg0);
 	}
 
 	public void keyReleased(KeyEvent arg0) 
@@ -311,6 +320,36 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 	
 	public void noHayMasCajas(int p)
 	{
+		bg.setIcon((new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/Background01.png"))));
+		
+		musica.setBounds(860,430,32,32);
+		
+		for(JComponent c:componentes)
+		{
+			contenedor.remove(c);
+			c=null;
+		}
+		contenedor.repaint();
+		
+		sonidoJ.detener();
+		sonidoJ=null;
+		sonidoM=new SonidoMenu();
+		sonidoM.reproducir();
+		
+		JLabel puntaje=new JLabel("Puntaje: "+p);
+		
+		InputStream is=this.getClass().getResourceAsStream("Fonts/Prototype.ttf");
+		try {
+			puntaje.setFont(Font.createFont(Font.TRUETYPE_FONT, is).deriveFont(1, 52));
+			puntaje.setForeground(Color.white);
+		} catch (FontFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+		}	
+		
+		
 		tiempo.destruir();
 		Icon[] gane=new Icon[7];
 		for(int i=0; i<6; i++){
@@ -318,22 +357,21 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 		}
 		
 		gane[6]=new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/Ganaste/gane06.gif"));
-		JLabel bg=new JLabel(new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/Background01.png"))); 
-		bg.setBounds(0, 0,998, 500);
-		contenedor.add(bg,0);
 		JLabel tl=new JLabel(new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/win00.png")));
 		tl.setBounds(115, 40, 860, 100);
 		contenedor.add(tl,0);
-		JLabel sc=new JLabel(new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/score00.png")));
-		sc.setBounds(80, 240, 350, 60);
-		contenedor.add(sc,0);
+		componentes.add(tl);
 		JLabel bm=new JLabel(gane[0]);
 		contenedor.add(bm,0);
 		bm.setBounds(570, 77, 400, 400);
+		puntaje.setBounds(40, 400, 350, 60);
+		contenedor.add(puntaje, 0);
+		componentes.add(puntaje);
+		contenedor.repaint();
 		for(int i=0; i<6; i++){
 			bm.setIcon(gane[i]);
 			try {
-				Thread.sleep(1000);
+				Thread.sleep(100);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -345,14 +383,23 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 	
 	public void muerteBomberman(int p)
 	{
+		bg.setIcon(new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/Background03.png")));
+		musica.setBounds(860,430,32,32);
+		
 		for(JComponent c:componentes)
 		{
 			contenedor.remove(c);
 			c=null;
 		}
 		contenedor.repaint();
-		JLabel puntaje=new JLabel("Puntaje: "+p);
 		
+		sonidoJ.detener();
+		sonidoJ=null;
+		sonidoM=new SonidoMenu();
+		sonidoM.reproducir();
+		
+		JLabel puntaje=new JLabel("Puntaje: "+p);
+	
 		InputStream is=this.getClass().getResourceAsStream("Fonts/Prototype.ttf");
 		try {
 			puntaje.setFont(Font.createFont(Font.TRUETYPE_FONT, is).deriveFont(1, 52));
@@ -371,9 +418,6 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 		contenedor.add(go,1);
 		
 		//Pantalla perdida
-		JLabel bg=new JLabel(new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/Background03.png"))); 
-		bg.setBounds(0, 0,998, 500);
-		contenedor.add(bg,0);
 		JLabel bm=new JLabel(new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/Bombermanlose02.gif")));
 		bm.setBounds(570, 77, 400, 400);
 		contenedor.add(bm,0);

@@ -13,14 +13,14 @@ public class Cronometro extends Thread
 {
  
 	private volatile JLabel tiempo;
-	private int m,s,cs;
+	private int m,s;
 	private volatile boolean stop;
 	
 	public Cronometro()
 	{
 		stop=false;
-		m=s=cs=0;
-		tiempo = new JLabel("Time: 00:00:00");
+		m=s=0;
+		tiempo = new JLabel("Time: 00:00");
 		InputStream is=this.getClass().getResourceAsStream("../Grafica/Fonts/Prototype.ttf");
 		try {
 			tiempo.setFont(Font.createFont(Font.TRUETYPE_FONT, is).deriveFont(1, 18));
@@ -39,17 +39,12 @@ public class Cronometro extends Thread
 		while(!stop)
 		{
 			try {
-				Thread.sleep(10);
+				Thread.sleep(1000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			cs++;
-			if(cs==100)
-			{
-                cs = 0;
-                s++;
-            }
+			s++;
             if(s==60) 
             {
                 s = 0;
@@ -66,7 +61,7 @@ public class Cronometro extends Thread
 	
 	public void actualizarLabel()
 	{
-		tiempo.setText("Time: "+m+":"+s+":"+cs);
+		tiempo.setText("Time: "+m+":"+s);
 	}
 	
 	public JLabel getGrafico()

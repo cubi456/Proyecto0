@@ -16,7 +16,7 @@ public class AnimacionFuego extends Thread
 		this.g = g;
 		stop=false;
 		fg=new FuegoGrafico(c.getX(),c.getY());
-		this.g.getContenedor().add(fg.getGrafico(),2);
+		this.g.agregarJuego(fg.getGrafico(),2);
 	}
 	
 	public void run()
@@ -27,8 +27,7 @@ public class AnimacionFuego extends Thread
 			c.setFuego(true);
 			fg.iniciar();
 			c.setFuego(false);
-			g.remove(fg.getGrafico());
-			g.repaint();
+			g.sacarJuego(fg.getGrafico());
 			fg=null;
 			this.detener();
 		}
