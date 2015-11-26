@@ -25,11 +25,9 @@ import Sonidos.SonidoJuego;
 import Sonidos.SonidoMenu;
 import Sonidos.SonidoSalir;
 import Timer.Cronometro;
-//import Timer.ContadorTiempo;
 
 public class GUI extends JFrame implements ActionListener,KeyListener
 {
-	// ISB VER
 	private Bomberman b;
 	private static final long serialVersionUID = 1L;
 	private Vector<JComponent> componentes;
@@ -112,10 +110,10 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 		contenedor.add(comenzar,0);
 		componentes.add(comenzar);
 		
-		salir=new JButton(new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/salir01.png")));
+		salir=new JButton(new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/salir00.png")));
 		salir.setActionCommand("salir");
 		salir.addActionListener(this);
-		salir.setRolloverIcon(new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/salir00.png")));
+		salir.setRolloverIcon(new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/salir01.png")));
 		salir.setOpaque(false);
 		salir.setContentAreaFilled(false);
 		salir.setBorderPainted(false);

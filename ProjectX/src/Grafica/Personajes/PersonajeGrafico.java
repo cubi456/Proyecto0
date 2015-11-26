@@ -6,7 +6,11 @@ import java.util.Vector;
 import javax.swing.Icon;
 import javax.swing.JLabel;
 
-
+/**
+ *@author Barreix, Iñaki.
+ *@author Comellas, Juan Manuel.
+ *@version 1.0
+ */
 public abstract class PersonajeGrafico{
 	protected JLabel grafico;
 	protected Vector<Vector<Icon>> sprites;
@@ -15,22 +19,31 @@ public abstract class PersonajeGrafico{
 	protected int velocidad;
 	protected Point pos;
 	
+	/**
+	 * Recibe los parametros px y py y setea la grafica en la celda correspondiente
+	 * @param px ubicacion horizontal del bloque
+	 * @param py ubicacion vertical del bloque
+	 */
 	protected PersonajeGrafico(int v, int x, int y){
 		this.velocidad=v;
 		pos = new Point(ancho * x, alto * y);
 		sprites = new Vector<Vector<Icon>>();
 				
 	}
-	public int getVelocidad(){
-		return velocidad;
-	}
-	
+
+	/**
+	 * La logica le pasa la direccion donde va a mirar antes de verificar si puede moverse
+	 * @param dir a donde se piensa mover
+	 */
 	public void cambiarDirec(int dir)
 	{
-		// La logica le pasa la direccion donde se va a mover
 			grafico.setIcon(sprites.elementAt(dir).elementAt(0));
 	}
-	
+	/**
+	 * mueve personaje segun la accion que se debe hacer
+	 * 0:izquierda, 1:arriba, 2:derecha, 3:abajo, 4:muerte.
+	 * @param direccion a la que se le pide mover
+	 */
 	
 	public void mover(int direccion)
 	{
@@ -38,14 +51,17 @@ public abstract class PersonajeGrafico{
 			muerte();
 		else
 			{
-				int mov=2;
 				for(int j=0;j<2;j++){
-					movimientoGrafico(direccion, mov);
+					movimientoGrafico(direccion, 2);
 				}
 				grafico.setIcon(sprites.elementAt(direccion).elementAt(0));
 			}
 	}
-	
+	/**
+	 * Metodo que emplea el movimiento grafico
+	 * @param direccion
+	 * @param mov
+	 */
 	private void movimientoGrafico(int direccion, int mov){
 		for(Icon i:sprites.elementAt(direccion)){
 			switch(direccion){
@@ -72,6 +88,9 @@ public abstract class PersonajeGrafico{
 				}
 	  	}
 	}
+	/**
+	 * Metodo que emplea la animacion de la muerte
+	 */
 	private void muerte(){
 		 for(Icon i:sprites.elementAt(4))
 	  	 {
@@ -85,34 +104,41 @@ public abstract class PersonajeGrafico{
 	  	 }
 	  	 grafico.setIcon(null);
 	}
+	/**
+	 * Retorna el imagen asociada al grafico
+	 * @return Jlabel
+	 */
 	public JLabel getGrafico()
 	{
 		return this.grafico;
 	}
 	
+	/**
+	 * La logica lo llama cuandoun personaje muere para activar animacion
+	 */
 	public void morir()
 	{
-		if(this.grafico != null)
-		{
+		if(this.grafico != null)	
 			this.mover(4);
-	    }
 	}
 	
-	public Vector<Vector<Icon>> getSprites()
-	{
-		return sprites;
-	}
+	/**
+	 * Setea velocidad pasada por parametro
+	 * @param vel a la cual se quiere asignar
+	 */
+
 	
 	public void setVelocidad(int vel)
 	{
 		velocidad=vel;
 	}
 	
-	public Point getPos()
-	{
-		return pos;
-	}
-	
+	/**
+	 * Este metodo se utiliza para aquellos personajes que deban cambiar
+	 * por otro(estilo disfraz).
+	 * En este caso solo lo utilizara Bomberman, porlo que solo este lo redefinira
+	 * @param i
+	 */
 	public abstract void cambiarA(int i);
 		//Solo redifinira Bomberman en modo Dios
 		//se redefinira para las clases que lo necesitan

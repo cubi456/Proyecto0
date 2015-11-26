@@ -3,8 +3,19 @@ package Grafica.Bloques;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
+/**
+ *@author Barreix, Iñaki.
+ *@author Comellas, Juan Manuel.
+ *@version 1.0
+ */
+
 public class ParedDesctGrafico extends BloqueGrafico {
 	protected Icon[] bloque; 
+	/**
+	 * Crea el ParedDestructible donde le pasaran en que poscion se lo debe asignar
+	 * @param px ubicacion horizontal
+	 * @param py ubicacion vertial
+	 */
 	public ParedDesctGrafico(int px, int py){
 		super(px, py);
 		bloque=new Icon[5];
@@ -12,7 +23,9 @@ public class ParedDesctGrafico extends BloqueGrafico {
 		bloque[i]=new ImageIcon(this.getClass().getResource("../Sprites/Bloque/Destructible0"+i+".png"));
 		imagen= bloque[0];// pone el bloque comun
 	}
-	
+	/**
+	 * Genera una pequeña animacion en la destruccion de pared 
+	 */
 	public void destruir(){
 		for(int i=0; i<5;i++){
 			this.getGrafico().setIcon(bloque[i]);
