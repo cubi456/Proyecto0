@@ -8,6 +8,7 @@ import java.util.Vector;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -19,8 +20,10 @@ import javax.swing.border.EmptyBorder;
 import Logica.Juego;
 import Logica.Jugador.Bomberman;
 import Sonidos.Sonido;
+import Sonidos.SonidoComenzar;
 import Sonidos.SonidoJuego;
 import Sonidos.SonidoMenu;
+import Sonidos.SonidoSalir;
 import Timer.Cronometro;
 //import Timer.ContadorTiempo;
 
@@ -32,9 +35,11 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 	private Vector<JComponent> componentes;
 	private JPanel contenedor;
 	private Juego juego;
-	private JButton comenzar,salir;
+	private JButton comenzar,salir,musica;
 	private int direccion=-1;
 	private Cronometro tiempo;
+	private boolean silencio;
+	private Icon activo,inactivo;
 	private Sonido sonidoM,sonidoJ;
 	
 	private boolean lock=false;
@@ -118,6 +123,20 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 		contenedor.add(salir,0);
 		componentes.add(salir);
 		
+		
+		activo=new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/conMusica.png"));
+		inactivo=new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/sinMusica.png"));
+		musica=new JButton(activo);
+		musica.setActionCommand("musica");
+		musica.addActionListener(this);
+		musica.setRolloverIcon(inactivo);
+		musica.setOpaque(false);
+		musica.setContentAreaFilled(false);
+		musica.setBorderPainted(false);
+		musica.setBounds(820,430,32,32);
+		contenedor.add(musica,0);
+		silencio=false;
+		
 		sonidoM.reproducir();
 	}
 	
@@ -165,13 +184,15 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 		return contenedor;
 	}
 	
-	private void corregirContenedor()
+	private void iniciar()
 	{
 		if (juego == null) {
 			for(JComponent c:componentes){
 				contenedor.remove(c);
 				c=null;
 			}
+			Sonido s=new SonidoComenzar();
+			s.reproducir();
 			sonidoM.detener();
 			sonidoM=null;
 			this.repaint();
@@ -194,20 +215,17 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 	public void keyPressed(KeyEvent arg0) 
 	{
 		if (arg0.getKeyCode() == KeyEvent.VK_ENTER) {
-			corregirContenedor();
+			iniciar();
 		}
 		else
 			if(arg0.getKeyCode()==KeyEvent.VK_ESCAPE)
-				System.exit(0);
+				salir();
 			else
 				if(arg0.getKeyCode()==KeyEvent.VK_R)
 					reset();
 				else
 					if(arg0.getKeyCode()==KeyEvent.VK_S)
-						if(sonidoJ!=null)
-							sonidoJ.mute();
-						else
-							sonidoM.mute();
+						toggleSound();
 					else
 						mover(arg0);
 	}
@@ -225,9 +243,51 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 	public void actionPerformed(ActionEvent arg0) 
 	{
 		if(arg0.getActionCommand().equals("comenzar"))
-			this.corregirContenedor();
+			this.iniciar();
 		if(arg0.getActionCommand().equals("salir"))
-			System.exit(0);
+			salir();
+		if(arg0.getActionCommand().equals("musica"))
+			toggleSound();
 		this.requestFocus();
+	}
+	
+	private void toggleSound()
+	{
+		if(sonidoM!=null)
+			sonidoM.mute();
+		else
+			sonidoJ.mute();
+		if(silencio)
+		{
+			musica.setIcon(activo);
+			musica.setRolloverIcon(inactivo);
+			silencio=true;
+		}	
+		else
+		{
+			musica.setIcon(inactivo);
+			musica.setRolloverIcon(activo);
+			silencio=false;
+		}
+	}
+	
+	private void salir()
+	{
+		if(sonidoM!=null)
+		{
+			sonidoM.detener();
+			Sonido salir=new SonidoSalir();
+			salir.reproducir();
+			try {
+				Thread.sleep(600);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		else
+			sonidoJ.detener();
+		
+		System.exit(0);
 	}
 }

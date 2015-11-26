@@ -4,6 +4,7 @@ package Logica.PowerUps;
 import Grafica.PowerUps.PowerUpGrafico;
 import Logica.PowerUp;
 import Logica.Jugador.Bomberman;
+import Sonidos.SonidoMasacrality;
 
 /**
  *@author Barreix, Iñaki.
@@ -22,6 +23,7 @@ public class Masacrality extends PowerUp
     public Masacrality(PowerUpGrafico p) 
     {
        super(p);
+       sonido=new SonidoMasacrality();
     }
 
     /**
@@ -29,6 +31,7 @@ public class Masacrality extends PowerUp
      */
     public void setAction(Bomberman b) 
     {
+    	sonido.reproducir();
     	b.getPuntaje().addPuntaje(50);
         b.convertirEnDios();
     }

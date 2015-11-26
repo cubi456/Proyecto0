@@ -3,6 +3,8 @@ package Logica.PowerUps;
 import Grafica.PowerUps.PowerUpGrafico;
 import Logica.PowerUp;
 import Logica.Jugador.Bomberman;
+import Sonidos.Sonido;
+import Sonidos.SonidoBombality;
 
 /**
  *@author Barreix, Iñaki.
@@ -21,6 +23,7 @@ public class Bombality extends PowerUp
     public Bombality(PowerUpGrafico p)
     {
     	super(p);
+    	super.sonido=new SonidoBombality();
     }
 
     /**
@@ -28,6 +31,7 @@ public class Bombality extends PowerUp
      */
     public void setAction(Bomberman b) 
     {
+    	sonido.reproducir();
         b.addBomba();
         b.getPuntaje().addPuntaje(35);
     }

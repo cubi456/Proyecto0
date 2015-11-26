@@ -2,6 +2,7 @@ package Logica;
 
 import Grafica.PowerUps.PowerUpGrafico;
 import Logica.Jugador.Bomberman;
+import Sonidos.Sonido;
 
 /**
  *@author Barreix, Iñaki.
@@ -12,6 +13,7 @@ public abstract class PowerUp
 {
 	
 	protected PowerUpGrafico pug;
+	protected Sonido sonido;
 	
 	/**
 	 * Recibe como parámetro el componente gráfico

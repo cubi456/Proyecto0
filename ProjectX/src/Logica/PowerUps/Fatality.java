@@ -5,6 +5,7 @@ import Grafica.PowerUps.PowerUpGrafico;
 import Logica.PowerUp;
 import Logica.Jugador.Bomba;
 import Logica.Jugador.Bomberman;
+import Sonidos.SonidoFatality;
 
 /**
  *@author Barreix, Iñaki.
@@ -23,6 +24,7 @@ public class Fatality extends PowerUp
     public Fatality(PowerUpGrafico p)
     {
        super(p);
+       sonido=new SonidoFatality();
     }
 
     /**
@@ -30,6 +32,7 @@ public class Fatality extends PowerUp
      */
     public void setAction(Bomberman b) 
     {
+    	sonido.reproducir();
     	b.getPuntaje().addPuntaje(35);
     	for(Bomba bom: b.getBombas())
     		bom.duplicarAlcance();

@@ -3,6 +3,7 @@ package Logica.PowerUps;
 import Grafica.PowerUps.PowerUpGrafico;
 import Logica.PowerUp;
 import Logica.Jugador.Bomberman;
+import Sonidos.SonidoSpeedUp;
 
 /**
  *@author Barreix, Iñaki.
@@ -21,6 +22,7 @@ public class SpeedUp extends PowerUp
     public SpeedUp(PowerUpGrafico p) 
     {
     	super(p);
+    	sonido=new SonidoSpeedUp();
     }
 
     /**
@@ -29,6 +31,7 @@ public class SpeedUp extends PowerUp
     
     public void setAction(Bomberman b) 
     {
+    	sonido.reproducir();
         b.getPuntaje().addPuntaje(30);
         b.doubleSpeed(); //Dobla la velocidad del personaje
     }
