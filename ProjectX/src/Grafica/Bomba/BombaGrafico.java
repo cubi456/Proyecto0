@@ -46,7 +46,7 @@ public class BombaGrafico{
 		{
 			grafico.setIcon(detonar[i]);
 			grafico.setBounds(x,y,ancho,alto);
-			Thread.sleep(1666);
+			Thread.sleep(1000);
 		}
 		//Coloca el fuego en la casilla de la bomba.
 		AnimacionFuego aux=new AnimacionFuego(c,g);

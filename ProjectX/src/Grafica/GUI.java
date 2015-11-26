@@ -1,9 +1,14 @@
 package Grafica;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Vector;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -25,9 +30,11 @@ import Sonidos.SonidoJuego;
 import Sonidos.SonidoMenu;
 import Sonidos.SonidoSalir;
 import Timer.Cronometro;
+//import Timer.ContadorTiempo;
 
 public class GUI extends JFrame implements ActionListener,KeyListener
 {
+	// ISB VER
 	private Bomberman b;
 	private static final long serialVersionUID = 1L;
 	private Vector<JComponent> componentes;
@@ -94,27 +101,7 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 		JLabel tl=new JLabel(new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/title.png")));
 		tl.setBounds(100, 20, 458, 117);
 		contenedor.add(tl,0);
-		
-		//boton game over
-		
-		/*JLabel go=new JLabel(new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/gameOver.gif")));
-		go.setBounds(356, 150, 285, 199);
-		contenedor.add(go,1);*/
-		
-		//Pantalla perdida
-	/*	JLabel bg=new JLabel(new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/Background03.png"))); 
-		bg.setBounds(0, 0,998, 500);
-		contenedor.add(bg,0);
-		JLabel bm=new JLabel(new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/Bombermanlose02.gif")));
-		bm.setBounds(570, 77, 400, 400);
-		contenedor.add(bm,0);
-		JLabel tl=new JLabel(new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/lose00.png")));
-		tl.setBounds(115, 40, 860, 100);
-		contenedor.add(tl,0);
-		JLabel sc=new JLabel(new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/score00.png")));
-		sc.setBounds(80, 240, 350, 60);
-		contenedor.add(sc,0);
-		componentes.add(bm);*/
+		componentes.add(bm);
 		
 		//Botones
 		
@@ -202,13 +189,6 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 		return contenedor;
 	}
 	
-	public void muerteBomberman(){
-		
-	}
-	
-	public void noHayMasCajas(){
-		
-	}
 	private void iniciar()
 	{
 		if (juego == null) {
@@ -284,16 +264,29 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 			sonidoJ.mute();
 		if(silencio)
 		{
-			musica.setIcon(activo);
-			musica.setRolloverIcon(inactivo);
-			silencio=true;
+			musica.setIcon(inactivo);
+			musica.setEnabled(true);
+			musica.setRolloverIcon(activo);
 		}	
 		else
 		{
-			musica.setIcon(inactivo);
-			musica.setRolloverIcon(activo);
-			silencio=false;
+			musica.setIcon(activo);
+			musica.setEnabled(true);
+			musica.setRolloverIcon(inactivo);
 		}
+		silencio=!silencio;
+	}
+	
+	public void agregarJuego(JComponent c,int index)
+	{
+		contenedor.add(c,index);
+		componentes.add(c);
+	}
+	
+	public void sacarJuego(JComponent c)
+	{
+		contenedor.remove(c);
+		componentes.removeElement(c);
 	}
 	
 	private void salir()
@@ -314,5 +307,82 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 			sonidoJ.detener();
 		
 		System.exit(0);
+	}
+	
+	public void noHayMasCajas(int p)
+	{
+		tiempo.destruir();
+		Icon[] gane=new Icon[7];
+		for(int i=0; i<6; i++){
+			gane[i]=new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/Ganaste/gane0"+i+".png"));
+		}
+		
+		gane[6]=new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/Ganaste/gane06.gif"));
+		JLabel bg=new JLabel(new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/Background01.png"))); 
+		bg.setBounds(0, 0,998, 500);
+		contenedor.add(bg,0);
+		JLabel tl=new JLabel(new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/win00.png")));
+		tl.setBounds(115, 40, 860, 100);
+		contenedor.add(tl,0);
+		JLabel sc=new JLabel(new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/score00.png")));
+		sc.setBounds(80, 240, 350, 60);
+		contenedor.add(sc,0);
+		JLabel bm=new JLabel(gane[0]);
+		contenedor.add(bm,0);
+		bm.setBounds(570, 77, 400, 400);
+		for(int i=0; i<6; i++){
+			bm.setIcon(gane[i]);
+			try {
+				Thread.sleep(1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		bm.setIcon(gane[6]);	
+		componentes.add(bm);
+	}
+	
+	public void muerteBomberman(int p)
+	{
+		for(JComponent c:componentes)
+		{
+			contenedor.remove(c);
+			c=null;
+		}
+		contenedor.repaint();
+		JLabel puntaje=new JLabel("Puntaje: "+p);
+		
+		InputStream is=this.getClass().getResourceAsStream("Fonts/Prototype.ttf");
+		try {
+			puntaje.setFont(Font.createFont(Font.TRUETYPE_FONT, is).deriveFont(1, 52));
+			puntaje.setForeground(Color.white);
+		} catch (FontFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+		}	
+		
+		
+		tiempo.destruir();
+		JLabel go=new JLabel(new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/gameOver.gif")));
+		go.setBounds(356, 150, 285, 199);
+		contenedor.add(go,1);
+		
+		//Pantalla perdida
+		JLabel bg=new JLabel(new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/Background03.png"))); 
+		bg.setBounds(0, 0,998, 500);
+		contenedor.add(bg,0);
+		JLabel bm=new JLabel(new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/Bombermanlose02.gif")));
+		bm.setBounds(570, 77, 400, 400);
+		contenedor.add(bm,0);
+		JLabel tl=new JLabel(new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/lose00.png")));
+		tl.setBounds(115, 40, 860, 100);
+		contenedor.add(tl,0);
+		puntaje.setBounds(40, 400, 350, 60);
+		contenedor.add(puntaje, 0);
+		componentes.add(bm);
+		contenedor.repaint();
 	}
 }

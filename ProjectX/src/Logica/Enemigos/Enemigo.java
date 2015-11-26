@@ -123,7 +123,9 @@ public abstract class Enemigo extends Personaje {
     	}
     
     	public void detenerHilo(){
+    		vivo=false;
     		et.destruir();
+    		et=null;
     	}
 
 }

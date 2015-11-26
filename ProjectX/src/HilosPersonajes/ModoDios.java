@@ -31,7 +31,6 @@ public class ModoDios extends Thread
 	
 	public void destruir()
 	{
-		this.interrupt();
 		this.stop=true;
 	}
 	

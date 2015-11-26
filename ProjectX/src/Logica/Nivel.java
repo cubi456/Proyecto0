@@ -57,7 +57,7 @@ public class Nivel
              		else
              				celdas[f][c]=new Celda(f,c,null,this);
         		 }
-        		 miJuego.getGui().getContenedor().add(celdas[f][c].getGrafico(), 0); 
+        		 miJuego.getGui().agregarJuego(celdas[f][c].getGrafico(), 0); 
         	}
         }
         crearPowerUps(pu);

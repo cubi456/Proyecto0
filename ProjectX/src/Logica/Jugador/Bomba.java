@@ -19,7 +19,7 @@ public class Bomba
     protected BombaThread bt;
     protected Bomberman b;
     protected SonidoBomba sonido;
-    protected boolean agrego;
+    protected boolean dios;
     /**
      * Crea una nueva Bomba con el atributo
      * de tipo Bomberman que recibe como parámetro.
@@ -28,7 +28,7 @@ public class Bomba
     public Bomba(Bomberman bom) 
     {
     	ubicacion=null;
-    	agrego=!bom.getDios();
+    	dios=bom.getDios();
     	alcance=bom.getAlc();
     	b=bom;
     	sonido=new SonidoBomba();
@@ -86,7 +86,7 @@ public class Bomba
     	{
     		sonido.reproducir();
     		ubicacion.destruirBomba();
-    		ubicacion.getNivel().getJuego().getGui().remove(bg.getGrafico());
+    		ubicacion.getNivel().getJuego().getGui().sacarJuego(bg.getGrafico());
     		for(Celda c:ubicacion.getAdyacentes(alcance))
     		{
     			if(c.getBomberman()!=null && !c.getBomberman().getDios())
@@ -105,9 +105,9 @@ public class Bomba
     			}
     		}
     	}
-    	bt.destruir();
-    	if(agrego)
+    	if(!dios)
     		b.addBomba();
+    	bt.destruir();
     }
 
 }

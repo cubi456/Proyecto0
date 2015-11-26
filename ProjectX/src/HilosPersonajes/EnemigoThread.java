@@ -15,10 +15,7 @@ public class EnemigoThread extends Thread {
 	
 	public void run(){
 		while(!rStop){
-			//try {
-				//Thread.sleep(vel); 
 				rLogic.mover(0);
-			//} catch (InterruptedException e) { }
 		}
 	}
 	
@@ -27,7 +24,6 @@ public class EnemigoThread extends Thread {
 	 * 
 	 */
 	public void destruir() {
-		this.interrupt();
 		rStop=true;
 	}
 

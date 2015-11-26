@@ -61,7 +61,6 @@ public class Cronometro extends Thread
 	
 	public void destruir()
 	{
-		this.interrupt();
 		this.stop=true;
 	}
 	

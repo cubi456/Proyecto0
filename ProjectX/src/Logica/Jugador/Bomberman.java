@@ -41,7 +41,7 @@ public class Bomberman extends Personaje
     	addBomba();
     	grafico=new BombermanGrafico(s, x, y);
     	bt=new BombermanThread(miJuego.getGui(),this);
-    	miJuego.getGui().getContenedor().add(grafico.getGrafico(),2);
+    	miJuego.getGui().agregarJuego(grafico.getGrafico(),2);
     	miJuego.getNivel(0).getCelda(x, y).setBomberman(this);
     	bt.start();
     }
@@ -105,7 +105,7 @@ public class Bomberman extends Personaje
         		else
         			bom=new Bomba(this);
         		bom.setUbicacion(c);
-    			miJuego.getGui().getContenedor().add(bom.getGrafico().getGrafico(),20);
+    			miJuego.getGui().agregarJuego(bom.getGrafico().getGrafico(),20);
         		bom.getGrafico().setPos(posX, posY);
         		c.colocarBomba(bom);
         		bom=null;

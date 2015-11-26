@@ -116,7 +116,7 @@ public class Celda {
     		PowerUp power= estado.getPowerUp();
     		if(power!=null){
     			power.getGrafico().setPos(x, y);
-    			miNivel.getJuego().getGui().getContenedor().add(power.getGrafico().getGrafico(),20);
+    			miNivel.getJuego().getGui().agregarJuego(power.getGrafico().getGrafico(),20);
     			this.setPowerUp(power);
     		}
     		estado=null;

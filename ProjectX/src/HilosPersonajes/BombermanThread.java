@@ -30,7 +30,6 @@ public class BombermanThread extends Thread
  }
 	public void destruir()
 	{
-		this.interrupt();
 		this.stop=true;
 	}
 	

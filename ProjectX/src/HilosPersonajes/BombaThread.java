@@ -33,7 +33,6 @@ public class BombaThread extends Thread
 	
 	public void destruir()
 	{
-		this.interrupt();
 		this.stop=true;
 	}
 }

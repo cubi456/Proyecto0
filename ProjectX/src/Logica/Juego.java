@@ -4,6 +4,7 @@ import java.util.*;
 
 import Grafica.GUI;
 import Logica.Enemigos.Altair;
+import Logica.Enemigos.Enemigo;
 import Logica.Enemigos.Rugulus;
 import Logica.Enemigos.Sirius;
 import Logica.Jugador.Bomberman;
@@ -17,7 +18,7 @@ public class Juego
 {
     protected Vector<Nivel> misNiveles;
     protected Bomberman b;
-    protected Vector<Personaje> misPersonajes;
+    protected Vector<Enemigo> misPersonajes;
     protected GUI gui;
     
 /**
@@ -30,7 +31,7 @@ public class Juego
     {
     	gui=g;
     	misNiveles= new Vector<Nivel>();
-    	misPersonajes=new Vector<Personaje>();
+    	misPersonajes=new Vector<Enemigo>();
     	this.crearNivel();
     	this.addBomberman();
     	this.addRugulus();
@@ -47,7 +48,7 @@ public class Juego
      * que contiene objetos de tipo Personaje.
      * @return Vector<Personaje>
      */
-    public Vector<Personaje> misPersonajes() 
+    public Vector<Enemigo> misPersonajes() 
     {
         return misPersonajes;
     }
@@ -116,9 +117,9 @@ public class Juego
     public void addRugulus()
     {
     	Point p= asignarPos();
-    	Personaje r= new Rugulus(1000, (int)p.getX(), (int)p.getY(), 15,this);
+    	Enemigo r= new Rugulus(1000, (int)p.getX(), (int)p.getY(), 15,this);
     	misPersonajes.addElement(r);
-    	gui.getContenedor().add(r.getGrafico(), 2);    	
+    	gui.agregarJuego(r.getGrafico(), 2);    	
     }
 
     /**
@@ -127,9 +128,9 @@ public class Juego
     public void addAltair()
     {
     	Point p= asignarPos();
-    	Personaje a= new Altair(1000, (int)p.getX(), (int)p.getY(), 20,this);
+    	Enemigo a= new Altair(1000, (int)p.getX(), (int)p.getY(), 20,this);
     	misPersonajes.addElement(a);
-        gui.getContenedor().add(a.getGrafico(),2);
+        gui.agregarJuego(a.getGrafico(),2);
     }
 
     /**
@@ -137,9 +138,9 @@ public class Juego
      */
     public void addSirius()
     {
-    	Personaje s= new Sirius(600, 29,11, 50,this);
+    	Enemigo s= new Sirius(600, 29,11, 50,this);
     	misPersonajes.addElement(s);
-    	gui.getContenedor().add(s.getGrafico(),2);
+    	gui.agregarJuego(s.getGrafico(), 2);
     }
 
     /**
@@ -151,7 +152,6 @@ public class Juego
     	//Por convencion Bomberman se asigna en la celda 1,1 con una velocidad inicial designada.
     	Bomberman b= new Bomberman(1000, 1, 1,this);
     	this.b=b;
-    	misPersonajes.addElement(b);
 
     	return b;
     } 
@@ -193,7 +193,7 @@ public class Juego
      * Avisa a la grafica que murio bomberman y detiene a los enemigos
      */
     public void matarBomberman(){
-    	gui.muerteBomberman();
+    	gui.muerteBomberman(b.getPuntaje().getPuntos());
     	frenarEnemigos();
     	borrarNivel();
     	b=null;
@@ -203,7 +203,7 @@ public class Juego
      * Avisa a la grafica la victoria de el juego y detiene a los personajes
      */
     public void avisarVictoria(){
-    	gui.noHayMasCajas(); 
+    	gui.noHayMasCajas(b.getPuntaje().getPuntos()); 
     	frenarEnemigos();
     	frenarBomberman();
     	borrarNivel();

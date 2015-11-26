@@ -36,6 +36,11 @@ public class Puntaje
 		puntaje.setText("Puntaje: "+puntos);
 	}
 	
+	public int getPuntos()
+	{
+		return puntos;
+	}
+	
 	public JLabel getGrafico()
 	{
 		return puntaje;
