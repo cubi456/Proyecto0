@@ -103,8 +103,6 @@ public abstract class Personaje {
      * Genera la muerte del Personaje en el juego.
      */
     protected void pasar(Celda c, int dir){
-  		if(vivo)
-  			grafico.mover(dir);
     	setearEnCeldaPersonaje();
     	switch (dir) {
 			case 0 : // izq
@@ -121,6 +119,8 @@ public abstract class Personaje {
 			break;
 		}
   		analizar(c);
+  		if(vivo)
+  			grafico.mover(dir);
     }
     
     public abstract void morir();

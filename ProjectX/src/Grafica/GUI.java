@@ -66,7 +66,7 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 		setBounds(10, 100, 100, 600);
 		setSize(new Dimension(998, 500));
 		setTitle("Bomberman");
-		setResizable(true);
+		setResizable(false);
 		setIconImage(new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/icon03.png")).getImage());
 		contenedor = new JPanel();
 		contenedor.setBorder(new EmptyBorder(5, 5, 5, 5));

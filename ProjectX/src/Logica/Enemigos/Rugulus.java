@@ -1,8 +1,11 @@
 package Logica.Enemigos;
 
+import java.util.Random;
+
 import Grafica.Personajes.RugulusGrafico;
 import HilosPersonajes.EnemigoThread;
 import Logica.Juego;
+import Logica.Bloques.Celda;
 
 /**
  *@author Barreix, Iñaki.
@@ -29,6 +32,24 @@ public class Rugulus extends Enemigo
         grafico= new RugulusGrafico(s, x, y);
     	et= new EnemigoThread(this);
     	et.start();
+    }
+    
+    public void mover(int dir) {
+    	// Calculo la siguiente direccion aleatoriamente.
+    		if(vivo && mePuedoMover())
+    		{
+    		Random rnd = new Random();
+    	    dir=rnd.nextInt(4);
+    		moverHacia(dir);
+    		}
+    	}
+    	
+    private boolean mePuedoMover()
+    {
+    	for(Celda c:miJuego.getNivel(0).getCelda(posX, posY).getAdyacentes(1))
+    		if(c.getPared()==null)
+    			return true;
+    	return false;
     }
     
 }

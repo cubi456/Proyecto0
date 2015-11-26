@@ -37,24 +37,15 @@ public abstract class PersonajeGrafico{
 		if(direccion==4)
 			muerte();
 		else
-			if(velocidad<1000)
-				moverConVel(direccion, 4);
-			else
-				moverLento(direccion);
+			{
+				int mov=2;
+				for(int j=0;j<2;j++){
+					movimientoGrafico(direccion, mov);
+				}
+				grafico.setIcon(sprites.elementAt(direccion).elementAt(0));
+			}
 	}
 	
-	private void moverLento(int direccion){
-		int mov=2;
-		for(int j=0;j<2;j++){
-			movimientoGrafico(direccion, mov);
-		}
-		grafico.setIcon(sprites.elementAt(direccion).elementAt(0));
-	}
-	
-	private void moverConVel(int direccion, int mov){
-			movimientoGrafico(direccion, mov);
-			grafico.setIcon(sprites.elementAt(direccion).elementAt(0));
-    }
 	private void movimientoGrafico(int direccion, int mov){
 		for(Icon i:sprites.elementAt(direccion)){
 			switch(direccion){

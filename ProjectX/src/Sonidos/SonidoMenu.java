@@ -24,4 +24,15 @@ public class SonidoMenu extends Sonido
 		}
 	}
 	
+	public void mute()
+	{
+		if(mute)
+			clip.stop();
+		else
+		{
+			super.reproducir();
+			clip.loop(Clip.LOOP_CONTINUOUSLY);
+		}
+		mute=!mute;
+	}
 }

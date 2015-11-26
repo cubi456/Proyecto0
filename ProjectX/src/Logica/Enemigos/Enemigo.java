@@ -33,7 +33,7 @@ public abstract class Enemigo extends Personaje {
         puntaje=p;
         miJuego.getNivel(0).getCelda(x, y).setEnemigo(this);
     }
-
+    
     /**
      * Retorna puntaje asociado al Enemigo
      *@return Puntaje del enemigo.
@@ -57,11 +57,16 @@ public abstract class Enemigo extends Personaje {
      */
     public void morir()
     {
-    	vivo=false;
-    	miJuego.getNivel(0).getCelda(this.posX,this.posY).setEnemigo(null);
-    	miJuego.matarPersonaje(this);
-    	grafico.morir();
-    	et.destruir();
+    	synchronized(this)
+    	{
+    		vivo=false;
+        	miJuego.getNivel(0).getCelda(this.posX,this.posY).setEnemigo(null);
+        	miJuego.matarPersonaje(this);
+        	grafico.morir();
+        	et.destruir();
+        	for(Celda c:miJuego.getNivel(0).getCelda(posX, posY).getAdyacentes(1))
+        		c.setEnemigo(null);
+    	}
     }
   
     /**

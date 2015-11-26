@@ -105,8 +105,6 @@ public class Bomba
     		}
     	}
     	bt.destruir();
-    	sonido.detener();
-    	sonido=null;
     	if(agrego)
     		b.addBomba();
     }

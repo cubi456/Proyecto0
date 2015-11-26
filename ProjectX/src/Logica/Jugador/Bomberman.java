@@ -140,19 +140,23 @@ public class Bomberman extends Personaje
     				miJuego.getGui().repaint();
     			}
     }
-    public void morir() {
-    	vivo=false;
-    	miJuego.getNivel(0).getCelda(this.posX,this.posY).setBomberman(null);
-    	grafico.morir();
-    	bt.destruir();
-    	miJuego.matarPersonaje(this);
+    public void morir() 
+    {
+    	synchronized(this)
+    	{
+    		vivo=false;
+        	miJuego.getNivel(0).getCelda(this.posX,this.posY).setBomberman(null);
+        	grafico.morir();
+        	bt.destruir();
+        	miJuego.matarPersonaje(this);
+    	}
     }
     /**
      * Duplica la velocidad del Bomberman.
      */
     public void doubleSpeed()
     {
-    	this.speed= (int) (speed*0.75);
+    	this.speed= speed-125;
     	grafico.setVelocidad(speed);
     }
     

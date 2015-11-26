@@ -23,4 +23,16 @@ public class SonidoJuego extends Sonido
 			e.printStackTrace();
 		}
 	}
+	
+	public void mute()
+	{
+		if(mute)
+			clip.stop();
+		else
+		{
+			super.reproducir();
+			clip.loop(Clip.LOOP_CONTINUOUSLY);
+		}
+		mute=!mute;
+	}
 }
