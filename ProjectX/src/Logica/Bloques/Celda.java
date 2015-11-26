@@ -102,13 +102,17 @@ public class Celda {
     }
     /**
      * Destruye la pared que se encuentra en la celda.
+     * Si no hay mas cajas en el nivel termina el juego
      */
     public void destruir() 
     {
     	if(estado.isDestructible())
     	{    		
     		grafico.destruir();
-    		miNivel.getControlador().removePared();
+    		ControladorBloques cont= miNivel.getControlador();
+    		cont.removePared();
+    		if(cont.getParedes()==0)
+    			miNivel.getJuego().avisarVictoria();
     		PowerUp power= estado.getPowerUp();
     		if(power!=null){
     			power.getGrafico().setPos(x, y);

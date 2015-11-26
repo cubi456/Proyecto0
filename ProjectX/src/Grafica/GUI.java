@@ -94,7 +94,27 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 		JLabel tl=new JLabel(new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/title.png")));
 		tl.setBounds(100, 20, 458, 117);
 		contenedor.add(tl,0);
-		componentes.add(bm);
+		
+		//boton game over
+		
+		/*JLabel go=new JLabel(new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/gameOver.gif")));
+		go.setBounds(356, 150, 285, 199);
+		contenedor.add(go,1);*/
+		
+		//Pantalla perdida
+	/*	JLabel bg=new JLabel(new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/Background03.png"))); 
+		bg.setBounds(0, 0,998, 500);
+		contenedor.add(bg,0);
+		JLabel bm=new JLabel(new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/Bombermanlose02.gif")));
+		bm.setBounds(570, 77, 400, 400);
+		contenedor.add(bm,0);
+		JLabel tl=new JLabel(new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/lose00.png")));
+		tl.setBounds(115, 40, 860, 100);
+		contenedor.add(tl,0);
+		JLabel sc=new JLabel(new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/score00.png")));
+		sc.setBounds(80, 240, 350, 60);
+		contenedor.add(sc,0);
+		componentes.add(bm);*/
 		
 		//Botones
 		
@@ -182,6 +202,13 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 		return contenedor;
 	}
 	
+	public void muerteBomberman(){
+		
+	}
+	
+	public void noHayMasCajas(){
+		
+	}
 	private void iniciar()
 	{
 		if (juego == null) {

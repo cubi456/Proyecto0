@@ -42,20 +42,7 @@ public class Nivel
         int  cantDest=145;
         for(int f=0; f<celdas.length; f++)
         {
-        	for(int c=0; c< celdas[0].length; c++){
-        		// el que se usa para probar
-       	/*	 if((c+1==celdas[0].length || c==0)||(f==0 || f+1==celdas.length))
-       		    celdas[f][c]= new Celda(f, c,new Pared(null,false),this);
-       		 else
-       			 if(f%2!=0 || c%2!=0)
-       				celdas[f][c]=new Celda(f,c,null,this);
-            		else
-            			if(f%4==0 && c%4!=0|| f%4!=0 && c%4==0)
-            				celdas[f][c]= new Celda(f, c,new Pared(null,false),this);
-            			else
-            				celdas[f][c]= new Celda(f, c,new Pared(null,true),this);
-        	*/
-        
+        	for(int c=0; c< celdas[0].length; c++){        
         		boolean espLibre = ((f==1 && c==1)||(f==1 && c==2)||(f==2 && c==1)||(f==28 && c==11)||(f==29 && c==10)||(f==29 && c==11));
         		 if((c+1==celdas[0].length || c==0)||(f==0 || f+1==celdas.length) || (f%2==0 && c%2==0))
         		    celdas[f][c]= new Celda(f, c,new Pared(null,false),this);
@@ -144,7 +131,7 @@ public class Nivel
     /**
      * 
      * Genera los powerUp del nivel.
-     * @param pu
+     * @param pu[]
      */
     private void crearPowerUps(int []pu)
     {
@@ -153,7 +140,9 @@ public class Nivel
     	   for(int j=pu[i];j>0;j--)
     		   addPowerUp(i);    
     }
-    
+    /**
+     * Asigna los lugares correspondientes de los PowerUps de manera Aleatoria
+     */
     private void designarPowerUps(){
     	Random gen= new Random();
     	int x,y;
@@ -172,6 +161,10 @@ public class Nivel
     		asigne=false;
     	}
     }
+    /**
+     * Devuelve el controlador de bloques
+     * @return ControladorBloques 
+     */
 
     public ControladorBloques getControlador()
     {

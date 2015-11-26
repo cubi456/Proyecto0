@@ -125,19 +125,29 @@ public abstract class Personaje {
     
     public abstract void morir();
     
-    /**
-     * Retorna el componente gráfico asociado al Personaje.
-     * @return JLabel
-     */
     
     public abstract void mover(int dir);
     
     protected abstract void analizar(Celda c);
-    
+    /**
+     * Quita al personaje de la celda de la que se movio
+     */
     protected abstract void setearEnCeldaPersonaje();
-    
+    /**
+     * Forma de poder pasar a la siguiente celda
+     * @param c a la que quiero pasar
+     * @param dir direccion a la que quiero ir
+     */
     protected abstract void quererPasar(Celda c, int dir);
-    
+    /**
+     * detiene el hilo del personaje
+     */
+    public abstract void detenerHilo();
+   
+    /**
+     * Retorna el componente gráfico asociado al Personaje.
+     * @return JLabel
+     */
     public JLabel getGrafico(){
 		return this.grafico.getGrafico();
 	}    

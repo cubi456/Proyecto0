@@ -15,7 +15,6 @@ import Logica.Jugador.Bomberman;
  */
 public class Juego 
 {
-    protected Timer tiempo;
     protected Vector<Nivel> misNiveles;
     protected Bomberman b;
     protected Vector<Personaje> misPersonajes;
@@ -173,7 +172,10 @@ public class Juego
     	//	Por convencion Bomberman es el primer personaje creado por eso siempre estara en la pos 0.
     	return b;
     }
-    
+/**
+ * Designa la posicion aleatoria de los personajes
+ * @return Point la posicion donde se los va a asignar
+ */
     public Point asignarPos(){
     	Random pos= new Random();
     	int x=0,y=0;
@@ -187,5 +189,40 @@ public class Juego
     	}
     	return new Point(x, y);
     }
+    /**
+     * Avisa a la grafica que murio bomberman y detiene a los enemigos
+     */
+    public void matarBomberman(){
+    	gui.muerteBomberman();
+    	frenarEnemigos();
+    	borrarNivel();
+    	b=null;
+    }
     
+    /**
+     * Avisa a la grafica la victoria de el juego y detiene a los personajes
+     */
+    public void avisarVictoria(){
+    	gui.noHayMasCajas(); 
+    	frenarEnemigos();
+    	frenarBomberman();
+    	borrarNivel();
+    }
+    
+    private void borrarNivel(){
+    	this.misNiveles.remove(misNiveles().size()-1);
+    	misNiveles=null;
+    }
+    private void frenarEnemigos(){
+    	for(Personaje p: misPersonajes){
+    		p.detenerHilo();
+    		p=null;
+    	}
+    	misPersonajes=null;    
+    }
+    
+    private void frenarBomberman(){
+    	b.detenerHilo();
+    	b=null;
+    }
 }
