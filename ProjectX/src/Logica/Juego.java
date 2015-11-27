@@ -193,20 +193,22 @@ public class Juego
      * Avisa a la grafica que murio bomberman y detiene a los enemigos
      */
     public void matarBomberman(){
-    	gui.muerteBomberman(b.getPuntaje().getPuntos());
+    	int p=b.getPuntaje().getPuntos();
     	frenarEnemigos();
     	borrarNivel();
     	b=null;
+    	gui.muerteBomberman(p);
     }
     
     /**
      * Avisa a la grafica la victoria de el juego y detiene a los personajes
      */
     public void avisarVictoria(){
-    	gui.noHayMasCajas(b.getPuntaje().getPuntos()); 
+    	int p=b.getPuntaje().getPuntos();
     	frenarEnemigos();
     	frenarBomberman();
     	borrarNivel();
+    	gui.noHayMasCajas(p); 
     }
     
     private void borrarNivel(){

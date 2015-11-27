@@ -28,6 +28,7 @@ public class AnimacionFuego extends Thread
 			fg.iniciar();
 			c.setFuego(false);
 			g.sacarJuego(fg.getGrafico());
+			g.repaint();
 			fg=null;
 			this.detener();
 		}

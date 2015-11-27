@@ -9,7 +9,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Random;
 import java.util.Vector;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -31,22 +30,23 @@ import Sonidos.SonidoJuego;
 import Sonidos.SonidoMenu;
 import Sonidos.SonidoSalir;
 import Timer.Cronometro;
+//import Timer.ContadorTiempo;
 
 public class GUI extends JFrame implements ActionListener,KeyListener
 {
+	// ISB VER
 	private Bomberman b;
 	private static final long serialVersionUID = 1L;
 	private Vector<JComponent> componentes;
 	private JPanel contenedor;
-	private JLabel bg, tl, bm, bombLose;
+	private JLabel bg;
 	private Juego juego;
-	private JButton comenzar,salir,musica;
+	private JButton comenzar,salir,musica,reset;
 	private int direccion=-1;
 	private Cronometro tiempo;
 	private boolean silencio;
-	private Icon activo, inactivo;
+	private Icon activo,inactivo;
 	private Sonido sonidoM,sonidoJ;
-	private Icon[] bombGane, win, lose, backgrounds;
 	
 	private boolean lock=false;
 	/**
@@ -86,20 +86,13 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 		componentes = new Vector<JComponent>();
 		this.addKeyListener(this);
 		this.setFocusable(true);
-		armarBackgrounds();
-		bg=new JLabel(backgrounds[0]); 
+		bg=new JLabel(new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/Backgrounds/Background00.png"))); 
 		bg.setBounds(0, 0,998, 500);
 		contenedor.add(bg,0);
 		crearMenu();
-			
+		
 	}
 	
-	private void armarBackgrounds(){		
-		this.backgrounds=new Icon[5];
-		for(int i=0; i<backgrounds.length; i++)
-			backgrounds[i]=new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/Backgrounds/Background0"+i+".png"));
-	
-	}
 
 	private void crearMenu(){
 		sonidoM=new SonidoMenu();
@@ -151,30 +144,6 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 		contenedor.add(musica,0);
 		silencio=false;
 		
-		// Carga imagenes de pantalla score
-		// de salida
-		this.bombGane=new Icon[7];
-		for(int i=0; i<bombGane.length-1; i++)
-			bombGane[i]=new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/Ganaste/gane0"+i+".png"));
-		bombGane[6]=new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/Ganaste/gane06.gif"));
-		
-		// carteles de ganar
-		this.win=new Icon[4];
-		for(int i=0; i<win.length; i++)
-			win[i]=new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/CartelesSalida/win0"+i+".png"));
-		
-		//carteles de perder
-		this.lose=new Icon[4];
-		for(int i=0; i<lose.length; i++)
-			lose[i]=new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/CartelesSalida/lose0"+i+".png"));
-		
-		bombLose= new JLabel(new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/Bombermanlose02.gif")));
-		
-		// Game Over
-		/*		JLabel go=new JLabel(new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/gameOver.gif")));
-		go.setBounds(356, 150, 285, 199);
-		contenedor.add(go,1);
-*/	
 		sonidoM.reproducir();
 	}
 	
@@ -248,7 +217,18 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 			contenedor.remove(c);
 			c=null;
 		}
-		bg.setIcon(backgrounds[0]);
+		contenedor.repaint();
+		if(sonidoM!=null)
+		{
+			sonidoM.detener();
+			sonidoM=null;
+		}
+		else
+		{
+			sonidoJ.detener();
+			sonidoJ=null;
+		}
+		bg.setIcon((new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/Backgrounds/Background00.png"))));
 		musica.setBounds(820,430,32,32);
 		System.gc();
 		iniciarJuego();
@@ -348,70 +328,13 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 		
 		System.exit(0);
 	}
-	/**
-	 * Pantalla victoria
-	 * @param p
-	 */
+	
 	public void noHayMasCajas(int p)
 	{
-		int colorBg= setearBg();
-		prepararPantallaScore(p);
+		bg.setIcon((new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/Backgrounds/Background01.png"))));
 		
-		tl=new JLabel(win[colorBg]);
-		JLabel bm=new JLabel(bombGane[0]);
-		agregarAContenedor();
-		
-		for(int i=0; i<6; i++){
-			bm.setIcon(bombGane[i]);
-			try {
-				Thread.sleep(100);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-		bm.setIcon(bombGane[6]);	
-		componentes.add(bm);
-	}
-	
-	
-	public void muerteBomberman(int p)
-	{
-		int colorBg= setearBg();
-		prepararPantallaScore(p);
-		
-		//Pantalla perdida
-		bm=bombLose;
-		tl=new JLabel(lose[colorBg]);
-		agregarAContenedor();
-		
-	}
-	
-	private void agregarAContenedor(){
-		bm.setBounds(570, 77, 400, 400);
-		tl.setBounds(115, 40, 860, 100);
-		contenedor.add(bm,0);
-		contenedor.add(tl,0);
-		componentes.add(bm);
-		componentes.add(tl);
-		contenedor.repaint();
-	}
-	private int setearBg(){
-		Random nro= new Random();
-		//bg.setIcon(backgrounds[nro.nextInt(5)+1]); // desinga un background cualquiera
-		bg.setIcon(backgrounds[2]);
-		return nro.nextInt(5);	//le designa otro color al cartel
-	}
-	private void acomodarSonido(){
-		
-		sonidoJ.detener();
-		sonidoJ=null;
-		sonidoM=new SonidoMenu();
-		sonidoM.reproducir();
-	}
-	private void prepararPantallaScore(int p){
-	
 		musica.setBounds(860,430,32,32);
+		
 		for(JComponent c:componentes)
 		{
 			contenedor.remove(c);
@@ -419,9 +342,13 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 		}
 		contenedor.repaint();
 		
-		acomodarSonido();
-
+		sonidoJ.detener();
+		sonidoJ=null;
+		sonidoM=new SonidoMenu();
+		sonidoM.reproducir();
+		
 		JLabel puntaje=new JLabel("Puntaje: "+p);
+		
 		InputStream is=this.getClass().getResourceAsStream("Fonts/Prototype.ttf");
 		try {
 			puntaje.setFont(Font.createFont(Font.TRUETYPE_FONT, is).deriveFont(1, 52));
@@ -432,10 +359,86 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 		}	
+		
+		
+		tiempo.destruir();
+		Icon[] gane=new Icon[7];
+		for(int i=0; i<6; i++){
+			gane[i]=new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/Ganaste/gane0"+i+".png"));
+		}
+		
+		gane[6]=new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/Ganaste/gane06.gif"));
+		JLabel tl=new JLabel(new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/CartelesSalida/win00.png")));
+		tl.setBounds(115, 40, 860, 100);
+		contenedor.add(tl,0);
+		componentes.add(tl);
+		JLabel bm=new JLabel(gane[0]);
+		contenedor.add(bm,0);
+		bm.setBounds(570, 77, 400, 400);
 		puntaje.setBounds(40, 400, 350, 60);
 		contenedor.add(puntaje, 0);
-		componentes.add(puntaje);		
-		tiempo.destruir();
-		
+		componentes.add(puntaje);
+		contenedor.repaint();
+		for(int i=0; i<6; i++){
+			bm.setIcon(gane[i]);
+			try {
+				Thread.sleep(100);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		bm.setIcon(gane[6]);	
+		componentes.add(bm);
 	}
+	
+	public void muerteBomberman(int p)
+	{
+		bg.setIcon(new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/Backgrounds/Background03.png")));
+		musica.setBounds(860,430,32,32);
+		
+		for(JComponent c:componentes)
+		{
+			contenedor.remove(c);
+			c=null;
+		}
+		contenedor.repaint();
+		
+		sonidoJ.detener();
+		sonidoJ=null;
+		sonidoM=new SonidoMenu();
+		sonidoM.reproducir();
+		
+		JLabel puntaje=new JLabel("Puntaje: "+p);
+	
+		InputStream is=this.getClass().getResourceAsStream("Fonts/Prototype.ttf");
+		try {
+			puntaje.setFont(Font.createFont(Font.TRUETYPE_FONT, is).deriveFont(1, 52));
+			puntaje.setForeground(Color.white);
+		} catch (FontFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+		}	
+		
+		
+		tiempo.destruir();
+		JLabel go=new JLabel(new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/gameOver.gif")));
+		go.setBounds(356, 150, 285, 199);
+		contenedor.add(go,1);
+		
+		//Pantalla perdida
+		JLabel bm=new JLabel(new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/Bombermanlose02.gif")));
+		bm.setBounds(570, 77, 400, 400);
+		contenedor.add(bm,0);
+		JLabel tl=new JLabel(new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/CartelesSalida/lose00.png")));
+		tl.setBounds(115, 40, 860, 100);
+		contenedor.add(tl,0);
+		puntaje.setBounds(40, 400, 350, 60);
+		contenedor.add(puntaje, 0);
+		componentes.add(bm);
+		contenedor.repaint();
+	}
+	
 }

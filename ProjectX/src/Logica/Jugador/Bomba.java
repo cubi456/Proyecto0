@@ -31,7 +31,6 @@ public class Bomba
     	dios=bom.getDios();
     	alcance=bom.getAlc();
     	b=bom;
-    	sonido=new SonidoBomba();
     }
 
     /**
@@ -84,6 +83,7 @@ public class Bomba
     {
     	if(ubicacion!=null)
     	{
+    		sonido=new SonidoBomba();
     		sonido.reproducir();
     		ubicacion.destruirBomba();
     		ubicacion.getNivel().getJuego().getGui().sacarJuego(bg.getGrafico());
