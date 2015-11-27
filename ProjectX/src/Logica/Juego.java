@@ -197,7 +197,7 @@ public class Juego
     	frenarEnemigos();
     	borrarNivel();
     	b=null;
-    	gui.noHayMasCajas(p);
+    	gui.muerteBomberman(p);
     }
     
     /**

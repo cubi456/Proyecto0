@@ -249,6 +249,9 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 					if(arg0.getKeyCode()==KeyEvent.VK_S)
 						toggleSound();
 					else
+						if(arg0.getKeyCode()==KeyEvent.VK_D)
+							this.b.convertirEnDios();
+						else
 							mover(arg0);
 	}
 
@@ -328,7 +331,6 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 	
 	public void noHayMasCajas(int p)
 	{
-		Cronometro t=tiempo;
 		bg.setIcon((new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/Backgrounds/Background01.png"))));
 		
 		musica.setBounds(860,430,32,32);
@@ -367,7 +369,7 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 		
 		gane[6]=new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/Ganaste/gane06.gif"));
 		JLabel tl=new JLabel(new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/CartelesSalida/win00.png")));
-		tl.setBounds(70, 20, 860, 100);
+		tl.setBounds(115, 40, 860, 100);
 		contenedor.add(tl,0);
 		componentes.add(tl);
 		JLabel bm=new JLabel(gane[0]);
@@ -376,10 +378,6 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 		puntaje.setBounds(40, 400, 350, 60);
 		contenedor.add(puntaje, 0);
 		componentes.add(puntaje);
-		t.getGrafico().getFont().deriveFont(1, 52);
-		t.getGrafico().setBounds(40,340,350,60);
-		contenedor.add(t.getGrafico(), 0);
-		componentes.add(t.getGrafico());
 		contenedor.repaint();
 		for(int i=0; i<6; i++){
 			bm.setIcon(gane[i]);
@@ -398,7 +396,7 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 	{
 		bg.setIcon(new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/Backgrounds/Background03.png")));
 		musica.setBounds(860,430,32,32);
-		Cronometro t=tiempo;
+		
 		for(JComponent c:componentes)
 		{
 			contenedor.remove(c);
@@ -427,7 +425,7 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 		
 		tiempo.destruir();
 		JLabel go=new JLabel(new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/gameOver.gif")));
-		go.setBounds(250, 150, 285, 199);
+		go.setBounds(356, 150, 285, 199);
 		contenedor.add(go,1);
 		
 		//Pantalla perdida
@@ -435,15 +433,11 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 		bm.setBounds(570, 77, 400, 400);
 		contenedor.add(bm,0);
 		JLabel tl=new JLabel(new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/CartelesSalida/lose00.png")));
-		tl.setBounds(70, 20, 860, 100);
+		tl.setBounds(115, 40, 860, 100);
 		contenedor.add(tl,0);
 		puntaje.setBounds(40, 400, 350, 60);
 		contenedor.add(puntaje, 0);
 		componentes.add(bm);
-		t.getGrafico().getFont().deriveFont(1, 52);
-		t.getGrafico().setBounds(40,340,350,60);
-		contenedor.add(t.getGrafico(), 0);
-		componentes.add(t.getGrafico());
 		contenedor.repaint();
 	}
 	

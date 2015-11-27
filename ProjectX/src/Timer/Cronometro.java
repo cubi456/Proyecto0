@@ -20,7 +20,7 @@ public class Cronometro extends Thread
 	{
 		stop=false;
 		m=s=0;
-		tiempo = new JLabel("Tempo: 0:0");
+		tiempo = new JLabel("Time: 00:00");
 		InputStream is=this.getClass().getResourceAsStream("../Grafica/Fonts/Prototype.ttf");
 		try {
 			tiempo.setFont(Font.createFont(Font.TRUETYPE_FONT, is).deriveFont(1, 18));
@@ -61,7 +61,7 @@ public class Cronometro extends Thread
 	
 	public void actualizarLabel()
 	{
-		tiempo.setText("Tiempo: "+m+":"+s);
+		tiempo.setText("Time: "+m+":"+s);
 	}
 	
 	public JLabel getGrafico()

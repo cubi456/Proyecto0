@@ -39,6 +39,7 @@ public class Bomberman extends Personaje
     	puntaje= new Puntaje();
     	misBombas= new Vector<Bomba>();
     	addBomba();
+    	addBomba();
     	grafico=new BombermanGrafico(s, x, y);
     	bt=new BombermanThread(miJuego.getGui(),this);
     	miJuego.getGui().agregarJuego(grafico.getGrafico(),2);
