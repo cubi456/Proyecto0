@@ -104,7 +104,6 @@ public class Bomberman extends Personaje
     		{
     			if(c.getBomba()==null){
     				bom=misBombas.remove(misBombas.size()-1);
-    				System.out.println("Removi bomba");
     				bom.setUbicacion(c);
     				miJuego.getGui().agregarJuego(bom.getGrafico().getGrafico(),20);
     				bom.getGrafico().setPos(posX, posY);
