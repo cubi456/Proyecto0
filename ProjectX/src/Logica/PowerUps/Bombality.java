@@ -3,7 +3,6 @@ package Logica.PowerUps;
 import Grafica.PowerUps.PowerUpGrafico;
 import Logica.PowerUp;
 import Logica.Jugador.Bomberman;
-import Sonidos.Sonido;
 import Sonidos.SonidoBombality;
 
 /**

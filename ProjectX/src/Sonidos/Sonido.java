@@ -1,7 +1,6 @@
 package Sonidos;
 
 
-import java.util.ResourceBundle.Control;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.Clip;

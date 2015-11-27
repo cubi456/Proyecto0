@@ -41,7 +41,7 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 	private JPanel contenedor;
 	private JLabel bg;
 	private Juego juego;
-	private JButton comenzar,salir,musica,reset;
+	private JButton comenzar,salir,musica;
 	private int direccion=-1;
 	private Cronometro tiempo;
 	private boolean silencio;

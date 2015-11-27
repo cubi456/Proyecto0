@@ -60,6 +60,7 @@ public class Bomberman extends Personaje
      */
     public void addBomba(Bomba b) 
     {
+       b.setAlcance(alc);
        misBombas.add(b);    
     }
     /**

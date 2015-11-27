@@ -40,7 +40,17 @@ public class Bomba
     	//aumenta cada llama 1, "duplicandola"
         alcance+=1;
     }
-
+    
+    /**
+     * Setea el alcance de la bomba
+     * @param a
+     */
+    
+    public void setAlcance(int a)
+    {
+    	alcance=a;
+    }
+    
     /**
      * Retorna el alcance de explosión de la bomba.
      * @return int alcance.
