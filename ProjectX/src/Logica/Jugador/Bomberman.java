@@ -125,8 +125,17 @@ public class Bomberman extends Personaje
     }
 
     protected void quererPasar(Celda c, int dir){
-    	if((c.getPared()== null && c.getBomba()==null) || (dios && (c.getPared()==null || c.getPared().isDestructible())))
+    	if((c.getPared()== null && c.getBomba()==null) || (dios && (c.getPared()==null || c.getPared().isDestructible())) || (c.getPared()!=null && c.getPared().isDestructible() && estoyTravado()))
     		pasar(c, dir);
+    }
+    
+    private boolean estoyTravado()
+    {
+    	boolean estoy=true;
+    	for(Celda c:miJuego.getNivel(0).getCelda(posX, posY).getAdyacentes(1))
+    		if(estoy)
+    			estoy=estoy && c.getPared()!=null;
+    	return estoy;
     }
    
     protected void setearEnCeldaPersonaje(){

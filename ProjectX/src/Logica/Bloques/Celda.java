@@ -106,7 +106,7 @@ public class Celda {
      */
     public void destruir() 
     {
-    	if(estado.isDestructible())
+    	if(estado!=null && estado.isDestructible())
     	{    		
     		grafico.destruir();
     		ControladorBloques cont= miNivel.getControlador();
