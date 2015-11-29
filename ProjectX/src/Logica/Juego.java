@@ -208,21 +208,13 @@ public class Juego
     private int terminarJuego(){
     	int p=b.getPuntaje().getPuntos();
     	frenarPersonajes();
-    	borrarNivel();
     	return p;
-    }
-    
-    private void borrarNivel(){
-    	this.misNiveles.remove(misNiveles().size()-1);
-    	misNiveles=null;
     }
     
     private void frenarPersonajes(){
     	for(Personaje p: misPersonajes){
     		p.detenerHilo();
-    		p=null;
     	}
-    	misPersonajes=null;    
     }
     
 }

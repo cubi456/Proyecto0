@@ -43,9 +43,9 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 	private JButton comenzar,salir,musica;
 	private int direccion=-1;
 	private Cronometro tiempo;
-	private boolean silencio;
+	private boolean silencio, pantallaJuego;
 	private Icon activo,inactivo;
-	private Icon[] background, bmgif, twin, tlose;
+	private Icon[] background, bmgif, twin, tlose, gover;
 	private Sonido sonidoM,sonidoJ;
 	
 	private boolean lock=false;
@@ -106,7 +106,7 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 		compSalida.add(bm);
 		compSalida.add(tl);
 		
-		//Botones
+		// CargaBotones
 		
 		
 		comenzar=new JButton(new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/Botones/comenzar00.png")));
@@ -116,9 +116,6 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 		comenzar.setOpaque(false);
 		comenzar.setContentAreaFilled(false);
 		comenzar.setBorderPainted(false);
-		comenzar.setBounds(160,160,350,50);
-		contenedor.add(comenzar,0);
-		compSalida.add(comenzar);
 		
 		salir=new JButton(new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/Botones/salir00.png")));
 		salir.setActionCommand("salir");
@@ -127,10 +124,8 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 		salir.setOpaque(false);
 		salir.setContentAreaFilled(false);
 		salir.setBorderPainted(false);
-		salir.setBounds(200,220,350,50);
-		contenedor.add(salir,0);
-		compSalida.add(salir);
-		
+		//los agrega a la pantalla
+		agregarBotones();
 		
 		activo=new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/Botones/conMusica.png"));
 		inactivo=new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/Botones/sinMusica.png"));
@@ -153,12 +148,12 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 		puntaje=new JLabel();
 		// Se utiliza para que JLabel aparezca mas rapido
 		bgAux=new JLabel();
-
-	/*
-		JLabel go=new JLabel(new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/gameOver.gif")));
-		go.setBounds(250, 150, 285, 199);
-		contenedor.add(go,1);
-	*/
+		
+		
+		// cartel de gameOver
+		gover=new Icon[8];
+		for(int i=0; i<gover.length; i++)
+			gover[i]=new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/CartelesSalida/gameover0"+i+".png"));
 		sonidoM.reproducir();
 	}
 	
@@ -175,6 +170,7 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 	
 	private void iniciarJuego(){
 		sonidoJ=new SonidoJuego();
+		pantallaJuego=true;
 		juego= new Juego(this);
 		b=juego.getBomberman();
 		b.getPuntaje().getGrafico().setBounds(870, 410, 128,64);
@@ -269,7 +265,11 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 	{
 		int keyCode= arg0.getKeyCode();
 		if (keyCode == KeyEvent.VK_ENTER) {
-			iniciar();
+			if(!pantallaJuego) 		// Si no estoy dentro del juego
+				if(juego==null)		// si no hay juego creado comienzo
+					iniciar();
+				else
+					reset();		//Sino restarteo
 		}
 		else
 			if(keyCode==KeyEvent.VK_ESCAPE)
@@ -297,7 +297,10 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 	public void actionPerformed(ActionEvent arg0) 
 	{
 		if(arg0.getActionCommand().equals("comenzar"))
-			this.iniciar();
+			if(juego==null)
+				this.iniciar();
+			else
+				reset();
 		if(arg0.getActionCommand().equals("salir"))
 			salir();
 		if(arg0.getActionCommand().equals("musica"))
@@ -328,9 +331,11 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 	
 	public void agregarJuego(JComponent c,int index)
 	{
+		if(pantallaJuego){
 		//	Se le suma uno al indice dejando en ind 0 a los comp de pantalla
-		contenedor.add(c,index+1);
-		componentesJuego.add(c);
+			contenedor.add(c,index+1);
+			componentesJuego.add(c);
+		}
 	}
 	
 	public void sacarJuego(JComponent c)
@@ -358,16 +363,33 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 		
 		System.exit(0);
 	}
-	private int tenerDistinto(int ant, Random gen){
-		int nuevo=gen.nextInt(6);
-		if(nuevo!=ant)
-			return nuevo;
-		else 
-			return tenerDistinto(ant, gen);
+
+	private void mostrarCartel(){
+		/**
+		 * Ademas de colocar el cartel de juego terminado da lugar a que algunos hilos terminen(logicamente)
+		 */
+		JLabel go=new JLabel();
+		go.setIcon(gover[0]);
+		go.setBounds(356, 150, 285, 199);
+		contenedor.add(go, 1);
+		for(int i=0;i<gover.length;i++)
+		{
+			go.setIcon(gover[i]);
+			go.setBounds(356, 150, 285, 199);
+			try {
+				Thread.sleep(500);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		contenedor.remove(go);
+	
 	}
-	public void gameOver(boolean forma, int p){
+	public void gameOver(boolean victoria, int p){
 		// variable game over pregunta si el juego termino bien o mal
-		// true victoria, false perdida
+		pantallaJuego=false;
+		mostrarCartel();
 		Random gen=new Random();
 		int colorbg=gen.nextInt(4)+1;
 		bgAux.setIcon(background[colorbg]);
@@ -376,7 +398,7 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 		contenedor.repaint();
 		tiempo.destruir();
 		
-		if(forma== true){
+		if(victoria){
 			bm.setIcon(bmgif[0]);
 			tl.setIcon(twin[tenerDistinto(colorbg, gen)]);
 		}
@@ -396,8 +418,17 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 		ponerPuntaje(p);
 		ponerTiempo();
 		quitarComponentesJuego();
+		agregarBotones();		
+		contenedor.repaint();
 		
-		
+	}
+	
+	private int tenerDistinto(int ant, Random gen){
+		int nuevo=gen.nextInt(5);
+		if(nuevo!=ant)
+			return nuevo;
+		else 
+			return tenerDistinto(ant, gen);
 	}
 
 	private void ponerMusicaMenu(){
@@ -439,4 +470,12 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 		}
 	}
 	
+	private void agregarBotones(){
+		comenzar.setBounds(160,160,350,50);
+		contenedor.add(comenzar,1);
+		compSalida.add(comenzar);
+		salir.setBounds(200,220,350,50);
+		contenedor.add(salir,1);
+		compSalida.add(salir);
+	}	
 }
