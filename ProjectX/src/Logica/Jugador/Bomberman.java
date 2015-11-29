@@ -166,8 +166,6 @@ public class Bomberman extends Personaje
     		vivo=false;
         	miJuego.getNivel(0).getCelda(this.posX,this.posY).setBomberman(null);
         	grafico.morir();
-        	bt.destruir();
-        	//miJuego.matarPersonaje(this);
         	miJuego.matarBomberman();
     	}
     }

@@ -18,7 +18,7 @@ public class Juego
 {
     protected Vector<Nivel> misNiveles;
     protected Bomberman b;
-    protected Vector<Enemigo> misPersonajes;
+    protected Vector<Personaje> misPersonajes;
     protected GUI gui;
     
 /**
@@ -31,7 +31,7 @@ public class Juego
     {
     	gui=g;
     	misNiveles= new Vector<Nivel>();
-    	misPersonajes=new Vector<Enemigo>();
+    	misPersonajes=new Vector<Personaje>();
     	this.crearNivel();
     	this.addBomberman();
     	this.addRugulus();
@@ -48,7 +48,7 @@ public class Juego
      * que contiene objetos de tipo Personaje.
      * @return Vector<Personaje>
      */
-    public Vector<Enemigo> misPersonajes() 
+    public Vector<Personaje> misPersonajes() 
     {
         return misPersonajes;
     }
@@ -152,7 +152,7 @@ public class Juego
     	//Por convencion Bomberman se asigna en la celda 1,1 con una velocidad inicial designada.
     	Bomberman b= new Bomberman(1000, 1, 1,this);
     	this.b=b;
-
+    	misPersonajes.addElement(b);
     	return b;
     } 
     
@@ -193,29 +193,31 @@ public class Juego
      * Avisa a la grafica que murio bomberman y detiene a los enemigos
      */
     public void matarBomberman(){
-    	int p=b.getPuntaje().getPuntos();
-    	frenarEnemigos();
-    	borrarNivel();
-    	b=null;
-    	gui.noHayMasCajas(p);
+    	int p = terminarJuego();
+    	gui.gameOver(false, p);
     }
     
     /**
      * Avisa a la grafica la victoria de el juego y detiene a los personajes
      */
     public void avisarVictoria(){
+    	int p =terminarJuego();
+    	gui.gameOver(true, p); 
+    }
+    
+    private int terminarJuego(){
     	int p=b.getPuntaje().getPuntos();
-    	frenarEnemigos();
-    	frenarBomberman();
+    	frenarPersonajes();
     	borrarNivel();
-    	gui.noHayMasCajas(p); 
+    	return p;
     }
     
     private void borrarNivel(){
     	this.misNiveles.remove(misNiveles().size()-1);
     	misNiveles=null;
     }
-    private void frenarEnemigos(){
+    
+    private void frenarPersonajes(){
     	for(Personaje p: misPersonajes){
     		p.detenerHilo();
     		p=null;
@@ -223,8 +225,4 @@ public class Juego
     	misPersonajes=null;    
     }
     
-    private void frenarBomberman(){
-    	b.detenerHilo();
-    	b=null;
-    }
 }
