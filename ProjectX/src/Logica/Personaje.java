@@ -16,7 +16,6 @@ public abstract class Personaje {
     protected Juego miJuego;
     protected boolean vivo;
     protected PersonajeGrafico grafico;
-
     /**
      * Crea un nuevo Personaje con la velocidad,
      * la posición en X,la posición en Y

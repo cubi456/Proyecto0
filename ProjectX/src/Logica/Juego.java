@@ -2,6 +2,7 @@ package Logica;
 import java.awt.Point;
 import java.util.*;
 
+import Grafica.CargadorGrafico;
 import Grafica.GUI;
 import Logica.Enemigos.Altair;
 import Logica.Enemigos.Enemigo;
@@ -215,6 +216,10 @@ public class Juego
     	for(Personaje p: misPersonajes){
     		p.detenerHilo();
     	}
+    }
+    
+    public CargadorGrafico getCargadorGrafico(){
+    	return gui.getCargadorGrafico();
     }
     
 }

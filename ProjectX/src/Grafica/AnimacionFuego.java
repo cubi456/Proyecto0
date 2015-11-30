@@ -15,7 +15,7 @@ public class AnimacionFuego extends Thread
 		this.c=c;
 		this.g = g;
 		stop=false;
-		fg=new FuegoGrafico(c.getX(),c.getY());
+		fg=new FuegoGrafico(c.getX(),c.getY(), g.getCargadorGrafico());
 		this.g.agregarJuego(fg.getGrafico(),2);
 	}
 	

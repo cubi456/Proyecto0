@@ -1,8 +1,9 @@
 package Grafica.Bomba;
 
 import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+
+import Grafica.CargadorGrafico;
 
 public class FuegoGrafico{
 	protected JLabel grafico;
@@ -12,11 +13,9 @@ public class FuegoGrafico{
 	protected int x,y;
 	protected int acl;
 	
-	public FuegoGrafico(int px,int py)
+	public FuegoGrafico(int px,int py, CargadorGrafico gc)
 	{
-		exp= new Icon[5];
-		for(int i=0; i<5; i++)
-			exp[i] = new ImageIcon(this.getClass().getResource("../Sprites/Fire/fire0"+i+".png"));		
+		exp=gc.getFuego();
 		this.x=px* ancho;
 		this.y=py* alto;
 		

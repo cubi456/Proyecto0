@@ -1,7 +1,8 @@
 package Grafica.Bloques;
 
 import javax.swing.Icon;
-import javax.swing.ImageIcon;
+
+import Grafica.CargadorGrafico;
 
 /**
  *@author Barreix, Iñaki.
@@ -11,17 +12,17 @@ import javax.swing.ImageIcon;
 
 public class ParedDesctGrafico extends BloqueGrafico {
 	protected Icon[] bloque; 
+	protected Icon imgAux;
 	/**
 	 * Crea el ParedDestructible donde le pasaran en que poscion se lo debe asignar
 	 * @param px ubicacion horizontal
 	 * @param py ubicacion vertial
 	 */
-	public ParedDesctGrafico(int px, int py){
+	public ParedDesctGrafico(int px, int py, CargadorGrafico cg){
 		super(px, py);
-		bloque=new Icon[5];
-		for(int i=0; i<5;i++)
-		bloque[i]=new ImageIcon(this.getClass().getResource("../Sprites/Bloque/Destructible0"+i+".png"));
+		bloque=cg.getBDestAnimacion();
 		imagen= bloque[0];// pone el bloque comun
+		imgAux=cg.getBSuelo();
 	}
 	/**
 	 * Genera una pequeña animacion en la destruccion de pared 
@@ -37,7 +38,7 @@ public class ParedDesctGrafico extends BloqueGrafico {
 			}
 			
 		}
-		imagen= new ImageIcon(this.getClass().getResource("../Sprites/Bloque/Piso.png")); 
+		imagen=imgAux;
 		this.getGrafico().setIcon(imagen);
 	}
 }

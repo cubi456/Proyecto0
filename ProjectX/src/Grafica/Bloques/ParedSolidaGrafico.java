@@ -1,6 +1,6 @@
 package Grafica.Bloques;
 
-import javax.swing.ImageIcon;
+import Grafica.CargadorGrafico;
 
 /**
  *@author Barreix, Iñaki.
@@ -13,9 +13,9 @@ public class ParedSolidaGrafico extends BloqueGrafico{
 	 * @param px ubicacion horizontal
 	 * @param py ubicacion vertial
 	 */
-	public ParedSolidaGrafico(int px, int py){
+	public ParedSolidaGrafico(int px, int py, CargadorGrafico cg){
 		super(px, py);
-		imagen= new ImageIcon(this.getClass().getResource("../Sprites/Bloque/ParedSolida.png"));
+		imagen= cg.getBInd();
 	}
 	/**
 	 * En esta implementación no hace nada el suelo si se destruye

@@ -50,12 +50,12 @@ public class Celda {
         miNivel=n;
         estado=p;
         if(estado==null)
-        	grafico=new SueloGrafico(x, y);
+        	grafico=new SueloGrafico(x, y, miNivel.getCargadorGrafico());
         else
         	if(estado.isDestructible())
-        		grafico=new ParedDesctGrafico(x, y);
+        		grafico=new ParedDesctGrafico(x, y, miNivel.getCargadorGrafico());
         	else
-        		grafico=new ParedSolidaGrafico(x, y);
+        		grafico=new ParedSolidaGrafico(x, y, miNivel.getCargadorGrafico());
         		
         
     }

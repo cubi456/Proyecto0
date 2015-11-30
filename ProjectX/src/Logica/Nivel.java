@@ -2,7 +2,7 @@
 package Logica;
 import java.util.*;
 
-
+import Grafica.CargadorGrafico;
 import Grafica.PowerUps.BombalityGrafico;
 import Grafica.PowerUps.FatalityGrafico;
 import Grafica.PowerUps.MasacralityGrafico;
@@ -169,6 +169,9 @@ public class Nivel
     public ControladorBloques getControlador()
     {
     	return paredes;
+    }
+    public CargadorGrafico getCargadorGrafico(){
+    	return miJuego.getCargadorGrafico();
     }
  
 }

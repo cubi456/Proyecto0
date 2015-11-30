@@ -1,6 +1,7 @@
 package Grafica.Bloques;
 
-import javax.swing.ImageIcon;
+
+import Grafica.CargadorGrafico;
 
 /**
  *@author Barreix, Iñaki.
@@ -13,9 +14,9 @@ public class SueloGrafico extends BloqueGrafico{
 	 * @param px ubicacion horizontal
 	 * @param py ubicacion vertial
 	 */
-	public SueloGrafico(int px, int py){
+	public SueloGrafico(int px, int py, CargadorGrafico cg){
 		super(px,py);
-		imagen=new ImageIcon(this.getClass().getResource("../Sprites/Bloque/Piso.png"));
+		imagen=cg.getBSuelo();
 	}
 	
 	/**

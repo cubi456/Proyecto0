@@ -47,6 +47,7 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 	private Icon activo,inactivo;
 	private Icon[] background, bmgif, twin, tlose, gover;
 	private Sonido sonidoM,sonidoJ;
+	private CargadorGrafico cargadorGrafico;
 	
 	private boolean lock=false;
 	/**
@@ -78,6 +79,7 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 		setSize(new Dimension(998, 500));
 		setTitle("Bomberman");
 		setResizable(false);
+		cargadorGrafico=new CargadorGrafico();
 		setIconImage(new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/Iconos/icon03.png")).getImage());
 		contenedor = new JPanel();
 		contenedor.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -91,9 +93,8 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 		bg=new JLabel(background[0]); 
 		bg.setBounds(0, 0,998, 500);
 		contenedor.add(bg,0);
-		crearMenu();		
+		crearMenu();
 	}
-
 
 	private void crearMenu(){
 		sonidoM=new SonidoMenu();
@@ -416,9 +417,9 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 		compSalida.add(bgAux);
 		ponerMusicaMenu();
 		ponerPuntaje(p);
-		ponerTiempo();
 		quitarComponentesJuego();
-		agregarBotones();		
+		agregarBotones();	
+		ponerTiempo();
 		contenedor.repaint();
 		
 	}
@@ -458,7 +459,7 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 	private void ponerTiempo(){		
 		tiempo.getGrafico().getFont().deriveFont(1, 52);
 		tiempo.getGrafico().setBounds(40,340,350,60);
-		contenedor.add(tiempo.getGrafico(), 0);
+		contenedor.add(tiempo.getGrafico(), 1);
 		compSalida.add(tiempo.getGrafico());
 	}
 	
@@ -478,4 +479,8 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 		contenedor.add(salir,1);
 		compSalida.add(salir);
 	}	
+	public CargadorGrafico getCargadorGrafico(){
+		return cargadorGrafico;
+	}
+
 }

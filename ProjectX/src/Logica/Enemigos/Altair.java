@@ -27,7 +27,7 @@ public class Altair extends Enemigo
      */
     public Altair(int s, int x, int y, int p,Juego j) {
     	super(s, x, y, p,j);
-        grafico= new AltairGrafico(s, x, y);
+        grafico= new AltairGrafico(s, x, y, miJuego.getCargadorGrafico());
     	et= new EnemigoThread(this);
     	et.start();
     }

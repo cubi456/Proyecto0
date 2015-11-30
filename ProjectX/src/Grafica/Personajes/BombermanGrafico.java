@@ -3,8 +3,9 @@ package Grafica.Personajes;
 import java.util.Vector;
 
 import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+
+import Grafica.CargadorGrafico;
 
 public class BombermanGrafico extends PersonajeGrafico {
 	/**
@@ -14,12 +15,12 @@ public class BombermanGrafico extends PersonajeGrafico {
 	 * @param py ubicacion vertical del bloque
 	 */
 	private Vector<Vector<Icon>> spritesDios, spritesAux;
-	public BombermanGrafico(int v, int px, int py) {
+	public BombermanGrafico(int v, int px, int py, CargadorGrafico gc) {
 		super(v, px, py);
-		sprites=cargarNormal();
+		sprites=gc.getBomberman();
 		spritesAux=sprites;
-		spritesDios=cargarDios();
-		this.grafico = new JLabel(sprites.elementAt(3).elementAt(0)); // Comienza de enfrente
+		spritesDios=gc.getBombDios();
+		this.grafico = new JLabel(gc.getBomberman().elementAt(0).elementAt(0));
 		this.grafico.setBounds(pos.x , pos.y, ancho, alto);
 	}
 	/**
@@ -34,49 +35,5 @@ public class BombermanGrafico extends PersonajeGrafico {
 		else{// carga normal
 			sprites=spritesAux;
 		}
-	}
-	/**
-	 * Carga las imagenes pertenecientes a Bomberman en estado Normal
-	 * @return Vector<Vector<Icon>> la coleccion de secuencia Normal
-	 */
-	
-	private Vector<Vector<Icon>> cargarNormal(){
-		Vector<Vector<Icon>> sp=new Vector<Vector<Icon>>();
-		sp.addElement(new Vector<Icon>());
-		for(int i=0;i<=7;i++)
-			sp.lastElement().addElement(new ImageIcon(this.getClass().getResource("../Sprites/Bomberman/Left/Left0"+i+".png")));
-		sp.addElement(new Vector<Icon>());
-		for(int i=0;i<=7;i++)
-			sp.lastElement().addElement(new ImageIcon(this.getClass().getResource("../Sprites/Bomberman/UP/UP0"+i+".png")));
-		sp.addElement(new Vector<Icon>());
-		for(int i=0;i<=7;i++)
-			sp.lastElement().addElement(new ImageIcon(this.getClass().getResource("../Sprites/Bomberman/Right/Right0"+i+".png")));
-		sp.addElement(new Vector<Icon>());
-		for(int i=0;i<=7;i++)
-			sp.lastElement().addElement(new ImageIcon(this.getClass().getResource("../Sprites/Bomberman/Down/Down0"+i+".png")));
-		sp.addElement(new Vector<Icon>());
-		for(int i=0;i<5;i++)
-			sp.lastElement().addElement(new ImageIcon(this.getClass().getResource("../Sprites/Bomberman/Dead/Dead0"+i+".png")));
-		return sp;
-	}
-	/**
-	 * Carga las imagenes pertenecientes a Bomberman en estado Dios
-	 * @return Vector<Vector<Icon>> la coleccion de secuencia Dios
-	 */
-	private Vector<Vector<Icon>> cargarDios(){
-		Vector<Vector<Icon>> spritesDios=new Vector<Vector<Icon>>();
-		spritesDios.addElement(new Vector<Icon>());
-		for(int i=0;i<=7;i++)
-			spritesDios.lastElement().addElement(new ImageIcon(this.getClass().getResource("../Sprites/Dios/Left/Left0"+i+".png")));
-		spritesDios.addElement(new Vector<Icon>());
-		for(int i=0;i<=7;i++)
-			spritesDios.lastElement().addElement(new ImageIcon(this.getClass().getResource("../Sprites/Dios/UP/UP0"+i+".png")));
-		spritesDios.addElement(new Vector<Icon>());
-		for(int i=0;i<=7;i++)
-			spritesDios.lastElement().addElement(new ImageIcon(this.getClass().getResource("../Sprites/Dios/Right/Right0"+i+".png")));
-		spritesDios.addElement(new Vector<Icon>());
-		for(int i=0;i<=7;i++)
-			spritesDios.lastElement().addElement(new ImageIcon(this.getClass().getResource("../Sprites/Dios/Down/Down0"+i+".png")));
-		return spritesDios;
 	}
 }

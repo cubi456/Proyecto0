@@ -3,7 +3,6 @@ package Grafica.Bomba;
 
 
 import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 import Grafica.AnimacionFuego;
@@ -19,10 +18,8 @@ public class BombaGrafico{
 	protected GUI g;
 	
 	public BombaGrafico(GUI gui){
-		detonar= new Icon[3];
-		for(int i=0; i<detonar.length; i++)
-			detonar[i] = new ImageIcon(this.getClass().getResource("../Sprites/Bomba/Bomb0"+i+".png"));
 		g=gui;
+		detonar=g.getCargadorGrafico().getBomba();
 	}
 	
 	public void setPos(int px,int py)

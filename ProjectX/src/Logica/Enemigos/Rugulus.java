@@ -29,7 +29,7 @@ public class Rugulus extends Enemigo
      */
     public Rugulus(int s, int x, int y, int p,Juego j) {
         super(s, x, y, p,j);
-        grafico= new RugulusGrafico(s, x, y);
+        grafico= new RugulusGrafico(s, x, y, miJuego.getCargadorGrafico());
     	et= new EnemigoThread(this);
     	et.start();
     }
