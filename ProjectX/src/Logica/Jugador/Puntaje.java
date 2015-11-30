@@ -2,32 +2,33 @@ package Logica.Jugador;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.FontFormatException;
-import java.io.IOException;
-import java.io.InputStream;
-
 import javax.swing.JLabel;
 
+import Grafica.CargadorGrafico;
+
+/**
+ *@author Barreix, Iñaki.
+ *@author Comellas, Juan Manuel.
+ *@version 1.0
+ */
 public class Puntaje 
 {
 	private int puntos;
-	private JLabel puntaje;
-	
-	public Puntaje()
+	private JLabel puntaje, puntaje2;
+	/**
+	 * Clase absoluta para controlar el puntaje de Bomberman
+	 * @param cg Utiliza el cargadorGrafico para obtener la fuente
+	 */
+	public Puntaje(CargadorGrafico cg)
 	{
 		puntos=0;
 		puntaje=new JLabel("Puntaje: 0");
-		InputStream is=this.getClass().getResourceAsStream("../../Grafica/Fonts/Prototype.ttf");
-		try {
-			puntaje.setFont(Font.createFont(Font.TRUETYPE_FONT, is).deriveFont(1, 18));
-			puntaje.setForeground(Color.white);
-		} catch (FontFormatException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		puntaje2=new JLabel("");
+		Font fuente=cg.getFPrototype();
+		puntaje.setFont(fuente.deriveFont(1, 18));
+		puntaje.setForeground(Color.white);
+		puntaje2.setFont(fuente.deriveFont(1, 52));
+		puntaje2.setForeground(Color.white);
 	}
 	
 	public void addPuntaje(int p)
@@ -36,13 +37,15 @@ public class Puntaje
 		puntaje.setText("Puntaje: "+puntos);
 	}
 	
-	public int getPuntos()
-	{
-		return puntos;
-	}
+
 	
 	public JLabel getGrafico()
 	{
 		return puntaje;
+	}
+	
+	public JLabel getGrafico2(){
+		puntaje2.setText("Puntaje: "+ puntos);
+		return puntaje2;
 	}
 }

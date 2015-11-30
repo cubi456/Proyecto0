@@ -1,10 +1,10 @@
 package Grafica.PowerUps;
 
-import javax.swing.ImageIcon;
+import Grafica.CargadorGrafico;
 
 public class MasacralityGrafico extends PowerUpGrafico{
-	public MasacralityGrafico(){
+	public MasacralityGrafico(CargadorGrafico gc){
 		super();
-		imagen=new ImageIcon(this.getClass().getResource("../Sprites/PU/PU_Masacrality.png"));
+		imagen=gc.getMasacrality();
 	}
 }

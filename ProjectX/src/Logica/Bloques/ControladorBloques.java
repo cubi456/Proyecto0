@@ -2,11 +2,10 @@ package Logica.Bloques;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.FontFormatException;
-import java.io.IOException;
-import java.io.InputStream;
 
 import javax.swing.JLabel;
+
+import Grafica.CargadorGrafico;
 
 public class ControladorBloques 
 {
@@ -16,21 +15,13 @@ public class ControladorBloques
 	 * Crea el cartel de cantidad de paredes Destructibles
 	 * @param p Cantidad total de paredesDest
 	 */
-	public ControladorBloques(int p)
+	public ControladorBloques(int p, CargadorGrafico cg)
 	{
 		paredes=p;
 		cant=new JLabel("Paredes restantes: "+paredes);
-		InputStream is=this.getClass().getResourceAsStream("../../Grafica/Fonts/Prototype.ttf");
-		try {
-			cant.setFont(Font.createFont(Font.TRUETYPE_FONT, is).deriveFont(1, 18));
-			cant.setForeground(Color.white);
-		} catch (FontFormatException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		Font fuente=cg.getFPrototype();
+		cant.setFont(fuente.deriveFont(1, 18));
+		cant.setForeground(Color.white);
 	}
 	/**
 	 * Disminuye la cantidad de paredes, y actualiza cartel

@@ -33,4 +33,8 @@ public class BombermanThread extends Thread
 		this.stop=true;
 	}
 	
+	public void restablecer(){
+		this.stop=false;
+	}
+	
 }

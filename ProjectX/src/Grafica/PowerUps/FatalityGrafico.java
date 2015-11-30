@@ -1,10 +1,10 @@
 package Grafica.PowerUps;
 
-import javax.swing.ImageIcon;
+import Grafica.CargadorGrafico;
 
 public class FatalityGrafico extends PowerUpGrafico{
-	public FatalityGrafico(){
+	public FatalityGrafico(CargadorGrafico gc){
 		super();
-		imagen=new ImageIcon(this.getClass().getResource("../Sprites/PU/PU_Fatality.png"));
+		imagen=gc.getFatality();
 	}
 }

@@ -194,22 +194,20 @@ public class Juego
      * Avisa a la grafica que murio bomberman y detiene a los enemigos
      */
     public void matarBomberman(){
-    	int p = terminarJuego();
-    	gui.gameOver(false, p);
+    	terminarJuego();
+    	gui.gameOver(false);
     }
     
     /**
      * Avisa a la grafica la victoria de el juego y detiene a los personajes
      */
     public void avisarVictoria(){
-    	int p =terminarJuego();
-    	gui.gameOver(true, p); 
+    	terminarJuego();
+    	gui.gameOver(true); 
     }
     
-    private int terminarJuego(){
-    	int p=b.getPuntaje().getPuntos();
+    private void terminarJuego(){
     	frenarPersonajes();
-    	return p;
     }
     
     private void frenarPersonajes(){
@@ -222,4 +220,9 @@ public class Juego
     	return gui.getCargadorGrafico();
     }
     
+    public void comenzarHilo(){
+       	for(Personaje p: misPersonajes){
+    		p.comenzarHilo();
+    	}
+    }
 }

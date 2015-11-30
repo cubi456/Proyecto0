@@ -62,7 +62,7 @@ public class Nivel
         }
         crearPowerUps(pu);
         designarPowerUps();
-        paredes=new ControladorBloques(cant);
+        paredes=new ControladorBloques(cant, this.getCargadorGrafico());
     }
 
     /**
@@ -94,25 +94,25 @@ public class Nivel
     	switch(i)
     	{
     		case 0:{
-    				p=new SpeedUpGrafico();
+    				p=new SpeedUpGrafico(miJuego.getCargadorGrafico());
     				PowerUp aux=new SpeedUp(p);
     				misPower.addElement(aux);
     				break;
     			   }
     		case 1:{
-    				p=new FatalityGrafico();
+    				p=new FatalityGrafico(miJuego.getCargadorGrafico());
     				PowerUp aux=new Fatality(p);
     				misPower.addElement(aux);
     				break;
     			   }
     		case 2:{
-    				p= new BombalityGrafico();
+    				p= new BombalityGrafico(miJuego.getCargadorGrafico());
     				PowerUp aux=new Bombality(p);
     				misPower.addElement(aux);
     				break;
     			   }
     		case 3:{
-    				p=new MasacralityGrafico();
+    				p=new MasacralityGrafico(miJuego.getCargadorGrafico());
     				PowerUp aux=new Masacrality(p);
     				misPower.addElement(aux);
     				break;

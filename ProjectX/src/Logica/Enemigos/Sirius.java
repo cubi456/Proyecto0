@@ -30,7 +30,6 @@ public class Sirius extends Enemigo {
         super(s, x, y, p,j);
         grafico= new SiriusGrafico(s, x, y, miJuego.getCargadorGrafico());
     	et= new EnemigoThread(this);
-    	et.start();
     }
 
     

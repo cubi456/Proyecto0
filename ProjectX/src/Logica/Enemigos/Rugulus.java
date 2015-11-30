@@ -31,7 +31,6 @@ public class Rugulus extends Enemigo
         super(s, x, y, p,j);
         grafico= new RugulusGrafico(s, x, y, miJuego.getCargadorGrafico());
     	et= new EnemigoThread(this);
-    	et.start();
     }
     
     public void mover(int dir) {

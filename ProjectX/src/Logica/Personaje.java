@@ -142,7 +142,10 @@ public abstract class Personaje {
      * detiene el hilo del personaje
      */
     public abstract void detenerHilo();
-   
+   /**
+    * restablece hilo
+    */
+    public abstract void comenzarHilo();
     /**
      * Retorna el componente gráfico asociado al Personaje.
      * @return JLabel

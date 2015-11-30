@@ -20,7 +20,7 @@ public class BombermanGrafico extends PersonajeGrafico {
 		sprites=gc.getBomberman();
 		spritesAux=sprites;
 		spritesDios=gc.getBombDios();
-		this.grafico = new JLabel(gc.getBomberman().elementAt(0).elementAt(0));
+		this.grafico = new JLabel(gc.getBomberman().elementAt(3).elementAt(0));
 		this.grafico.setBounds(pos.x , pos.y, ancho, alto);
 	}
 	/**

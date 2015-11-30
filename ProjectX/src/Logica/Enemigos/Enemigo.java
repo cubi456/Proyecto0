@@ -130,5 +130,9 @@ public abstract class Enemigo extends Personaje {
         		et=null;
     		}
     	}
+    	
+    	public void comenzarHilo(){
+    		et.start();
+    	}
 
 }

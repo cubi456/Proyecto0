@@ -36,14 +36,13 @@ public class Bomberman extends Personaje
     	super(s, x, y,j);
     	dios=false;
     	alc=1;
-    	puntaje= new Puntaje();
+    	puntaje= new Puntaje(miJuego.getCargadorGrafico());
     	misBombas= new Vector<Bomba>();
     	addBomba();
     	grafico=new BombermanGrafico(s, x, y, miJuego.getCargadorGrafico());
     	bt=new BombermanThread(miJuego.getGui(),this);
     	miJuego.getGui().agregarJuego(grafico.getGrafico(),2);
     	miJuego.getNivel(0).getCelda(x, y).setBomberman(this);
-    	bt.start();
     }
 
    /**
@@ -225,5 +224,13 @@ public class Bomberman extends Personaje
 	
 	public void detenerHilo(){
 		bt.destruir();
+	}
+	
+	public void restablecerEjecucion(){
+		bt.restablecer();
+	}
+	
+	public void comenzarHilo(){
+		bt.start();
 	}
 }

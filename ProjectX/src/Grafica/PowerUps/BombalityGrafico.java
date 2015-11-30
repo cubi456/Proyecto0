@@ -1,10 +1,10 @@
 package Grafica.PowerUps;
 
-import javax.swing.ImageIcon;
+import Grafica.CargadorGrafico;
 
 public class BombalityGrafico extends PowerUpGrafico{
-	public BombalityGrafico(){
+	public BombalityGrafico(CargadorGrafico gc){
 		super();
-		imagen=new ImageIcon(this.getClass().getResource("../Sprites/PU/PU_Bombality.png"));
+		imagen=gc.getBombality();
 	}
 }

@@ -1,10 +1,10 @@
 package Grafica.PowerUps;
 
-import javax.swing.ImageIcon;
+import Grafica.CargadorGrafico;
 
 public class SpeedUpGrafico extends PowerUpGrafico{
-	public SpeedUpGrafico(){
+	public SpeedUpGrafico(CargadorGrafico gc){
 		super();
-		imagen=new ImageIcon(this.getClass().getResource("../Sprites/PU/PU_Speedup.png"));
+		imagen=gc.getSpeed();
 	}
 }

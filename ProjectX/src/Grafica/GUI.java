@@ -1,14 +1,9 @@
 package Grafica;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.EventQueue;
-import java.awt.Font;
-import java.awt.FontFormatException;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.Random;
 import java.util.Vector;
 import java.awt.event.ActionEvent;
@@ -24,7 +19,6 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import Logica.Juego;
-import Logica.Jugador.Bomberman;
 import Sonidos.Sonido;
 import Sonidos.SonidoComenzar;
 import Sonidos.SonidoJuego;
@@ -34,18 +28,16 @@ import Timer.Cronometro;
 
 public class GUI extends JFrame implements ActionListener,KeyListener
 {
-	private Bomberman b;
 	private static final long serialVersionUID = 1L;
 	private Vector<JComponent> componentesJuego, compSalida;
 	private JPanel contenedor;
-	private JLabel bg, bgAux, bm, tl, puntaje;
+	private JLabel bg, bgAux, bm, tl, score, timer;
 	private Juego juego;
 	private JButton comenzar,salir,musica;
 	private int direccion=-1;
 	private Cronometro tiempo;
 	private boolean silencio, pantallaJuego;
 	private Icon activo,inactivo;
-	private Icon[] background, bmgif, twin, tlose, gover;
 	private Sonido sonidoM,sonidoJ;
 	private CargadorGrafico cargadorGrafico;
 	
@@ -80,7 +72,7 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 		setTitle("Bomberman");
 		setResizable(false);
 		cargadorGrafico=new CargadorGrafico();
-		setIconImage(new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/Iconos/icon03.png")).getImage());
+		setIconImage(new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/icon00.png")).getImage());
 		contenedor = new JPanel();
 		contenedor.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contenedor);
@@ -89,8 +81,7 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 		compSalida=new Vector<JComponent>();
 		this.addKeyListener(this);
 		this.setFocusable(true);
-		cargarBackgrounds();
-		bg=new JLabel(background[0]); 
+		bg=new JLabel(cargadorGrafico.getBackground()[0]); 
 		bg.setBounds(0, 0,998, 500);
 		contenedor.add(bg,0);
 		crearMenu();
@@ -98,10 +89,10 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 
 	private void crearMenu(){
 		sonidoM=new SonidoMenu();
-		bm=new JLabel(new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/BombermanRender00.png")));
+		bm=new JLabel(cargadorGrafico.getBombRender());
 		bm.setBounds(570, 20, 420, 423);
 		contenedor.add(bm,0);
-		tl=new JLabel(new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/title.png")));
+		tl=new JLabel(cargadorGrafico.getTitle());
 		tl.setBounds(100, 20, 458, 117);
 		contenedor.add(tl,0);
 		compSalida.add(bm);
@@ -110,30 +101,28 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 		// CargaBotones
 		
 		
-		comenzar=new JButton(new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/Botones/comenzar00.png")));
+		comenzar=new JButton(cargadorGrafico.getBComenzar()[0]);
 		comenzar.setActionCommand("comenzar");
 		comenzar.addActionListener(this);
-		comenzar.setRolloverIcon(new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/Botones/comenzar01.png")));
+		comenzar.setRolloverIcon(cargadorGrafico.getBComenzar()[1]);
 		comenzar.setOpaque(false);
 		comenzar.setContentAreaFilled(false);
 		comenzar.setBorderPainted(false);
 		
-		salir=new JButton(new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/Botones/salir00.png")));
+		salir=new JButton(cargadorGrafico.getBSalir()[0]);
 		salir.setActionCommand("salir");
 		salir.addActionListener(this);
-		salir.setRolloverIcon(new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/Botones/salir01.png")));
+		salir.setRolloverIcon(cargadorGrafico.getBSalir()[1]);
 		salir.setOpaque(false);
 		salir.setContentAreaFilled(false);
 		salir.setBorderPainted(false);
 		//los agrega a la pantalla
 		agregarBotones();
 		
-		activo=new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/Botones/conMusica.png"));
-		inactivo=new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/Botones/sinMusica.png"));
-		musica=new JButton(activo);
+		musica=new JButton(cargadorGrafico.getBSonido()[0]);
 		musica.setActionCommand("musica");
 		musica.addActionListener(this);
-		musica.setRolloverIcon(inactivo);
+		musica.setRolloverIcon(cargadorGrafico.getBSonido()[1]);
 		musica.setOpaque(false);
 		musica.setContentAreaFilled(false);
 		musica.setBorderPainted(false);
@@ -141,49 +130,30 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 		contenedor.add(musica,0);
 		silencio=false;
 		
-		//Bomberman giff
-		this.bmgif= new Icon[2];
-		bmgif[0]=new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/Bombermanwin.gif"));
-		bmgif[1]=new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/Bombermanlose.gif"));
-		
-		puntaje=new JLabel();
 		// Se utiliza para que JLabel aparezca mas rapido
 		bgAux=new JLabel();
-		
-		
-		// cartel de gameOver
-		gover=new Icon[8];
-		for(int i=0; i<gover.length; i++)
-			gover[i]=new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/CartelesSalida/gameover0"+i+".png"));
 		sonidoM.reproducir();
 	}
 	
-	private void cargarBackgrounds(){	
-		this.background=new Icon[5];
-		this.twin=new Icon[5];
-		this.tlose=new Icon[5];				
-		for(int i=0; i<background.length; i++){
-			background[i]=new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/Backgrounds/Background0"+i+".png"));	
-			twin[i]=new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/CartelesSalida/win0"+i+".png"));
-			tlose[i]=new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/CartelesSalida/lose0"+i+".png"));
-		}
-	}
+
 	
 	private void iniciarJuego(){
 		sonidoJ=new SonidoJuego();
 		pantallaJuego=true;
 		juego= new Juego(this);
-		b=juego.getBomberman();
-		b.getPuntaje().getGrafico().setBounds(870, 410, 128,64);
-		contenedor.add(b.getPuntaje().getGrafico(),1);
-		componentesJuego.add(b.getPuntaje().getGrafico());
+		score=juego.getBomberman().getPuntaje().getGrafico();
+		score.setBounds(870, 410, 128,64);
+		contenedor.add(score,1);
 		juego.getNivel(0).getControlador().getGrafico().setBounds(140, 410, 256, 64);
 		contenedor.add(juego.getNivel(0).getControlador().getGrafico(),1);
 		componentesJuego.add(juego.getNivel(0).getControlador().getGrafico());
-		tiempo = new Cronometro();
+		tiempo = new Cronometro(cargadorGrafico);
 		tiempo.getGrafico().setBounds(10, 410, 128, 64);
 		contenedor.add(tiempo.getGrafico(),1);
 		componentesJuego.add(tiempo.getGrafico());
+		// Ya se establecio el juego log y graficamente 
+		//mostrarRSG();
+		juego.comenzarHilo();
 		sonidoJ.reproducir();
 		tiempo.start();
 	}
@@ -225,7 +195,7 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 				contenedor.remove(c);
 				c=null;
 			}
-			Sonido s=new SonidoComenzar();
+			Sonido s=new SonidoComenzar(cargadorGrafico);
 			s.reproducir();
 			sonidoM.detener();
 			sonidoM=null;
@@ -256,7 +226,7 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 			sonidoJ.detener();
 			sonidoJ=null;
 		}
-		bg.setIcon((new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/Backgrounds/Background00.png"))));
+		//bg.setIcon(b);
 		musica.setBounds(820,430,32,32);
 		System.gc();
 		iniciarJuego();
@@ -355,7 +325,6 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 			try {
 				Thread.sleep(600);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -365,47 +334,63 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 		System.exit(0);
 	}
 
+	private void mostrarRSG(){
+		JLabel rsg= new JLabel();
+		rsg.setIcon(cargadorGrafico.getRSG()[0]);
+		rsg.setBounds(0,50,900,400);
+		contenedor.add(rsg, 1);
+		for(int i=0; i<3; i++){
+			rsg.setIcon(cargadorGrafico.getRSG()[i]);
+			rsg.setBounds(0,50,900,400);
+			try {
+				Thread.sleep(2000);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		}
+		contenedor.remove(rsg);
+	}
 	private void mostrarCartel(){
 		/**
 		 * Ademas de colocar el cartel de juego terminado da lugar a que algunos hilos terminen(logicamente)
 		 */
 		JLabel go=new JLabel();
-		go.setIcon(gover[0]);
+		go.setIcon(cargadorGrafico.getGameOver()[0]);
 		go.setBounds(356, 150, 285, 199);
 		contenedor.add(go, 1);
-		for(int i=0;i<gover.length;i++)
+		for(int i=0;i<cargadorGrafico.getGameOver().length;i++)
 		{
-			go.setIcon(gover[i]);
+			go.setIcon(cargadorGrafico.getGameOver()[i]);
 			go.setBounds(356, 150, 285, 199);
 			try {
 				Thread.sleep(500);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
 		contenedor.remove(go);
 	
 	}
-	public void gameOver(boolean victoria, int p){
+	public void gameOver(boolean victoria){
 		// variable game over pregunta si el juego termino bien o mal
 		pantallaJuego=false;
+		score=juego.getBomberman().getPuntaje().getGrafico2();
 		mostrarCartel();
 		Random gen=new Random();
 		int colorbg=gen.nextInt(4)+1;
-		bgAux.setIcon(background[colorbg]);
+		bgAux.setIcon(cargadorGrafico.getBackground()[colorbg]);
 		bgAux.setBounds(0, 0,998, 500);
 		contenedor.add(bgAux,1);
 		contenedor.repaint();
 		tiempo.destruir();
 		
 		if(victoria){
-			bm.setIcon(bmgif[0]);
-			tl.setIcon(twin[tenerDistinto(colorbg, gen)]);
+			bm.setIcon(cargadorGrafico.getBombGif()[0]);
+			tl.setIcon(cargadorGrafico.getWin()[tenerDistinto(colorbg, gen)]);
 		}
 		else{
-			bm.setIcon(bmgif[1]);
-			tl.setIcon(tlose[tenerDistinto(colorbg, gen)]);
+			bm.setIcon(cargadorGrafico.getBombGif()[1]);
+			tl.setIcon(cargadorGrafico.getLose()[tenerDistinto(colorbg, gen)]);
 		}
 		bm.setBounds(570, 77, 400, 400);
 		tl.setBounds(70, 20, 860, 100);
@@ -416,7 +401,7 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 		compSalida.add(bm);
 		compSalida.add(bgAux);
 		ponerMusicaMenu();
-		ponerPuntaje(p);
+		ponerPuntaje();
 		quitarComponentesJuego();
 		agregarBotones();	
 		ponerTiempo();
@@ -439,28 +424,17 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 		sonidoM.reproducir();
 	}
 	
-	private void ponerPuntaje(int p){
-		puntaje=new JLabel("Puntaje: "+p);
-		InputStream is=this.getClass().getResourceAsStream("Fonts/Prototype.ttf");
-		try {
-			puntaje.setFont(Font.createFont(Font.TRUETYPE_FONT, is).deriveFont(1, 52));
-			puntaje.setForeground(Color.white);
-		} catch (FontFormatException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-		}		
-		puntaje.setBounds(40, 400, 350, 60);
-		contenedor.add(puntaje, 0);
-		compSalida.add(puntaje);
+	private void ponerPuntaje(){
+		score.setBounds(40, 400, 350, 60);
+		contenedor.add(score, 0);
+		compSalida.add(score);
 	}
 	
 	private void ponerTiempo(){		
-		tiempo.getGrafico().getFont().deriveFont(1, 52);
-		tiempo.getGrafico().setBounds(40,340,350,60);
-		contenedor.add(tiempo.getGrafico(), 1);
-		compSalida.add(tiempo.getGrafico());
+		timer=tiempo.getGrafico2();
+		timer.setBounds(40,340,350,60);
+		contenedor.add(timer, 1);
+		compSalida.add(timer);
 	}
 	
 	private void quitarComponentesJuego(){

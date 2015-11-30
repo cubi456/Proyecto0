@@ -29,7 +29,6 @@ public class Altair extends Enemigo
     	super(s, x, y, p,j);
         grafico= new AltairGrafico(s, x, y, miJuego.getCargadorGrafico());
     	et= new EnemigoThread(this);
-    	et.start();
     }
     protected void quererPasar(Celda c, int dir){
     	//Rugulus y sirius utilizaran este. ALtair lo redifinirá

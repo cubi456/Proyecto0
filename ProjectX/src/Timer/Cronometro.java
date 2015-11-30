@@ -3,35 +3,36 @@ package Timer;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.FontFormatException;
-import java.io.IOException;
-import java.io.InputStream;
-
 import javax.swing.JLabel;
 
+import Grafica.CargadorGrafico;
+
+/**
+ *@author Barreix, Iñaki.
+ *@author Comellas, Juan Manuel.
+ *@version 1.0
+ */
 public class Cronometro extends Thread 
 {
  
-	private volatile JLabel tiempo;
+	private volatile JLabel tiempo, tiempo2;
 	private int m,s;
 	private volatile boolean stop;
-	
-	public Cronometro()
+	/**
+	 * Clase absoluta solo para controlar el tiempo
+	 * @param cg Utiliza el CargadorGrafico para obtener la fuente
+	 */
+	public Cronometro(CargadorGrafico cg)
 	{
 		stop=false;
 		m=s=0;
 		tiempo = new JLabel("Tempo: 0:0");
-		InputStream is=this.getClass().getResourceAsStream("../Grafica/Fonts/Prototype.ttf");
-		try {
-			tiempo.setFont(Font.createFont(Font.TRUETYPE_FONT, is).deriveFont(1, 18));
-			tiempo.setForeground(Color.white);
-		} catch (FontFormatException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		tiempo2= new JLabel("");
+		Font fuente=cg.getFPrototype();
+		tiempo.setFont(fuente.deriveFont(1, 18));
+		tiempo.setForeground(Color.white);
+		tiempo2.setFont(fuente.deriveFont(1, 52));
+		tiempo2.setForeground(Color.white);
 	}
 	
 	public void run()
@@ -57,6 +58,7 @@ public class Cronometro extends Thread
 	public void destruir()
 	{
 		this.stop=true;
+		
 	}
 	
 	public void actualizarLabel()
@@ -67,5 +69,10 @@ public class Cronometro extends Thread
 	public JLabel getGrafico()
 	{
 		return tiempo;
+	}
+	
+	public JLabel getGrafico2(){
+		tiempo2.setText("Tiempo: "+m+":"+s);
+		return tiempo2;
 	}
 }
