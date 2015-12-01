@@ -138,7 +138,7 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 
 	
 	private void iniciarJuego(){
-		sonidoJ=new SonidoJuego();
+	
 		pantallaJuego=true;
 		juego= new Juego(this);
 		score=juego.getBomberman().getPuntaje().getGrafico();
@@ -152,6 +152,7 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 		contenedor.add(tiempo.getGrafico(),1);
 		componentesJuego.add(tiempo.getGrafico());
 		// Ya se establecio el juego log y graficamente 
+		sonidoJ=new SonidoJuego();
 		//mostrarRSG();
 		juego.comenzarHilo();
 		sonidoJ.reproducir();
@@ -195,7 +196,7 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 				contenedor.remove(c);
 				c=null;
 			}
-			Sonido s=new SonidoComenzar(cargadorGrafico);
+			Sonido s=new SonidoComenzar();
 			s.reproducir();
 			sonidoM.detener();
 			sonidoM=null;

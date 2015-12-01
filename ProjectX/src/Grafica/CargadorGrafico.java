@@ -42,20 +42,8 @@ public class CargadorGrafico{
 		crearPU();
 		crearFonts();
 		
-		//	Cargador Audio
-		//crearAudios();
 	}
-	
-	private void crearAudios(){
-		abombality= new BufferedInputStream(getClass().getResourceAsStream("../../Sounds/Bombality.wav"));
-		aspeed= new BufferedInputStream(getClass().getResourceAsStream("../../Sounds/Bombality.wav"));
-		amasacrality= new BufferedInputStream(getClass().getResourceAsStream("../../Sounds/Fatality.wav"));
-		abomba= new BufferedInputStream(getClass().getResourceAsStream("../../Sounds/Bomba.wav"));
-		acomenzar= new BufferedInputStream(getClass().getResourceAsStream("../../Sounds/Comenzar.wav"));
-		asalir=new BufferedInputStream(getClass().getResourceAsStream("../../Sounds/Salir.wav"));
-		agame=new BufferedInputStream(getClass().getResourceAsStream("../../Sounds/Comenzar.wav"));
-		amenu= new BufferedInputStream(getClass().getResourceAsStream("../../Sounds/MenuSound.wav"));
-	}
+
 	
 	private void crearRSG(){
 		rsg= new Icon[3];
