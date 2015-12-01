@@ -9,7 +9,6 @@ import java.util.Vector;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -143,6 +142,7 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 		score=juego.getBomberman().getPuntaje().getGrafico();
 		score.setBounds(870, 410, 128,64);
 		contenedor.add(score,1);
+		componentesJuego.add(score);
 		juego.getNivel(0).getControlador().getGrafico().setBounds(140, 410, 256, 64);
 		contenedor.add(juego.getNivel(0).getControlador().getGrafico(),1);
 		componentesJuego.add(juego.getNivel(0).getControlador().getGrafico());
