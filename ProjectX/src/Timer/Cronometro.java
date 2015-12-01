@@ -26,12 +26,12 @@ public class Cronometro extends Thread
 	{
 		stop=false;
 		m=s=0;
-		tiempo = new JLabel("Tempo: 0:0");
+		tiempo = new JLabel("Tiempo: 00:00");
 		tiempo2= new JLabel("");
 		Font fuente=cg.getFPrototype();
 		tiempo.setFont(fuente.deriveFont(1, 18));
 		tiempo.setForeground(Color.white);
-		tiempo2.setFont(fuente.deriveFont(1, 52));
+		tiempo2.setFont(fuente.deriveFont(1, 48));
 		tiempo2.setForeground(Color.white);
 	}
 	
@@ -63,7 +63,7 @@ public class Cronometro extends Thread
 	
 	public void actualizarLabel()
 	{
-		tiempo.setText("Tiempo: "+m+":"+s);
+		tiempo.setText("Tiempo: "+(m<=9?"0":"")+m+":"+(s<=9?"0":"")+s);
 	}
 	
 	public JLabel getGrafico()
@@ -72,7 +72,7 @@ public class Cronometro extends Thread
 	}
 	
 	public JLabel getGrafico2(){
-		tiempo2.setText("Tiempo: "+m+":"+s);
+		tiempo2.setText(tiempo.getText());
 		return tiempo2;
 	}
 }

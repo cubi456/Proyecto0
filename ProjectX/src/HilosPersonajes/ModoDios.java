@@ -19,7 +19,8 @@ public class ModoDios extends Thread
 		{
 			b.Dios();
 			try {
-				Thread.sleep(5000);
+				//Subido a 8 segundos para mejorar la jugabilidad
+				Thread.sleep(8000);
 			} catch (InterruptedException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

@@ -37,7 +37,6 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 	private int direccion=-1;
 	private Cronometro tiempo;
 	private boolean silencio, pantallaJuego;
-	private Icon activo,inactivo;
 	private Sonido sonidoM,sonidoJ;
 	private CargadorGrafico cargadorGrafico;
 	
@@ -153,8 +152,9 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 		componentesJuego.add(tiempo.getGrafico());
 		// Ya se establecio el juego log y graficamente 
 		sonidoJ=new SonidoJuego();
-		//mostrarRSG();
 		juego.comenzarHilo();
+		if(!silencio)
+			toggleSound();
 		sonidoJ.reproducir();
 		tiempo.start();
 	}
@@ -196,11 +196,14 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 				contenedor.remove(c);
 				c=null;
 			}
-			Sonido s=new SonidoComenzar();
-			s.reproducir();
-			sonidoM.detener();
-			sonidoM=null;
-			this.repaint();
+			contenedor.repaint();
+			if(!silencio)
+			{
+				Sonido s=new SonidoComenzar();
+				s.reproducir();
+				sonidoM.detener();
+				sonidoM=null;
+			}
 			iniciarJuego();
 		}
 	}
@@ -277,7 +280,7 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 			salir();
 		if(arg0.getActionCommand().equals("musica"))
 			toggleSound();
-		this.requestFocus();
+		requestFocus();
 	}
 	
 	private void toggleSound()
@@ -288,15 +291,15 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 			sonidoJ.mute();
 		if(silencio)
 		{
-			musica.setIcon(inactivo);
+			musica.setIcon(cargadorGrafico.getBSonido()[1]);
 			musica.setEnabled(true);
-			musica.setRolloverIcon(activo);
+			musica.setRolloverIcon(cargadorGrafico.getBSonido()[0]);
 		}	
 		else
 		{
-			musica.setIcon(activo);
+			musica.setIcon(cargadorGrafico.getBSonido()[0]);
 			musica.setEnabled(true);
-			musica.setRolloverIcon(inactivo);
+			musica.setRolloverIcon(cargadorGrafico.getBSonido()[1]);
 		}
 		silencio=!silencio;
 	}
@@ -324,7 +327,7 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 			Sonido salir=new SonidoSalir();
 			salir.reproducir();
 			try {
-				Thread.sleep(600);
+				Thread.sleep(2000);
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -335,12 +338,14 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 		System.exit(0);
 	}
 
+	@SuppressWarnings("unused")
 	private void mostrarRSG(){
 		JLabel rsg= new JLabel();
 		rsg.setIcon(cargadorGrafico.getRSG()[0]);
 		rsg.setBounds(0,50,900,400);
 		contenedor.add(rsg, 1);
-		for(int i=0; i<3; i++){
+		contenedor.repaint();
+		for(int i=0; i<cargadorGrafico.getRSG().length; i++){
 			rsg.setIcon(cargadorGrafico.getRSG()[i]);
 			rsg.setBounds(0,50,900,400);
 			try {
@@ -357,12 +362,13 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 		 */
 		JLabel go=new JLabel();
 		go.setIcon(cargadorGrafico.getGameOver()[0]);
-		go.setBounds(356, 150, 285, 199);
+		go.setBounds(356, 100, 285, 199);
 		contenedor.add(go, 1);
+		contenedor.repaint();
 		for(int i=0;i<cargadorGrafico.getGameOver().length;i++)
 		{
 			go.setIcon(cargadorGrafico.getGameOver()[i]);
-			go.setBounds(356, 150, 285, 199);
+			go.setBounds(356, 100, 285, 199);
 			try {
 				Thread.sleep(500);
 			} catch (InterruptedException e) {
@@ -374,6 +380,7 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 	}
 	public void gameOver(boolean victoria){
 		// variable game over pregunta si el juego termino bien o mal
+		tiempo.destruir();
 		pantallaJuego=false;
 		score=juego.getBomberman().getPuntaje().getGrafico2();
 		mostrarCartel();
@@ -382,9 +389,7 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 		bgAux.setIcon(cargadorGrafico.getBackground()[colorbg]);
 		bgAux.setBounds(0, 0,998, 500);
 		contenedor.add(bgAux,1);
-		contenedor.repaint();
-		tiempo.destruir();
-		
+		contenedor.repaint();		
 		if(victoria){
 			bm.setIcon(cargadorGrafico.getBombGif()[0]);
 			tl.setIcon(cargadorGrafico.getWin()[tenerDistinto(colorbg, gen)]);
@@ -401,6 +406,8 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 		
 		compSalida.add(bm);
 		compSalida.add(bgAux);
+		if(!silencio)
+			toggleSound();
 		ponerMusicaMenu();
 		ponerPuntaje();
 		quitarComponentesJuego();

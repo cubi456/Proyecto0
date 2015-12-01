@@ -43,7 +43,7 @@ public class Sirius extends Enemigo {
 			boolean encontre=false;
 			Celda c=miJuego.getNivel(0).getCelda(this.posX, this.posY);
 			Celda aux=null;
-			Vector<Celda> ady=c.getAdyacentes(6);
+			Vector<Celda> ady=c.getAdyacentes(9);
 			for(int i=0;i<ady.size() && !encontre;i++)
 			{
 				if(ady.elementAt(i).getBomberman()!=null)
