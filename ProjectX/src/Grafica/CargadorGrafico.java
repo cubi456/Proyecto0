@@ -2,7 +2,6 @@ package Grafica;
 
 import java.awt.Font;
 import java.awt.FontFormatException;
-import java.io.BufferedInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Vector;
@@ -19,7 +18,6 @@ public class CargadorGrafico{
 	private Icon bDest, bSuelo, bInd, bombality, masacrality, fatality, speed, bombRender, title;
 	private Vector<Vector<Icon>> bm, altair, sirius,rugulus, bombDios;
 	private Font fPrototype;
-	private BufferedInputStream abombality, aspeed, amasacrality, abomba, acomenzar, asalir, agame, amenu;
 	public CargadorGrafico(){
 		//	Sprite Juego
 		crearBgYCarteles();
@@ -318,36 +316,5 @@ public class CargadorGrafico{
 	
 	public Icon[] getRSG(){
 		return rsg;
-	}
-	
-	public BufferedInputStream getABombality(){
-		return abombality;
-	}
-	
-	public BufferedInputStream getASpeed(){
-		return aspeed;
-	}
-	
-	public BufferedInputStream getAMasacrality(){
-		return amasacrality;
-	}
-	
-	public BufferedInputStream getABomba(){
-		return abomba;
-	}
-	
-	public BufferedInputStream getASalir(){
-		return asalir;
-	}
-	public BufferedInputStream getAComenzar(){
-		return acomenzar;
-	}
-	
-	public BufferedInputStream getAGame(){
-		return agame;
-	}
-	
-	public BufferedInputStream getAMenu(){
-		return amenu;
 	}
 }
