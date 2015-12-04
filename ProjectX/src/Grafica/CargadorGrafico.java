@@ -15,7 +15,7 @@ public class CargadorGrafico{
 	 */
 	
 	private Icon[] bDestAnimacion, bomb, fire, background, twin, tlose, bmgif, gover, bComenzar, bSalir, bSonido, rsg;
-	private Icon bDest, bSuelo, bInd, bombality, masacrality, fatality, speed, bombRender, title;
+	private Icon bDest, bSuelo, bInd, bombality, masacrality, fatality, speed, bombRender, title, ayuda;
 	private Vector<Vector<Icon>> bm, altair, sirius,rugulus, bombDios;
 	private Font fPrototype;
 	public CargadorGrafico(){
@@ -40,9 +40,13 @@ public class CargadorGrafico{
 		crearPU();
 		crearFonts();
 		
+		crearAyuda();
+		
 	}
 
-	
+	private void crearAyuda(){
+		ayuda= new ImageIcon(this.getClass().getResource("../Grafica/Sprites/Menu/ayuda.png"));
+	}
 	private void crearRSG(){
 		rsg= new Icon[3];
 		for(int i=0; i<rsg.length;i++)
@@ -316,5 +320,9 @@ public class CargadorGrafico{
 	
 	public Icon[] getRSG(){
 		return rsg;
+	}
+	
+	public Icon getAyuda(){
+		return ayuda;
 	}
 }

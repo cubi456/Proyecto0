@@ -35,7 +35,7 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 	private JButton comenzar,salir,musica;
 	private int direccion=-1;
 	private Cronometro tiempo;
-	private boolean silencio, pantallaJuego;
+	private boolean silencio, pantallaJuego, estoyAyuda;
 	private Sonido sonidoM,sonidoJ;
 	private CargadorGrafico cargadorGrafico;
 	
@@ -130,6 +130,7 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 		
 		// Se utiliza para que JLabel aparezca mas rapido
 		bgAux=new JLabel();
+		estoyAyuda=false;
 		sonidoM.reproducir();
 	}
 	
@@ -250,12 +251,20 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 			if(keyCode==KeyEvent.VK_ESCAPE)
 				salir();
 			else
-				if(keyCode==KeyEvent.VK_R)
-					reset();
+				if(keyCode==KeyEvent.VK_R){
+					if (!pantallaJuego)
+						reset();
+					}
 				else
 					if(keyCode==KeyEvent.VK_S)
 						toggleSound();
 					else
+						if(keyCode==KeyEvent.VK_H){
+							if (!pantallaJuego)
+								ayuda();
+								estoyAyuda=!estoyAyuda;
+							}
+						else
 							mover(arg0);
 	}
 
@@ -463,6 +472,21 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 	}	
 	public CargadorGrafico getCargadorGrafico(){
 		return cargadorGrafico;
+	}
+	
+	private void ayuda(){
+		if(!estoyAyuda){
+			for(JComponent c: compSalida)
+				c.setVisible(false);
+			bg.setIcon(cargadorGrafico.getAyuda());
+			bg.setBounds(0, -35, 998, 500);
+		}
+		else{
+			for(JComponent c: compSalida)
+				c.setVisible(true);
+			bg.setIcon(cargadorGrafico.getBackground()[0]);
+			bg.setBounds(0,  0, 998, 500);
+		}		
 	}
 
 }
