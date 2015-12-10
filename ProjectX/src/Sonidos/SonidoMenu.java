@@ -26,7 +26,7 @@ public class SonidoMenu extends Sonido
 	
 	public void mute()
 	{
-		if(mute)
+		if(!mute)
 			clip.stop();
 		else
 		{

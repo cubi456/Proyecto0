@@ -32,7 +32,8 @@ public class Fatality extends PowerUp
      */
     public void setAction(Bomberman b) 
     {
-    	sonido.reproducir();
+    	if(!b.getJuego().getGui().getSilencio())
+    		sonido.reproducir();
     	b.getPuntaje().addPuntaje(35);
     	for(Bomba bom: b.getBombas())
     		bom.duplicarAlcance();

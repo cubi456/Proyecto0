@@ -31,7 +31,8 @@ public class SpeedUp extends PowerUp
     
     public void setAction(Bomberman b) 
     {
-    	sonido.reproducir();
+    	if(!b.getJuego().getGui().getSilencio())
+    		sonido.reproducir();
         b.getPuntaje().addPuntaje(30);
         b.doubleSpeed(); //Dobla la velocidad del personaje
     }

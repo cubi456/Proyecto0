@@ -30,7 +30,8 @@ public class Bombality extends PowerUp
      */
     public void setAction(Bomberman b) 
     {
-    	sonido.reproducir();
+    	if(!b.getJuego().getGui().getSilencio())
+    		sonido.reproducir();
         b.addBomba();
         b.getPuntaje().addPuntaje(35);
     }

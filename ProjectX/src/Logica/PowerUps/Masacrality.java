@@ -31,9 +31,10 @@ public class Masacrality extends PowerUp
      */
     public void setAction(Bomberman b) 
     {
-    	sonido.reproducir();
+    /*	if(!b.getJuego().getGui().getSilencio())
+    		sonido.reproducir();*/
     	b.getPuntaje().addPuntaje(50);
-        b.convertirEnDios();
+        b.convertirEnDios(sonido);
     }
 
 }

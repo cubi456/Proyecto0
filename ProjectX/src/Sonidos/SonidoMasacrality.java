@@ -4,6 +4,7 @@ import java.io.BufferedInputStream;
 import java.io.IOException;
 
 import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
@@ -20,5 +21,8 @@ public class SonidoMasacrality extends Sonido
 			e.printStackTrace();
 		}
 	}
-	
+	public void reproducir(){
+		super.reproducir();
+		clip.loop(Clip.LOOP_CONTINUOUSLY);
+	}
 }

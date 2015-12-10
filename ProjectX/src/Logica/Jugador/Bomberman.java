@@ -10,6 +10,7 @@ import Logica.Juego;
 import Logica.Personaje;
 import Logica.PowerUp;
 import Logica.Bloques.Celda;
+import Sonidos.Sonido;
 
 /**
  *@author Barreix, Iñaki.
@@ -74,9 +75,9 @@ public class Bomberman extends Personaje
        dios=!dios;
     }
     
-    public void convertirEnDios()
+    public void convertirEnDios(Sonido s)
     {
-    	ModoDios m=new ModoDios(this);
+    	ModoDios m=new ModoDios(this, s);
     	m.start();
     }
     
@@ -232,5 +233,9 @@ public class Bomberman extends Personaje
 	
 	public void comenzarHilo(){
 		bt.start();
+	}
+	
+	public Juego getJuego(){
+		return miJuego;
 	}
 }

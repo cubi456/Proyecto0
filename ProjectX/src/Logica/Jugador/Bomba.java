@@ -1,5 +1,6 @@
 package Logica.Jugador;
 
+import Grafica.GUI;
 import Grafica.Bomba.BombaGrafico;
 import HilosPersonajes.BombaThread;
 import Logica.Bloques.Celda;
@@ -93,10 +94,13 @@ public class Bomba
     {
     	if(ubicacion!=null)
     	{
-    		sonido=new SonidoBomba();
-    		sonido.reproducir();
+    		GUI gui= ubicacion.getNivel().getJuego().getGui();
+    		if(!gui.getSilencio()){
+    			sonido=new SonidoBomba();
+    			sonido.reproducir();
+    		}
     		ubicacion.destruirBomba();
-    		ubicacion.getNivel().getJuego().getGui().sacarJuego(bg.getGrafico());
+    		gui.sacarJuego(bg.getGrafico());
     		for(Celda c:ubicacion.getAdyacentes(alcance))
     		{
     			if(c.getBomberman()!=null && !c.getBomberman().getDios())

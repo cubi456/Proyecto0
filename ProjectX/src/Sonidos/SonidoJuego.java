@@ -21,12 +21,12 @@ public class SonidoJuego extends Sonido
 			clip.loop(Clip.LOOP_CONTINUOUSLY);
 		} catch (LineUnavailableException | IOException | UnsupportedAudioFileException e) {
 			e.printStackTrace();
-		}
+		}		
 	}
 	
 	public void mute()
 	{
-		if(mute)
+		if(!mute)
 			clip.stop();
 		else
 		{

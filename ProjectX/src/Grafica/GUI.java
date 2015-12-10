@@ -154,9 +154,8 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 		// Ya se establecio el juego log y graficamente 
 		sonidoJ=new SonidoJuego();
 		juego.comenzarHilo();
-		if(!silencio)
-			toggleSound();
-		sonidoJ.reproducir();
+		if(silencio)
+			sonidoJ.mute();
 		tiempo.start();
 	}
 
@@ -202,9 +201,10 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 			{
 				Sonido s=new SonidoComenzar();
 				s.reproducir();
-				sonidoM.detener();
-				sonidoM=null;
 			}
+			sonidoM.detener();
+			sonidoM=null;
+			
 			iniciarJuego();
 		}
 	}
@@ -294,23 +294,24 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 	
 	private void toggleSound()
 	{
-		if(sonidoM!=null)
-			sonidoM.mute();
+		if(pantallaJuego)
+			sonidoJ.mute();	
 		else
-			sonidoJ.mute();
+			sonidoM.mute();		
 		if(silencio)
-		{
-			musica.setIcon(cargadorGrafico.getBSonido()[1]);
-			musica.setEnabled(true);
-			musica.setRolloverIcon(cargadorGrafico.getBSonido()[0]);
-		}	
-		else
 		{
 			musica.setIcon(cargadorGrafico.getBSonido()[0]);
 			musica.setEnabled(true);
 			musica.setRolloverIcon(cargadorGrafico.getBSonido()[1]);
+		}	
+		else
+		{
+			musica.setIcon(cargadorGrafico.getBSonido()[1]);
+			musica.setEnabled(true);
+			musica.setRolloverIcon(cargadorGrafico.getBSonido()[0]);
 		}
 		silencio=!silencio;
+		
 	}
 	
 	public void agregarJuego(JComponent c,int index)
@@ -333,8 +334,10 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 		if(sonidoM!=null)
 		{
 			sonidoM.detener();
-			Sonido salir=new SonidoSalir();
-			salir.reproducir();
+			if(!silencio){
+				Sonido salir=new SonidoSalir();
+				salir.reproducir();
+			}
 			try {
 				Thread.sleep(2000);
 			} catch (InterruptedException e) {
@@ -415,8 +418,8 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 		
 		compSalida.add(bm);
 		compSalida.add(bgAux);
-		if(!silencio)
-			toggleSound();
+	/*	if(!silencio)
+			toggleSound();*/
 		ponerMusicaMenu();
 		ponerPuntaje();
 		quitarComponentesJuego();
@@ -439,6 +442,8 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 		sonidoJ=null;
 		sonidoM=new SonidoMenu();
 		sonidoM.reproducir();
+		if(silencio)
+			sonidoM.mute();
 	}
 	
 	private void ponerPuntaje(){
@@ -488,5 +493,7 @@ public class GUI extends JFrame implements ActionListener,KeyListener
 			bg.setBounds(0,  0, 998, 500);
 		}		
 	}
-
+	public boolean getSilencio(){
+		return silencio;
+	}
 }

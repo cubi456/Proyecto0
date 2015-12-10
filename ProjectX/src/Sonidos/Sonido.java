@@ -23,7 +23,7 @@ public abstract class Sonido
 	
 	public void mute()
 	{
-		if(mute)
+		if(!mute)
 			reproducir();
 		else
 			clip.stop();
