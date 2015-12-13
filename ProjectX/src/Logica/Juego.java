@@ -207,6 +207,7 @@ public class Juego
     }
     
     private void terminarJuego(){
+    	this.misNiveles.get(0).getCelda(b.getPosX(), b.getPosY()).setBomberman(null);
     	frenarPersonajes();
     }
     

@@ -184,28 +184,28 @@ public class Celda {
     	   {
     		   Celda aux=miNivel.getCelda(x-i, y);
     		   salida.addElement(aux);
-    		   if(aux.getPared()!=null)
+    		   if(aux.getPared()!=null || aux.getBomba()!=null || aux.getPowerUp()!= null)
     			   izq=false;
     	   }
     	   if(der)
     	   {
     		   Celda aux=miNivel.getCelda(x+i, y);
     		   salida.addElement(aux);
-    		   if(aux.getPared()!=null)
+    		   if(aux.getPared()!=null || aux.getBomba()!=null || aux.getPowerUp()!= null)
     			   der=false;
     	   }
     	   if(arr)
     	   {
     		   Celda aux=miNivel.getCelda(x, y-i);
     		   salida.addElement(aux);
-    		   if(aux.getPared()!=null)
+    		   if(aux.getPared()!=null || aux.getBomba()!=null || aux.getPowerUp()!= null)
     			   arr=false;
     	   }
     	   if(abj)
     	   {
     		   Celda aux=miNivel.getCelda(x, y+i);
     		   salida.addElement(aux);
-    		   if(aux.getPared()!=null)
+    		   if(aux.getPared()!=null || aux.getBomba()!=null || aux.getPowerUp()!= null)
     			   abj=false;
     	   }
        }
@@ -241,15 +241,12 @@ public class Celda {
     	return fuego;
     }
     
-    private void setPowerUp(PowerUp p){
+    public void setPowerUp(PowerUp p){
     	pu=p;
     }
     
     public PowerUp getPowerUp(){
-    	PowerUp toReturn;
-    	toReturn= pu;
-    	pu=null;
-    	return toReturn;
+    	return pu;
     }
     
 }

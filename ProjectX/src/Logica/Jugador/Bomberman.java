@@ -155,7 +155,8 @@ public class Bomberman extends Personaje
     			PowerUp pup=c.getPowerUp(); // una vez que lo tiene ya lo borra de la celda
     			if(pup!=null){
     				pup.setAction(this);
-    				miJuego.getGui().remove(pup.getGrafico().getGrafico());
+    				c.setPowerUp(null);
+    				miJuego.getGui().sacarJuego(pup.getGrafico().getGrafico());
     				miJuego.getGui().repaint();
     			}
     }

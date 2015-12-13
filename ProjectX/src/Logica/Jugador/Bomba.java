@@ -3,6 +3,7 @@ package Logica.Jugador;
 import Grafica.GUI;
 import Grafica.Bomba.BombaGrafico;
 import HilosPersonajes.BombaThread;
+import Logica.PowerUp;
 import Logica.Bloques.Celda;
 import Sonidos.SonidoBomba;
 
@@ -103,14 +104,19 @@ public class Bomba
     		gui.sacarJuego(bg.getGrafico());
     		for(Celda c:ubicacion.getAdyacentes(alcance))
     		{
-    			if(c.getBomberman()!=null && !c.getBomberman().getDios())
+    			if(c.getBomberman()!=null && !c.getBomberman().getDios() && c.getBomba()==null)
     				c.getBomberman().morir();
     			if(ubicacion.getBomberman()!=null && !ubicacion.getBomberman().getDios())
     				ubicacion.getBomberman().morir();
-    			if(c.getEnemigo()!=null)
-    			{
+    			if(c.getEnemigo()!=null){
     				b.getPuntaje().addPuntaje(c.getEnemigo().getPuntaje());
-    				c.getEnemigo().morir();
+					c.getEnemigo().morir();
+    			}
+    			PowerUp pup=c.getPowerUp();
+    			if(pup!=null){
+    				c.setPowerUp(null);
+    				gui.sacarJuego(pup.getGrafico().getGrafico());
+    				gui.repaint();
     			}
     			if(c.getPared()!=null && c.getPared().isDestructible())
     			{
@@ -123,5 +129,4 @@ public class Bomba
     		b.addBomba(this);
     	bt.destruir();
     }
-
 }
