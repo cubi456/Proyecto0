@@ -16,10 +16,12 @@ public class BombaGrafico{
 	protected final int alto = 32;
 	protected int x,y;
 	protected GUI g;
+	protected boolean corte;
 	
 	public BombaGrafico(GUI gui){
 		g=gui;
 		detonar=g.getCargadorGrafico().getBomba();
+		corte=false;
 	}
 	
 	public void setPos(int px,int py)
@@ -39,7 +41,7 @@ public class BombaGrafico{
 	
 	public void detonar(Celda c,int a) throws InterruptedException
 	{
-		for(int i=0;i<detonar.length;i++)
+		for(int i=0;i<detonar.length && !corte;i++)
 		{
 			grafico.setIcon(detonar[i]);
 			grafico.setBounds(x,y,ancho,alto);
@@ -60,6 +62,7 @@ public class BombaGrafico{
 		}
 	}
 	
+	public void cortar(){
+		corte=true;
+	}
 }
-
-

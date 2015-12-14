@@ -79,6 +79,10 @@ public class Bomba
     	return bg;
     }
     
+    public BombaThread getHBomba(){
+    	return bt;
+    }
+    
     /**
      * Crea el thread que le da vida a la bomba y lo inicializa.
      */
@@ -111,6 +115,10 @@ public class Bomba
     			if(c.getEnemigo()!=null){
     				b.getPuntaje().addPuntaje(c.getEnemigo().getPuntaje());
 					c.getEnemigo().morir();
+    			}
+    			if(c.getBomba()!=null){
+    				c.getBomba().getHBomba().cortar();
+    				c.getBomba().getGrafico().cortar();
     			}
     			PowerUp pup=c.getPowerUp();
     			if(pup!=null){
